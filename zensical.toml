@@ -45,7 +45,7 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
 #
 # Read more: https://zensical.org/docs/setup/navigation/
  nav = [
-   { "Welcome" = "index.md" },
+   { "Home" = "index.md" },
    { "Project 1" = "project_batch_1/project_1.md" },
    { "Project 2" = "project_batch_1/project_2.md" }
  ]
