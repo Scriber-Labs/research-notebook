@@ -7,12 +7,12 @@ icon: simple/markdown
 ## Headers
 
 ```
-# H1 Header 1
-## H2 Header 2
-### H3 Header 3
-#### H4 Header 4
-##### H5 Header 5
-###### H6 Header 6
+# H1 Header
+## H2 Header
+### H3 Header
+#### H4 Header
+##### H5 Header
+###### H6 Header
 ```
 
 ## Text formatting
