@@ -1,11 +1,11 @@
 # Project 2: Low-Fidelity Inverse Schrödinger Problem
 
-!!! abstract ""
+!!! abstract Overview
 
     === "🥅 Goal"
 
         The purpose of project 2 is to study operator features that are identifiable in a low fidelity physics-informed machine learning prototype for the inverse Schrödinger problem.    
-
+        
     === 5️⃣ "5 Brunton Steps"
 
         | **Step** | **Description** | **Completed?** |
