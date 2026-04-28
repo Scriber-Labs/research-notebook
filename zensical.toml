@@ -299,7 +299,7 @@ quote = "octicons/quote-16"
 # a monospaced font used in code blocks.
 # ----------------------------------------------------------------------------
 [project.theme.font]
-text = "Chivo Mono"
+text = "Aclonica"
 #code = "Jetbrains Mono"
 
 # ----------------------------------------------------------------------------
