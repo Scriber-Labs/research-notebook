@@ -1,19 +1,17 @@
-# Project 2: Low-Fidelity Inverse Schrödinger Probelm
+# Project 2: Low-Fidelity Inverse Schrödinger Problem
 
-!!! admonition ""
+!!! abstract ""
 
-    === "Unordered List"
+    === "🥅 Goal"
 
-        ``` markdown
-        * Sed sagittis eleifend rutrum
-        * Donec vitae suscipit est
-        * Nulla tempor lobortis orci
-        ```
+        The purpose of project 2 is to study operator features that are identifiable in a low fidelity physics-informed machine learning prototype for the inverse Schrödinger problem.
 
-    === "Ordered List"
+    === 5️⃣ "5 Brunton Steps"
 
-        ``` markdown
-        1. Sed sagittis eleifend rutrum
-        2. Donec vitae suscipit est
-        3. Nulla tempor lobortis orci
-        ```
+        | **Step** | **Description** | **Completed?** |
+        |----------|-----------------|----------------|
+        | 1. **Problem formualtion** | Can a physics-informed neural network recover the unknown potential $V(x)$ along with the corresponding eigenfunctions from only noisy spectral data and probability-density snapshots? | ✔️ |
+
+        
+
+    === 🌍 Global Design Choices
