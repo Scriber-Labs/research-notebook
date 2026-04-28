@@ -17,7 +17,7 @@ site_name = "Research Notebook - Project Batch 1"
 # meaningful description of the site content for use by search engines.
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_description
-site_description = "A research notebook for Scriber Labs"
+site_description = "A research notebook for Project Batch 1 - Low Fidelity PIMLs"
 
 # The site_author attribute. This is used in the HTML head element.
 #
@@ -48,12 +48,12 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
    { "Project 1" = [
       { "Overview" = "project_1/project_1.md" },
       { "Architecture" = "project_1/architecture_1.md" },
-      { "Analysis" = "project_1/figure-analysis_1.md" }
+      { "Analysis" = "project_1/figure_analysis_1.md" }
    ]},
    { "Project 2" = [
       { "Overview" = "project_2/project_2.md" },
       { "Architecture" = "project_2/architecture_2.md" },
-      { "Analysis" = "project_2/figure-analysis_2.md" }
+      { "Analysis" = "project_2/figure_analysis_2.md" }
    ]},
    { "References" = "references/references.md" },
  ]
@@ -357,10 +357,12 @@ link = "https://github.com/Scriber-Labs"
 [project.markdown_extensions.def_list]
 [project.markdown_extensions.footnotes]
 [project.markdown_extensions.md_in_html]
+
 [project.markdown_extensions.toc]
 permalink = ""
 [project.markdown_extensions.pymdownx.arithmatex]
 generic = true
+
 [project.markdown_extensions.pymdownx.betterem]
 [project.markdown_extensions.pymdownx.caret]
 [project.markdown_extensions.pymdownx.details]
@@ -373,7 +375,7 @@ options.custom_icons = ["overrides/.icons"]
 [project.markdown_extensions.pymdownx.highlight]
 anchor_linenums = true
 line_spans = "__span"
-pygments_lang_class = true
+pygments_lang_class = false
 auto_title = true
 
 [project.markdown_extensions.pymdownx.inlinehilite]
