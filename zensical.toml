@@ -48,12 +48,12 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
    { "Project 1" = [
       { "Overview" = "project_1/project_1.md" },
       { "Architecture" = "project_1/architecture_1.md" },
-      { "Analysis" = "project_1/analysis_1.md" }
+      { "Analysis" = "project_1/figure-analysis_1.md" }
    ]},
    { "Project 2" = [
       { "Overview" = "project_2/project_2.md" },
       { "Architecture" = "project_2/architecture_2.md" },
-      { "Analysis" = "project_2/analysis_2.md" }
+      { "Analysis" = "project_2/figure-analysis_2.md" }
    ]},
    { "References" = "references/references.md" },
  ]
@@ -299,7 +299,7 @@ quote = "octicons/quote-16"
 # a monospaced font used in code blocks.
 # ----------------------------------------------------------------------------
 [project.theme.font]
-text = "Aclonica"
+text = "Chivo Mono"
 #code = "Jetbrains Mono"
 
 # ----------------------------------------------------------------------------
