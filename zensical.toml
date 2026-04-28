@@ -11,7 +11,7 @@
 # The site_name is shown in the page header and the browser window title
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_name
-site_name = "Research Notebook"
+site_name = "Research Notebook - Project Batch 1"
 
 # The site_description is included in the HTML head and should contain a
 # meaningful description of the site content for use by search engines.
@@ -27,7 +27,7 @@ site_author = "eigenscribe"
 # The site_url is the canonical URL for your site. When building online
 # documentation you should set this.
 # Read more: https://zensical.org/docs/setup/basics/#site_url
-site_url = "https://scriber-labs.github.io/research-notebook"
+site_url = "https://scriber-labs.github.io/zensical-notebook-project-batch-1/"
 
 # The copyright notice appears in the page footer and can contain an HTML
 # fragment.
