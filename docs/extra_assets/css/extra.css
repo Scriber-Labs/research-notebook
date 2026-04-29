@@ -159,12 +159,16 @@
   color: #0a6e5c;
 }
 
+
+
 /* Light mode admonitions */
-[data-md-color-scheme="default"] .md-typeset .admonition,
+/* ta-md-color-scheme="default"] .md-typeset .admonition,
 [data-md-color-scheme="default"] .md-typeset details {
   background: rgba(255, 255, 255, 0.6) !important;
   border-color: rgba(118, 82, 245, 0.2) !important;
 }
+*/
+
 
 [data-md-color-scheme="default"] .md-typeset .admonition-title,
 [data-md-color-scheme="default"] .md-typeset summary {
@@ -551,6 +555,7 @@ body {
 /* ============================================
    Admonitions — Glass Style
    ============================================ */
+/*
 .md-typeset .admonition,
 .md-typeset details {
   background: var(--ptg-glass-bg-light, rgba(22, 27, 34, 0.6)) !important;
@@ -560,13 +565,18 @@ body {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
+*/
+ 
 
+/*
 .md-typeset .admonition-title,
 .md-typeset summary {
   font-family: var(--ptg-font-heading);
   background: rgba(168, 85, 247, 0.15) !important;
   border-bottom: 1px solid var(--ptg-glass-border, rgba(168, 85, 247, 0.2));
 }
+*/
+
 
 .md-typeset .admonition.note,
 .md-typeset details.note {
@@ -578,12 +588,15 @@ body {
   border-left: 4px solid var(--ptg-color-warning) !important;
 }
 
+/*
 .md-typeset .admonition.tip,
 .md-typeset details.tip,
 .md-typeset .admonition.success,
 .md-typeset details.success {
   border-left: 4px solid var(--ptg-color-success) !important;
 }
+*/
+ */
 
 .md-typeset .admonition.danger,
 .md-typeset details.danger,

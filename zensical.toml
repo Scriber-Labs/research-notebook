@@ -44,19 +44,23 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
 #
 # Read more: https://zensical.org/docs/setup/navigation/
  nav = [
-   { "Home" = "index.md" },
-   { "Project 1" = [
-      { "Overview" = "project_1/project_1.md" },
-      { "Architecture" = "project_1/architecture_1.md" },
-      { "Analysis" = "project_1/figure_analysis_1.md" }
+   { "🏘️ Home" = "index.md" },
+   { "🌀 Kuramoto Benchmark Data" = "kuramoto-benchmark/index.md" },
+   { "🔰 Project Batch 1" = [
+       { "Overview " = "project_batch_1/index.md" },
+       { "Project 1" = [
+          { "Introduction" = "project_batch_1/project_1/index.md" },
+          { "Architecture" = "project_batch_1/project_1/architecture_1.md" },
+          { "Figure Analysis" = "project_batch_1/project_1/figure_analysis_1.md" }
+       ]},
+       { "Project 2" = [
+          { "Introduction" = "project_batch_1/project_2/index.md" },
+          { "Architecture" = "project_batch_1/project_2/architecture_2.md" },
+          { "Figure Analysis" = "project_batch_1/project_2/figure_analysis_2.md" }
+       ]},
    ]},
-   { "Project 2" = [
-      { "Overview" = "project_2/project_2.md" },
-      { "Architecture" = "project_2/architecture_2.md" },
-      { "Analysis" = "project_2/figure_analysis_2.md" }
-   ]},
-   { "References" = "references/references.md" },
- ]
+   { "🔖 References" = "references/references.md" },
+]
 
 # With the "extra_css" option you can add your own CSS styling to customize
 # your Zensical project according to your needs. You can add any number of
