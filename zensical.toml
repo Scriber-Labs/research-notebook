@@ -66,7 +66,7 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
 #
 # Read more: https://zensical.org/docs/customization/#additional-css
 #
-extra_css = ["extra_assets/stylesheets/extra.css"]
+extra_css = ["extra_assets/css/extra.css"]
 
 # With the `extra_javascript` option you can add your own JavaScript to your
 # project to customize the behavior according to your needs.
@@ -74,7 +74,7 @@ extra_css = ["extra_assets/stylesheets/extra.css"]
 # The path provided should be relative to the "docs_dir".
 #
 # Read more: https://zensical.org/docs/customization/#additional-javascript
-extra_javascript = ["extra_assets/javascripts/extra.js"]
+extra_javascript = ["extra_assets/javascript/extra.js"]
 
 # ----------------------------------------------------------------------------
 # Section for configuring theme options
@@ -312,8 +312,8 @@ text = "Aclonica"
 # - https://zensical.org/docs/setup/colors/
 # ----------------------------------------------------------------------------
 # Palette toggle for automatic mode
-palette.primary = "green"
-palette.accent = "indigo"
+palette.primary = "deep purple"
+palette.accent = "cyan"
 
 [[project.theme.palette]]
 media = "(prefers-color-scheme)"
