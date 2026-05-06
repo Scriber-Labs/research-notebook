@@ -46,8 +46,8 @@
   --ptg-transition-normal: 0.3s ease;
 
   /* Code Blocks — Panda-inspired Glass Editor */
-  --ptg-code-bg: rgba(18, 17, 38, 0.92);
-  --ptg-code-bg-deep: rgba(12, 11, 24, 0.96);
+  --ptg-code-bg: rgba(10, 10, 25, 0.94);
+  --ptg-code-bg-deep: rgba(6, 6, 16, 0.98);
   --ptg-code-header-bg: linear-gradient(135deg, rgba(48, 25, 52, 0.96), rgba(18, 24, 56, 0.96));
   --ptg-code-border: rgba(168, 85, 247, 0.35);
   --ptg-code-border-hover: rgba(20, 181, 255, 0.55);
@@ -197,7 +197,7 @@
   --ptg-code-inline-bg: rgba(118, 82, 245, 0.08);
   --ptg-code-inline-border: rgba(118, 82, 245, 0.2);
   --ptg-code-inline-color: #0a6e5c;
-  --ptg-code-block-bg: rgba(30, 30, 50, 0.05);
+  --ptg-code-block-bg: rgba(20, 20, 40, 0.08);
   --ptg-code-block-text: #1a1a2e;
 }
 
