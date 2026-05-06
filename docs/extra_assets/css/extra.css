@@ -550,10 +550,6 @@ body {
   -webkit-backdrop-filter: blur(var(--ptg-glass-blur));
   box-shadow: var(--ptg-glass-shadow);
   padding: var(--ptg-space-md);
-  height: fit-content;
-  align-self: flex-start;
-  position: sticky;
-  top: 5rem;
 }
 
 /* Left sidebar (navigation) */
@@ -758,20 +754,36 @@ body {
    ============================================ */
 
 /* Tablet and Small Desktop Breakpoint */
+@media screen and (min-width: 1221px) {
+  .md-sidebar {
+    position: sticky;
+    top: 5rem;
+    height: fit-content;
+    align-self: flex-start;
+  }
+}
+
 @media screen and (max-width: 1220px) {
   .md-main__inner {
     flex-direction: column;
     gap: var(--ptg-space-md);
   }
 
-  .md-sidebar {
+  /* Only apply static positioning to sidebars that are NOT part of a hidden/drawer component */
+  .md-sidebar:not([data-md-component="toc"]):not([data-md-component="navigation"]) {
     position: static;
     width: 100% !important;
     margin-bottom: var(--ptg-space-md);
   }
 
-  .md-sidebar--secondary {
-    order: -1; /* Move TOC above content on mobile for better accessibility */
+  /* In MkDocs Material, on mobile, the sidebars are often hidden and shown via drawers.
+     We want to allow the "embedded" TOC (if any) to be visible but not break the drawer.
+     Specifically, if the sidebar is inside the main content flow (not the drawer), we stack it.
+  */
+  .md-main__inner > .md-sidebar--secondary {
+    position: static;
+    width: 100% !important;
+    order: -1; 
   }
 }
 
@@ -829,8 +841,10 @@ body {
 /* Utility to hide sidebars that might be redundant on mobile if the main nav is used */
 @media screen and (max-width: 960px) {
   /* MkDocs Material usually has its own drawer, 
-     so we ensure our custom sidebar containers don't conflict */
-  .md-sidebar--primary {
+     so we ensure our custom sidebar containers don't conflict.
+     We only hide the PRIMARY sidebar if it's the one in the main layout, 
+     not the one inside the mobile drawer. */
+  .md-main__inner > .md-sidebar--primary {
     display: none; 
   }
 }
