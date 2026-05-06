@@ -918,16 +918,11 @@ mjx-container,
   }
 
   .md-main__inner {
-    margin: var(--ptg-space-sm);
-    gap: var(--ptg-space-sm);
-    display: block;
-    width: auto;
+    margin-top: var(--ptg-space-sm);
+    margin-bottom: var(--ptg-space-sm);
   }
 
   .md-sidebar {
-    width: auto;
-    position: static;
-    margin: var(--ptg-space-sm);
     border-radius: var(--ptg-radius-md);
   }
 
