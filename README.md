@@ -3,4 +3,4 @@
 > ``zensical serve``
 
 ## ✅ TODO
-- [ ] Mermaid style adjustments 
+- [ ] Fix mobile view
