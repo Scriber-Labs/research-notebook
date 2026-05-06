@@ -54,8 +54,8 @@
   --ptg-color-surface: #161b22;
   --ptg-color-text: whitesmoke;
   --ptg-color-muted: #8b949e;
-  --ptg-color-link: #7652f5;
-  --ptg-color-link-hover: #a855f7;
+  --ptg-color-link: #33baf5;
+  --ptg-color-link-hover: #ad5be6;
 
   --ptg-glass-bg: rgba(13, 17, 23, 0.75);
   --ptg-glass-bg-light: rgba(22, 27, 34, 0.6);
@@ -88,6 +88,9 @@
   --md-footer-fg-color:         #8b949e;
   --md-footer-fg-color--light:  whitesmoke;
   --md-footer-fg-color--lighter: #8b949e;
+
+  --ptg-color-bold: #38bdf8;
+  --ptg-color-italic: #e9d5ff; /* Brighter purple for better contrast */
 }
 
 /* ============================================
@@ -132,6 +135,9 @@
   --md-footer-fg-color:         #555570;
   --md-footer-fg-color--light:  #1a1a2e;
   --md-footer-fg-color--lighter: #555570;
+
+  --ptg-color-bold: #0284c7;
+  --ptg-color-italic: #a78bfa; /* Slightly lighter purple for better readability */
 }
 
 /* Light mode heading colors */
@@ -243,7 +249,8 @@
 
 /* Light mode MathJax */
 [data-md-color-scheme="default"] .MathJax,
-[data-md-color-scheme="default"] mjx-container {
+[data-md-color-scheme="default"] mjx-container,
+[data-md-color-scheme="default"] .katex {
   color: #0a6e5c !important;
 }
 
@@ -359,6 +366,26 @@ body {
 
 .md-typeset a:hover {
   color: var(--ptg-color-link-hover, #a855f7);
+}
+
+.md-typeset strong {
+  color: var(--ptg-color-bold);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.md-typeset a strong {
+  color: inherit;
+  text-shadow: none;
+}
+
+.md-typeset em {
+  color: var(--ptg-color-italic);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.md-typeset a em {
+  color: inherit;
+  text-shadow: none;
 }
 
 /* ============================================
@@ -631,6 +658,26 @@ body {
   border-left: 4px solid var(--ptg-color-error) !important;
 }
 
+.md-typeset .admonition.important,
+.md-typeset details.important {
+  border-left: 4px solid var(--ptg-color-secondary) !important;
+}
+
+.md-typeset .admonition.summary,
+.md-typeset details.summary {
+  border-left: 4px solid var(--ptg-color-success) !important;
+}
+
+.md-typeset .admonition.seealso,
+.md-typeset details.seealso {
+  border-left: 4px solid var(--ptg-color-accent) !important;
+}
+
+.md-typeset .admonition.todo,
+.md-typeset details.todo {
+  border-left: 4px solid var(--ptg-color-muted) !important;
+}
+
 /* ============================================
    Lists
    ============================================ */
@@ -746,10 +793,63 @@ body {
 }
 
 /* ============================================
-   MathJax
+   Grid Cards
    ============================================ */
+.md-typeset .grid.cards > ul > li {
+  background: var(--ptg-glass-bg-light, rgba(22, 27, 34, 0.6)) !important;
+  border: 1px solid var(--ptg-glass-border, rgba(168, 85, 247, 0.2)) !important;
+  border-radius: var(--ptg-radius-md) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  padding: var(--ptg-space-md) !important;
+  transition: all var(--ptg-transition-normal) !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.md-typeset .grid.cards > ul > li:hover {
+  background: var(--ptg-glass-bg, rgba(13, 17, 23, 0.75)) !important;
+  border-color: var(--ptg-glass-border-hover, rgba(168, 85, 247, 0.4)) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 40px rgba(168, 85, 247, 0.1) !important;
+}
+
+/* Card Title (the first bold line) */
+.md-typeset .grid.cards > ul > li p:first-child strong {
+  color: var(--ptg-color-primary);
+  font-family: var(--ptg-font-heading);
+  font-size: 1.1em;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.md-typeset .grid.cards > ul > li hr {
+  border-top: 1px solid var(--ptg-glass-border, rgba(168, 85, 247, 0.2)) !important;
+  margin: var(--ptg-space-sm) 0 !important;
+}
+
+/* ============================================
+   Math Containers
+   ============================================ */
+div.arithmatex,
+.katex-display,
+mjx-container[display="true"] {
+  display: block;
+  margin: var(--ptg-space-md) 0 !important;
+  padding: var(--ptg-space-lg) !important;
+  background: var(--ptg-glass-bg-light, rgba(22, 27, 34, 0.6)) !important;
+  border: 1px solid var(--ptg-glass-border, rgba(168, 85, 247, 0.2)) !important;
+  border-radius: var(--ptg-radius-md) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Base colors for math */
 .MathJax,
-mjx-container {
+mjx-container,
+.katex {
   color: var(--ptg-color-math) !important;
 }
 
@@ -773,6 +873,22 @@ mjx-container {
 
 .glow-cyan {
   box-shadow: 0 0 30px rgba(20, 181, 255, 0.4);
+}
+
+.lg {
+  font-size: 1.25rem !important;
+}
+
+.middle {
+  vertical-align: middle !important;
+}
+
+/* Ensure images/icons inside .middle are aligned */
+.middle img, 
+.middle svg,
+.middle .twemoji {
+  vertical-align: middle !important;
+  margin-bottom: 0.2em;
 }
 
 /* ============================================
