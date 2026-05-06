@@ -424,10 +424,9 @@ body {
 /* Ensure the main content area uses proper grid/flex layout */
 .md-main__inner {
   display: flex;
-  margin: var(--ptg-space-lg) auto;
   gap: var(--ptg-space-lg);
-  max-width: 100%;
   width: 100%;
+  max-width: 100%;
 }
 
 /* The content area should take remaining space */
