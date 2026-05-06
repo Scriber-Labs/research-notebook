@@ -638,3 +638,85 @@ body {
   height: 0.62rem;
   border-radius: 999px;
 }
+
+/* ============================================
+   Responsive Design (Mobile & Tablet)
+   ============================================ */
+
+/* Tablet and Small Desktop Breakpoint */
+@media screen and (max-width: 1220px) {
+  .md-main__inner {
+    flex-direction: column;
+    gap: var(--ptg-space-md);
+  }
+
+  .md-sidebar {
+    position: static;
+    width: 100% !important;
+    margin-bottom: var(--ptg-space-md);
+  }
+
+  .md-sidebar--secondary {
+    order: -1; /* Move TOC above content on mobile for better accessibility */
+  }
+}
+
+/* Mobile Devices Breakpoint */
+@media screen and (max-width: 768px) {
+  :root {
+    --ptg-space-xl: 1.25rem;
+    --ptg-space-lg: 1rem;
+  }
+
+  .md-content {
+    padding: var(--ptg-space-md);
+    border-radius: var(--ptg-radius-md);
+  }
+
+  .md-typeset h1 {
+    font-size: 1.5rem;
+  }
+
+  .md-typeset h2 {
+    font-size: 1.35rem;
+  }
+
+  .md-typeset h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Header adjustments */
+  .md-header__title .md-ellipsis {
+    font-size: 1rem !important;
+  }
+
+  /* Code block adjustments for mobile */
+  .md-typeset .highlight {
+    margin: 1rem -0.5rem; /* Slight bleed on very small screens */
+    border-radius: var(--ptg-radius-md);
+  }
+
+  .md-typeset .highlight pre {
+    padding: 0.8rem;
+  }
+
+  .md-typeset .highlight pre > code {
+    font-size: 0.75rem;
+  }
+
+  /* Better table handling on small screens */
+  .md-typeset table:not([class]) {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Utility to hide sidebars that might be redundant on mobile if the main nav is used */
+@media screen and (max-width: 960px) {
+  /* MkDocs Material usually has its own drawer, 
+     so we ensure our custom sidebar containers don't conflict */
+  .md-sidebar--primary {
+    display: none; 
+  }
+}
