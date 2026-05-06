@@ -1,6 +1,6 @@
 # Project 2: Low-Fidelity Inverse Schrödinger Problem
 
-!!! abstract "**Overview**"
+!!! abstract "__Overview__"
 
     === "🥅 Goal"
 

@@ -20,6 +20,7 @@
   --ptg-color-error: #f78166;
 
   /* Purple-Blue Gradients */
+  --ptg-gradient-purple: linear-gradient(135deg, #df99ff 0%, #a855f7 50%, #7652f5 100%);
   --ptg-gradient-purple-blue: linear-gradient(135deg, #a855f7 0%, #7652f5 50%, #14b5ff 100%);
   --ptg-gradient-blue-purple: linear-gradient(to right bottom, #00e8ff, #14b5ff, #5280ff, #7952f5);
 
@@ -106,8 +107,8 @@
   --md-footer-fg-color--light:  whitesmoke;
   --md-footer-fg-color--lighter: #8b949e;
 
-  --ptg-color-bold: #38bdf8;
-  --ptg-color-italic: #e9d5ff; /* Brighter purple for better contrast */
+  --ptg-color-bold: #ff85a1; /* Darker pink */
+  --ptg-color-italic: #ff99ab; /* Slightly different darker pink */
 
   /* Dark mode heading colors */
   --ptg-heading-h2: var(--ptg-color-primary);
@@ -175,8 +176,8 @@
   --md-footer-fg-color--light:  #1a1a2e;
   --md-footer-fg-color--lighter: #555570;
 
-  --ptg-color-bold: #0284c7;
-  --ptg-color-italic: #a78bfa; /* Slightly lighter purple for better readability */
+  --ptg-color-bold: #e91e63; /* Deep pink */
+  --ptg-color-italic: #f06292; /* Medium pink */
 
   /* Light mode heading colors */
   --ptg-heading-h2: #0a8fd4;
@@ -216,7 +217,77 @@
 
 .md-typeset .admonition-title,
 .md-typeset summary {
-  background: var(--ptg-admonition-bg) !important;
+  font-family: var(--ptg-font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--ptg-gradient-purple) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  display: block;
+  width: fit-content;
+}
+
+/* Ensure emojis in gradient headers don't inherit gradient/transparency */
+.md-typeset .admonition-title img.twemoji,
+.md-typeset summary img.twemoji,
+.md-typeset h1 img.twemoji,
+.md-header__title img.twemoji,
+.md-header__title .md-ellipsis img.twemoji {
+  -webkit-text-fill-color: initial !important;
+  color: initial !important;
+  background-clip: initial !important;
+  -webkit-background-clip: initial !important;
+  background: none !important;
+  filter: none !important;
+  display: inline-block !important;
+}
+
+/* Style for the tab headers in admonitions and regular content tabs */
+.md-typeset .tabbed-labels {
+  display: flex;
+  gap: 0.5rem;
+  box-shadow: none;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--ptg-glass-border);
+  padding-bottom: 4px;
+}
+
+.md-typeset .tabbed-labels label {
+  font-family: var(--ptg-font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ptg-color-text);
+  background: var(--ptg-glass-bg-light);
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--ptg-glass-border);
+  border-radius: var(--ptg-radius-sm);
+  transition: all var(--ptg-transition-fast);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.md-typeset .tabbed-labels label:hover {
+  border-color: var(--ptg-color-primary);
+  background: var(--ptg-glass-bg);
+}
+
+.md-typeset .tabbed-set input:nth-child(1):checked ~ .tabbed-labels label:nth-child(1),
+.md-typeset .tabbed-set input:nth-child(2):checked ~ .tabbed-labels label:nth-child(2),
+.md-typeset .tabbed-set input:nth-child(3):checked ~ .tabbed-labels label:nth-child(3),
+.md-typeset .tabbed-set input:nth-child(4):checked ~ .tabbed-labels label:nth-child(4),
+.md-typeset .tabbed-set input:nth-child(5):checked ~ .tabbed-labels label:nth-child(5),
+.md-typeset .tabbed-set input:nth-child(6):checked ~ .tabbed-labels label:nth-child(6),
+.md-typeset .tabbed-set input:nth-child(7):checked ~ .tabbed-labels label:nth-child(7),
+.md-typeset .tabbed-set input:nth-child(8):checked ~ .tabbed-labels label:nth-child(8),
+.md-typeset .tabbed-set input:nth-child(9):checked ~ .tabbed-labels label:nth-child(9),
+.md-typeset .tabbed-set input:nth-child(10):checked ~ .tabbed-labels label:nth-child(10) {
+  background: linear-gradient(135deg, rgba(223, 153, 255, 0.25) 0%, rgba(168, 85, 247, 0.25) 50%, rgba(118, 82, 245, 0.25) 100%) !important;
+  border-color: var(--ptg-color-secondary);
+  color: var(--ptg-color-text) !important;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15);
 }
 
 .md-nav__link {
@@ -241,7 +312,11 @@
 
 .md-typeset table:not([class]) th {
   background: var(--ptg-table-th-bg);
-  color: var(--ptg-table-th-color);
+  color: var(--ptg-code-cyan);
+  font-family: var(--ptg-font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .md-typeset blockquote {
@@ -637,6 +712,45 @@ body {
   width: 0.62rem;
   height: 0.62rem;
   border-radius: 999px;
+}
+
+/* ============================================
+   Grid Cards — Custom Header & Container
+   ============================================ */
+
+.md-typeset .grid.cards {
+  background: rgba(0, 0, 0, 0.25); /* Darker background for the container */
+  padding: var(--ptg-space-md);
+  border-radius: var(--ptg-radius-lg);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--ptg-glass-border);
+}
+
+/* Card titles (the bold text before the horizontal rule) */
+.md-typeset .grid.cards > li > p:first-child strong,
+.md-typeset .grid.cards > li > strong:first-child,
+.md-typeset .grid.cards blockquote > p:first-child strong {
+  display: block;
+  font-family: var(--ptg-font-heading);
+  font-size: 0.85rem;
+  color: var(--ptg-code-cyan);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.md-typeset .grid.cards > li {
+  background: var(--ptg-code-bg);
+  border: 1px solid var(--ptg-glass-border);
+  transition: all var(--ptg-transition-normal);
+}
+
+.md-typeset .grid.cards > li:hover {
+  border-color: var(--ptg-color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--ptg-glass-shadow);
 }
 
 /* ============================================
