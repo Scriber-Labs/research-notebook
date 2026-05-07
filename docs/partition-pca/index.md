@@ -2,7 +2,7 @@
 
 [🔗 GitHub Repo](https://github.com/Scriber-Labs/partition_pca_panel){ .md-button .md-button--primary }
 
-### ✅ To Do
+### ✔️ To Do
 - [ ] Rewrite Introduction with updated 'narrative' (see [docs/lumo_response.md](https://github.com/Scriber-Labs/partition_pca_panel/blob/46ab52f430cc28d2b2954ed3a5e1ab313d89a088/docs/lumo_response.md) for details).
 
 <!--
