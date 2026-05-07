@@ -59,7 +59,7 @@ classDef loss_terms fill:#15274d,stroke:#22d3ee,stroke-width:2px,color:#ffffff,r
 %% ==============================
 %% NODES (smaller circles)
 %% ==============================
-potential(("$$V_\theta$$")):::model
+potential(("$$V_\theta$$"))
 
 psi0_raw(("$$\psi_0^\theta$$")):::psiraw
 psi1_raw(("$$\psi_1^\theta$$")):::psiraw
