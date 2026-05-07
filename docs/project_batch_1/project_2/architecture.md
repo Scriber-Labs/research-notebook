@@ -1,4 +1,8 @@
 # Project 2 Architecture
+- [ ] POD diagnostics
+  - [ ] Figure out where phase /sign alignment (before/after SVD)?
+  - [ ] Figure out where POD scaling occurs ($\psi_n^\theta \rightarrow \psi_n^\theta\int{\Delta x}$)
+    - Note: phase / sign alignment precedes POD scaling
 
 ```mermaid
 %%{ init: {
