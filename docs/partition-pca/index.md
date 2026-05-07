@@ -1,5 +1,7 @@
 # 🐦‍🔥 Partition PCA
 
+.button{}
+
 ---
 !!! abstract __Overview__
 
