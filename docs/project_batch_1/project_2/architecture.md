@@ -1,8 +1,8 @@
-# Architecture
+# Project 2 Architecture
 
 ```mermaid
 %%{ init: {
-        "theme": "base",
+        "theme": "dark",
         "themeVariables": {
             "background": "#0D1117",
             "lineColor": "#14B5FF",
@@ -18,14 +18,16 @@
         "handDrawn": true
     } }%%
 
-flowchart LR
+flowchart TB
 
 %% ==============================
 %% COLOR CLASSES (your palette)
 %% ==============================
 style step0 fill:#301934,stroke:#5D3FD3,stroke-width:2px,color:#ffffff,rx:12,ry:12;
-style PIML fill:#081621,stroke:#14b5ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
-style synthetic_data fill:#0b0512,stroke:#5D3FD3,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12,ry:12;
+style PIML fill:#161b22,stroke:#14b5ff,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
+style synthetic_data fill:#040b30,stroke:#5D3FD3,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
+style spatial_grid fill:#1E0026,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+style observed_data fill:#142034,stroke:#5280ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
 style neural_ansatz fill:#0d1a30,stroke:#3b82ff,stroke-width:3px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
 style energy_eigenvalues fill:#071320,stroke:#3b9eff,stroke-width:4px,color:#ffffff,stroke-dasharray: 6 6, rx:12px, ry:12px;
 style PINN fill:#103b4f,stroke:#00E8FF,stroke-width:2px,color:#ffffff,stroke-dasharray: 6 6,rx:12,ry:12;
@@ -34,17 +36,17 @@ style normalization fill:#0f2335,stroke:#4b54ff,color:#ffffff,stroke-width:2px, 
 style normalized_wavefunctions fill:#112230,color:#ffffff,stroke:#4b54ff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
 style finite_difference fill:#011e00,stroke:#31ff48,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
 style residual fill:#0d2827,stroke:#03E8BD,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12px,ry:12px;
-style diagnostics fill:#1a0c0c,stroke:#FEB538,color:#ffffff,stroke-width:2px,rx:12px,ry:12px;
+style diagnostics fill:#161b22,stroke:#f68080,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
 style pod fill:#2f1616,stroke:#FEB538,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
 style loss fill:#0a0f1a,stroke:#22d3ee,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
 
-classDef data fill:#142034,stroke:#5280ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+
 classDef MLP fill:#2a185c,stroke:#9a66ff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
+style potential fill:#11163a,stroke:#5f88ff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
 classDef norm fill:#1e2b4e,stroke:#4b54ff,color:#ffffff,stroke-width:2px;
 classDef energy fill:#0d2238,stroke:#3b9eff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
-classDef learned_potential fill:#11163a,stroke:#5f88ff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
 classDef psiraw fill:#224261,stroke:#14B5FF,color:#ffffff,stroke-width:2px,rx:12,ry:12;
-classDef psinorm fill:#224261,stroke:#3327ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+classDef psinorm fill:#224261,stroke:#4b54ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
 classDef stencil fill:#023e00,stroke:#31ff48,color:#ffffff,stroke-width:2px;
 classDef physics fill:#1c5654,stroke:#03E8BD,color:#ffffff,stroke-width:2px;
 classDef opt fill:#2a071b,stroke:#FE28A2,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6;
@@ -55,15 +57,15 @@ classDef loss_terms fill:#15274d,stroke:#22d3ee,stroke-width:2px,color:#ffffff,r
 %% ==============================
 %% NODES (smaller circles)
 %% ==============================
-potential(("$$V_\theta$$")):::learned_potential
+potential(("$$V_\theta$$")):::model
 
 psi0_raw(("$$\psi_0^\theta$$")):::psiraw
 psi1_raw(("$$\psi_1^\theta$$")):::psiraw
 psi2_raw(("$$\psi_2^\theta$$")):::psiraw
 
-psi0(("$$\hat{\psi}_0^\theta$$")):::psinorm
-psi1(("$$\hat{\psi}_1^\theta$$")):::psinorm
-psi2(("$$\hat{\psi}_2^\theta$$")):::psinorm
+psi0(("$$\psi_0^\theta$$")):::psinorm
+psi1(("$$\psi_1^\theta$$")):::psinorm
+psi2(("$$\psi_2^\theta$$")):::psinorm
 
 E0(("$$E_0^\theta$$")):::energy
 E1(("$$E_1^\theta$$")):::energy
@@ -73,18 +75,12 @@ E2(("$$E_2^\theta$$")):::energy
 %% PIPELINE
 %% ==============================
 subgraph PIML["PIML Framework"]
-direction TB
+direction LR
 
     subgraph synthetic_data["1️⃣ Synthetic Data"]
     direction TB
-        spatial_grid("$$x\in[-5, 5]$$"):::data
-        observed_data["$$\rho_n^\text{obs}, \ E_n^\text{obs}$$"]:::data
-    end
-    
-    subgraph normalization["3️⃣ Range Constraints"]
-        norm1("L2 Normalize"):::norm
-        gs("Gram-Schmidt"):::norm
-        eps("$$+\epsilon \ \text{stability}$$"):::norm
+        spatial_grid("$$x\in[-5, 5]$$")
+        observed_data["$$\rho_n^\text{obs}, \ E_n^\text{obs}$$"]
     end
 
     subgraph neural_ansatz["2️⃣ Neural Ansatz"]
@@ -97,38 +93,43 @@ direction TB
 
         subgraph PINN["2️⃣ PINN"]
         direction TB
-            
-            MLP1("MLP"):::MLP
-            MLP2("MLP"):::MLP
-            MLP3("MLP"):::MLP
-            MLP4("MLP"):::MLP
 
-            subgraph raw_wavefunctions["Raw $$\psi_n^\theta$$"]
-            direction LR
-                psi0_raw --> norm1
-                psi1_raw --> norm1
-                psi2_raw --> norm1
+            subgraph raw_wavefunctions["Raw Learned Wavefunctions"]
+            direction TB
+                psi0_raw
+                psi1_raw
+                psi2_raw
             end
 
-            MLP1 --> potential
-            MLP2 --> psi0_raw
-            MLP3 --> psi1_raw
-            MLP4 --> psi2_raw
+            MLP1("MLP"):::MLP --> potential
+            MLP2("MLP"):::MLP --> psi0_raw
+            MLP3("MLP"):::MLP --> psi1_raw
+            MLP4("MLP"):::MLP --> psi2_raw
         end
     end
-    
-    subgraph normalized_wavefunctions["Normalized $$\psi_n^\theta$$"]
+
+    subgraph normalization["3️⃣ Range Constraints"]
+    direction LR
+        norm1("L2 Normalize"):::norm
+        gs("Gram-Schmidt"):::norm
+        eps("$$+\epsilon \ \text{stability}$$"):::norm
+    end
+
+    subgraph normalized_wavefunctions["Normalized Wavefunctions"]
+    direction TB
         psi0
         psi1
         psi2
     end
 
     subgraph finite_difference["3️⃣ Finite difference"]
+    direction LR
         eigenfunction_stencil("$$\frac{\partial^2}{dx^2}\psi_n^\theta$$ via"):::stencil
         potential_stencil("$$V_\theta''(x)$$"):::stencil
     end
 
     subgraph residual["4️⃣ Physics Residual"]
+    direction LR
         H("Ĥψ"):::physics
         R("$$R_n(x)=-\frac{1}{2}\frac{\partial^2}{\partial x^2}\psi_n^\theta + V_\theta\psi_n^\theta-E_n^\theta\psi_n^\theta $$"):::physics
     end
@@ -147,6 +148,10 @@ direction TB
     spatial_grid --> MLP2
     spatial_grid --> MLP3
     spatial_grid --> MLP4
+
+    psi0_raw --> norm1
+    psi1_raw --> norm1
+    psi2_raw --> norm1
 
     norm1 --> gs
 
@@ -203,7 +208,6 @@ step0["0️⃣ Define TISE dynamics"] --> PIML
 %% DIAGNOSTICS
 %% ==============================
 subgraph diagnostics["Diagnostics"]
-direction LR
 
     sanity["sanity checks"]:::diag
 
@@ -232,4 +236,5 @@ potential --> diagnostics
 %% LINKS (subtle)
 %% ==============================
 linkStyle default stroke:#8b949e,stroke-width:1.5px,opacity:0.8
+
 ```

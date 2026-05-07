@@ -1,5 +1,5 @@
 %%{ init: {
-        "theme": "base",
+        "theme": "dark",
         "themeVariables": {
             "background": "#0D1117",
             "lineColor": "#14B5FF",
@@ -21,7 +21,7 @@ flowchart TB
 %% COLOR CLASSES (your palette)
 %% ==============================
 style step0 fill:#301934,stroke:#5D3FD3,stroke-width:2px,color:#ffffff,rx:12,ry:12;
-style PIML fill:#081621,stroke:#14b5ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+style PIML fill:#161b22,stroke:#14b5ff,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
 style synthetic_data fill:#040b30,stroke:#5D3FD3,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
 style spatial_grid fill:#1E0026,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12;
 style observed_data fill:#142034,stroke:#5280ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
@@ -33,7 +33,7 @@ style normalization fill:#0f2335,stroke:#4b54ff,color:#ffffff,stroke-width:2px, 
 style normalized_wavefunctions fill:#112230,color:#ffffff,stroke:#4b54ff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
 style finite_difference fill:#011e00,stroke:#31ff48,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
 style residual fill:#0d2827,stroke:#03E8BD,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12px,ry:12px;
-style diagnostics fill:#1a0c0c,stroke:#FEB538,color:#ffffff,stroke-width:2px,rx:12px,ry:12px;
+style diagnostics fill:#161b22,stroke:#f68080,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
 style pod fill:#2f1616,stroke:#FEB538,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
 style loss fill:#0a0f1a,stroke:#22d3ee,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
 
@@ -45,9 +45,9 @@ classDef energy fill:#0d2238,stroke:#3b9eff,stroke-width:4px,color:#ffffff,rx:12
 classDef psiraw fill:#224261,stroke:#14B5FF,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 classDef psinorm fill:#224261,stroke:#4b54ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
 classDef stencil fill:#023e00,stroke:#31ff48,color:#ffffff,stroke-width:2px;
-classDef physics fill:#1c5654,stroke:#03E8BD,color:#fff,stroke-width:2px;
-classDef opt fill:#2a071b,stroke:#FE28A2,color:#fff,stroke-width:2px,stroke-dasharray:6 6;
-classDef diag fill:#F78166,stroke:#FEB538,color:#fff,stroke-width:2px;
+classDef physics fill:#1c5654,stroke:#03E8BD,color:#ffffff,stroke-width:2px;
+classDef opt fill:#2a071b,stroke:#FE28A2,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6;
+classDef diag fill:#F78166,stroke:#FEB538,color:#ffffff,stroke-width:2px;
 classDef loss_terms fill:#15274d,stroke:#22d3ee,stroke-width:2px,color:#ffffff,rx:12px, ry:12px;
 
 
@@ -92,7 +92,7 @@ direction LR
         direction TB
 
             subgraph raw_wavefunctions["Raw Learned Wavefunctions"]
-            direction LR
+            direction TB
                 psi0_raw
                 psi1_raw
                 psi2_raw
@@ -106,23 +106,27 @@ direction LR
     end
 
     subgraph normalization["3️⃣ Range Constraints"]
+    direction LR
         norm1("L2 Normalize"):::norm
         gs("Gram-Schmidt"):::norm
         eps("$$+\epsilon \ \text{stability}$$"):::norm
     end
 
     subgraph normalized_wavefunctions["Normalized Wavefunctions"]
+    direction TB
         psi0
         psi1
         psi2
     end
 
     subgraph finite_difference["3️⃣ Finite difference"]
+    direction LR
         eigenfunction_stencil("$$\frac{\partial^2}{dx^2}\psi_n^\theta$$ via"):::stencil
         potential_stencil("$$V_\theta''(x)$$"):::stencil
     end
 
     subgraph residual["4️⃣ Physics Residual"]
+    direction LR
         H("Ĥψ"):::physics
         R("$$R_n(x)=-\frac{1}{2}\frac{\partial^2}{\partial x^2}\psi_n^\theta + V_\theta\psi_n^\theta-E_n^\theta\psi_n^\theta $$"):::physics
     end
