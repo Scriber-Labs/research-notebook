@@ -3,3 +3,4 @@
 > ``zensical serve``
 
 ## ✅ TODO
+- [ ] Fix mobile view
