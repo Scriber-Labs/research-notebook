@@ -1,6 +1,6 @@
 # 🐦‍🔥 Partition PCA
 
-.button{}
+[🔗 GitHub Repo](https://github.com/Scriber-Labs/partition_pca_panel){ .md-button .md-button--primary }
 
 ---
 !!! abstract __Overview__
