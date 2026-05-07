@@ -7,15 +7,11 @@ $$ \theta_i(t+\Delta t) = \theta_i(t) + \dot{\theta}_i(t) \, \Delta t + \frac{1}
 
 <div class="grid cards" markdown>
 
-- 🟢 {.lg .middle } __Euler's Method__
-
-    ---
+- 🟢 __Euler's Method__
 
     Only retains the first-order term $\mathcal{O}(\Delta t)$.
 
-- 🔴 {.lg .middle } __Runge-Kutta Methods__
-
-    ---
+- 🔴 __Runge-Kutta Methods__
 
     Approximates higher-order terms (HOTs) via evaluation of $f$ at multiple grid points within the interval $[t, t+\Delta t] without requiring explicit HOTs.
 

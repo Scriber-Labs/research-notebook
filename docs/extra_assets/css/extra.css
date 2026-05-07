@@ -18,11 +18,13 @@
   --ptg-color-warning: #ffa657;
   --ptg-color-success: #22f792;
   --ptg-color-error: #f78166;
+  --ptg-color-orange: #ff8c00;
 
   /* Purple-Blue Gradients */
   --ptg-gradient-purple: linear-gradient(135deg, #df99ff 0%, #a855f7 50%, #7652f5 100%);
   --ptg-gradient-purple-blue: linear-gradient(135deg, #a855f7 0%, #7652f5 50%, #14b5ff 100%);
   --ptg-gradient-blue-purple: linear-gradient(to right bottom, #00e8ff, #14b5ff, #5280ff, #7952f5);
+  --ptg-gradient-orange: linear-gradient(135deg, #ffca28 0%, #ff8c00 50%, #f4511e 100%);
 
   /* Typography */
   --ptg-font-heading: 'Aclonica', sans-serif;
@@ -107,9 +109,6 @@
   --md-footer-fg-color--light:  whitesmoke;
   --md-footer-fg-color--lighter: #8b949e;
 
-  --ptg-color-bold: #ff85a1; /* Darker pink */
-  --ptg-color-italic: #ff99ab; /* Slightly different darker pink */
-
   /* Dark mode heading colors */
   --ptg-heading-h2: var(--ptg-color-primary);
   --ptg-heading-h3: var(--ptg-color-secondary);
@@ -176,8 +175,8 @@
   --md-footer-fg-color--light:  #1a1a2e;
   --md-footer-fg-color--lighter: #555570;
 
-  --ptg-color-bold: #e91e63; /* Deep pink */
-  --ptg-color-italic: #f06292; /* Medium pink */
+  --ptg-color-bold: #fd6d8e; /* Deep pink */
+  --ptg-color-italic: #fd6d8e; /* Medium pink */
 
   /* Light mode heading colors */
   --ptg-heading-h2: #0a8fd4;
@@ -229,39 +228,53 @@
   width: fit-content;
 }
 
-/* Ensure emojis in gradient headers don't inherit gradient/transparency */
+/* Ensure math and emojis in gradient headers don't inherit gradient/transparency */
 .md-typeset .admonition-title img.twemoji,
 .md-typeset summary img.twemoji,
 .md-typeset h1 img.twemoji,
 .md-header__title img.twemoji,
-.md-header__title .md-ellipsis img.twemoji {
+.md-header__title .md-ellipsis img.twemoji,
+.md-typeset .admonition-title .katex,
+.md-typeset summary .katex,
+.md-typeset .admonition-title .MathJax,
+.md-typeset summary .MathJax,
+.md-typeset .admonition-title mjx-container,
+.md-typeset summary mjx-container {
   -webkit-text-fill-color: initial !important;
-  color: initial !important;
+  color: var(--ptg-color-primary) !important;
   background-clip: initial !important;
   -webkit-background-clip: initial !important;
   background: none !important;
   filter: none !important;
+}
+
+.md-typeset .admonition-title .katex,
+.md-typeset summary .katex,
+.md-typeset .admonition-title .MathJax,
+.md-typeset summary .MathJax,
+.md-typeset .admonition-title mjx-container,
+.md-typeset summary mjx-container {
   display: inline-block !important;
 }
 
 /* Style for the tab headers in admonitions and regular content tabs */
 .md-typeset .tabbed-labels {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.4rem;
   box-shadow: none;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
   border-bottom: 1px solid var(--ptg-glass-border);
   padding-bottom: 4px;
 }
 
 .md-typeset .tabbed-labels label {
   font-family: var(--ptg-font-heading);
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--ptg-color-text);
   background: var(--ptg-glass-bg-light);
-  padding: 0.4rem 0.85rem;
+  padding: 0.1rem 0.3rem;
   border: 1px solid var(--ptg-glass-border);
   border-radius: var(--ptg-radius-sm);
   transition: all var(--ptg-transition-fast);
@@ -715,38 +728,79 @@ body {
    ============================================ */
 
 .md-typeset .grid.cards {
-  background: rgba(0, 0, 0, 0.25); /* Darker background for the container */
+  background: rgba(0, 0, 0, 0.25);
   padding: var(--ptg-space-md);
   border-radius: var(--ptg-radius-lg);
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   border: 1px solid var(--ptg-glass-border);
+  gap: 1rem;
 }
 
 /* Card titles (the bold text before the horizontal rule) */
 .md-typeset .grid.cards > li > p:first-child strong,
 .md-typeset .grid.cards > li > strong:first-child,
-.md-typeset .grid.cards blockquote > p:first-child strong {
+.md-typeset .grid.cards blockquote > p:first-child strong,
+.md-typeset .grid.cards li strong {
   display: block;
   font-family: var(--ptg-font-heading);
   font-size: 0.85rem;
-  color: var(--ptg-code-cyan);
-  letter-spacing: 0.06em;
+  background: var(--ptg-gradient-orange) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.5rem;
+  margin: -0.8rem -0.8rem 0.8rem -0.8rem;
+  padding: 0.7rem 0.8rem;
+  background-color: rgba(255, 140, 0, 0.15) !important;
+  border-bottom: 2px solid var(--ptg-color-secondary) !important;
+  border-radius: var(--ptg-radius-md) var(--ptg-radius-md) 0 0;
+  width: auto !important;
+}
+
+/* The middle section/content of the card */
+.md-typeset .grid.cards .middle {
+  display: block;
+  padding: 0.8rem;
+  color: var(--ptg-color-text);
+  border: 1px solid var(--ptg-color-secondary);
+  background: rgba(168, 85, 247, 0.12);
+  border-radius: var(--ptg-radius-sm);
+  margin: 0.2rem 0 0.5rem 0;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .md-typeset .grid.cards > li {
-  background: var(--ptg-code-bg);
-  border: 1px solid var(--ptg-glass-border);
+  background: var(--ptg-code-bg-deep) !important;
+  border: 2.5px solid var(--ptg-color-secondary) !important;
+  border-radius: var(--ptg-radius-md);
+  padding: 0.8rem;
   transition: all var(--ptg-transition-normal);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  list-style: none !important;
 }
 
 .md-typeset .grid.cards > li:hover {
-  border-color: var(--ptg-color-primary);
-  transform: translateY(-2px);
-  box-shadow: var(--ptg-glass-shadow);
+  border-color: #ffffff !important;
+  transform: translateY(-6px);
+  background: rgba(15, 15, 35, 0.98);
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(168, 85, 247, 0.4);
+}
+
+.md-typeset .grid.cards > li:hover .middle {
+  border-color: var(--ptg-color-secondary);
+  background: rgba(168, 85, 247, 0.12);
+}
+
+/* Adjust the horizontal rule inside cards if it exists */
+.md-typeset .grid.cards > li hr {
+  margin: 0.5rem 0;
+  border: none;
+  border-bottom: 2px solid var(--ptg-color-orange);
 }
 
 /* ============================================
