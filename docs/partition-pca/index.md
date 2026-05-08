@@ -1,9 +1,32 @@
-# Partition PCA
+# Partition PCA: Thermodynamic Fingerprints of Molecular Architectures
 
 [🔗 GitHub Repo](https://github.com/Scriber-Labs/partition_pca_panel){ .md-button .md-button--primary }
 
 ### ✔️ To Do
 - [ ] Rewrite Introduction with updated 'narrative' (see [docs/lumo_response.md](https://github.com/Scriber-Labs/partition_pca_panel/blob/46ab52f430cc28d2b2954ed3a5e1ab313d89a088/docs/lumo_response.md) for details).
+
+
+---
+!!! abstract "__Introduction__"
+
+    === "🥅 Goal"
+
+        The purpose of this project is to investigate whether distinct **molecular architectures** (defined by their discrete energy level structures) produce unique, separable **thermodynamic fingerprints** when subjected to *thermal stress*.
+        Here, Principal Component Analysis (PCA) is employed to visualize these differences in a reduced-dimensional space.
+
+    === "🗝️ Keywords"
+
+        - **Molecular architecture**:
+            - Defined by the spatial arrangement of atoms / molecules that comprise a system.
+            - Directly determines the quantized energy levels of the atoms / molecules that comprise a system.
+        - **Thermodynamic fingerprint**:
+            - A unique combination of thermodynamic properties that can be used to distinguish between different molecular architectures.
+            - Can be used to identify and classify molecular architectures using the relation between architecture-driven energy levels and textbook statistical mechanic principles.
+        - **Thermal stress**:
+            - Mechanical stress applied to a system undergoing changes in temperature.
+            - Reults in expansion or conctraction (changes in volume) according to equation of state for the system.
+
+    === ""
 
 <!--
     ---
