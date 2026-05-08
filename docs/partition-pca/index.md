@@ -3,8 +3,10 @@
 [🔗 GitHub Repo](https://github.com/Scriber-Labs/partition_pca_panel){ .md-button .md-button--primary }
 
 ### ✔️ To Do
-- [ ] Rewrite Introduction with updated 'narrative' (see [docs/lumo_response.md](https://github.com/Scriber-Labs/partition_pca_panel/blob/46ab52f430cc28d2b2954ed3a5e1ab313d89a088/docs/lumo_response.md) for details).
-
+- [x] Rewrite Introduction with updated 'narrative' (see [docs/lumo_response.md](https://github.com/Scriber-Labs/partition_pca_panel/blob/46ab52f430cc28d2b2954ed3a5e1ab313d89a088/docs/lumo_response.md) for details).
+- [ ] Polish introduction 
+  - [ ] Grammar and wording
+  - [ ] Resolve all sanity checks and needed citations.
 
 ---
 !!! abstract "__Introduction__"
@@ -53,6 +55,19 @@
             - $H_0$: There is no significant difference in the function of state between bulk liquid water and hydro-coherent domains.
             - $H_1$: There is a significant difference in the function of state between bulk liquid water and hydro-coherent domains.
      
+    === "💭 Theoretical Context"
+
+        !!! quote "LUMO-generated summary of ⚡ Electromagnetic & Biophysical Context"
+
+            This project is inspired by the intersection of **Statistical Mechanics** and **Classical Electromagnetism**, specifically the work of **Herbert Fröhlich** on biological coherence.
+
+            - **The Analogy:** Just as an LC circuit (inductor-capacitor) has specific resonant frequencies, molecular structures have discrete energy levels.
+            - **The Hypothesis:** "Hydro-Coherent Domains" act as **dielectric resonators**. Unlike "Bulk" (disordered) water, these domains can sustain **coherent vibrational modes** when pumped with metabolic energy.
+            - **The Vector Potential ($\mathbf{A}$):** Fröhlich suggested that living systems might be sensitive to the magnetic vector potential, acting as a "chemical potential" for coherence. In our simulation, this could manifest as a **shift in energy levels** that disproportionately affects the thermodynamic stability of coherent domains.
+
+    **Why PCA?**
+    If a Hydro-Coherent Domain is truly distinct, its response to thermal noise (Temperature) and external fields (Vector Potential) should be **non-linear** and **separable** from disordered systems in the thermodynamic feature space. PCA provides the lens to visualize this separation.
+
 !!! note "📋 Methods"
 
     === "🧪 Simlulation Overview"
