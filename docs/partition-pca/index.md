@@ -16,154 +16,122 @@
 
     === "🗝️ Keywords"
 
-        - **Molecular architecture**:
+        - **Molecular Architecture**:
             - Defined by the spatial arrangement of atoms / molecules that comprise a system.
             - Directly determines the quantized energy levels of the atoms / molecules that comprise a system.
-        - **Thermodynamic fingerprint**:
+        - **Thermodynamic Fingerprint**:
             - A unique combination of thermodynamic properties that can be used to distinguish between different molecular architectures.
             - Can be used to identify and classify molecular architectures using the relation between architecture-driven energy levels and textbook statistical mechanic principles.
-        - **Thermal stress**:
+        - **Thermal Stress**:
             - Mechanical stress applied to a system undergoing changes in temperature.
-            - Reults in expansion or conctraction (changes in volume) according to equation of state for the system.
-
-    === ""
-
-<!--
-    ---
-    !!! abstract __Overview__
-    
-        === "🥅 Goal"
-    
-            The purpose of this project is to use Principal Component Analysis (PCA) to gain insights into the thermodynamic behavior of a system of artificial chemical species with discrete energy levels.
-    
-        === "🎭 Setting the Stage"
-    
-            A system of $n$ artificial chemical species is simulated. 
-            All $n$ species are assumed to have $p$ discrete energy levels. 
-    
-            Let $E_{ij} : i\in\{0,1,...,n\} \wedge j\in\{1,2,...,p\}$ denote the $j^\text{th}$ energy level of the $i^\text{th}$ species. 
-            The probability of a species being in a particular energy level is drawn from a chosen distribution.
-        
-            Per $i^\text{th}$ species, we can use text-book statistical mechanics to compute the following:
-        
-            | **Symbol**            | **Meaning**                                                            | **Units**                           |
-            |:----------------------|:-----------------------------------------------------------------------|:------------------------------------|
-            | $\langle E_i \rangle$ | Average energy                                                         | $\mathrm{eV}$                       |
-            | $S_i$                 | Entropy (Shannon / Gibbs)                                              | $\mathrm{eV} \cdot \mathrm{K}^{-1}$ |
-            | $F_i$                 | Helmholtz free energy                                                  | $\mathrm{eV}$                       |
-            | $Z_i$                 | Partition function                                                     | dimensionless                       |
-            | $P_{ij}$              | Boltzmann probability of species $i$ being in energy level $j$         | -                                   |
-            | %NA                   | % inaccessible microstates (all states with probability $P < 10^{-6}$) | %                                   | 
-    
-    
-        === "🗺️ Conceptual Mapping"
-    
-            We can build a feature matrix (thermodynamic variables for each species) and perform PCA.
-            The resulting principal components are then used to visualize the data in a lower-dimensional space, displaying both the *scores* (points) and *loadings* (vectors) for species projection in a 3-D space.
-        
-            | ✨ **ML / Data Science Interpretation** | 🐦‍🔥 **Project Implementation** |
-            |:---------------------------------------| :----------------------------- |
-            | **Samples**                            | chemical species |
-            | **Features**                           | Thermodynamic quantities (see table above) |
-            | Controlled variations                  | Temperature, chemical potential, energy-level shape |
-    
-    
-            ??? "🔮 Future Implemenations"
-    
-                | ✨ **ML / Data Science Interpretation** | 🐦‍🔥 **Project Implementation**               |
-                |----------------------------------------|------------------------------------------------|
-                | **Labels**                             | Phases / clusters revealed by PCA / clustering |
-    
-        === "🔧 Current Tech Stack"
-    
-            - **Language:** Python
-              - **Math:** Statistical mechanics · Thermodynamics · Linear algebra
-              - **External libraries:** Panel, ...
-    
-        === "Educational Implications" 
-        
-            These expected observations can be used to create educational modules that help users gain a deeper understanding of the underlying relation between mathematics and physics.
-    
-            ???+ note "Example:"
-    
-                1. **Temperature Effects:** 
-    
-                    - Show how increasing temperature affects the partition function, energy, and entropy of the system.
-                    - Show how PCA captures these changes.
-    
-                2. **Phase Transitions:** 
-    
-                    - Demonstrate how different temperature regimes lead to distinct phase behaviors.
-                    - Illustrate how PCA can reveal these phase transitions by clustering thermodynamic properties.
+            - Results in expansion or contraction (changes in volume) according to equation of state for the system.
+        - **Hydro-Coherent Domain:**
+            - A descriptor of highly ordered, low-entropy water structures (analogous to the "Exclusion Zone" pheonmenon) without making claims about the exstence of a new state of matter.
+        - **Phase Transition vs. Crossover**:
+            - Phase transitions are abrupt changes in the thermodynamic properties of a system, while crossovers are smooth, continuous changes.
+            - In finite systems, crossovers are observed as gradual changes in thermodynamic properties without the formation of new phases or symmetry breaking.
                 
-                3. **Energy-Level Shapes:** 
-                    - Explore how different energy-level distributions affect the system's behavior.
-                    - Explore how PCA can distinguish between different energy-level shapes and their impact on system properties.
-    
-    ??? note "🔬 Expected vs. Observed Results"
-    
-        #### 1. Partition Function and Temperature Dependence
-        
-        - **Expectation:** The canonical partition function $Z_i$ and derived properties (e.g., average energy $\langle E_i \rangle$, entropy $S_i$, etc.) should demonstrate strong dependence on temperature.
-        - **PCA Insight:** PCA should reveal that temperature is a dominant factor in the first principal component due to its effect on multiple thermodynamic properties.
-        - [ ] **Observation:**
-            
-        #### 2. Boltzmann Distribution
-            
-        - **Expectation:** The Boltzmann probabilities $P_{ij}$ for the $i^\text{th}$ chemical species should behave according to the exponential distribution:
-            
-            $$P_{ij} \propto e^{-\beta E_{ij}} \quad \text{where} \ \beta = \frac{1}{k_B T} \, .$$
-        
-        - **PCA Insight:** The distribution of Boltzmann probabilities across energy levels should cluster in a distinguishable way based on temperature.
-        - [ ] **Observation:**
-    
-            
-        #### 3. Entropy and Disorder
-    
-        - **Expectation:** Entropy $S_i$ should increase with temperature for all species. This is a fundamental consequence of the Laws of Thermodyanmics.
-        - **PCA Insight:** PCA should reveal that entropy is a key factor in distinguishing different species / conditions (particularly in the contest of *phase transitions*).
-        - [ ] **Observation:**
-            
-        #### 4. Free Energy and Stability
-    
-        - **Expectation:** The Helmholtz free energy $F_i$ should decrease with temperature for species where $S_i$ increases faster than $\langle E_i \rangle$.
-        - **PCA Insight:** PCA should reveal that species with lower $F_i$ values are more stable over changes in temperature. Additionally, changes in chemical potential $\mu_i$ or energy-level shape $E_{ij}$ should affect the free energy landscape.
-        - [ ] **Observation:**
-            
-        #### 5. Phase Transitions
-    
-        - **Expectation:** Species with multiple energy levels should exhibit phase transitions over changes in temperature. These changes can be identified by sharp changes in thermodynamic properties.
-        - **PCA Insight:** PCA should reveal distinct clusters corresponding with different phases with principal components capturing the transition points.
-        - [ ] **Observation:**
-            
-        #### 6. Energy-Level Shape and Chemical Potential
-    
-        - **Expectation:** The shape of the energy levels $E_{ij}$ and chemical potentials $\mu_i$ should significantly affect thermodynamic properties.
-        - **PCA Insight:** PCA should distinguish between different energy-level shapes and chemical potentials and highlight their impact on overall system behavior.
-        - [ ] **Observation:**
-            
-        #### 7. Inaccessible Micro-States
-    
-        - **Expectation:** The percentage of "inaccessible" micro-states ($P < 10^{-6}$) should decrease as temperature increases.
-        - **PCA Insight:** The percentage of inaccessible states should be a significant factor in the principal components, particularly for species with a wide range of energy levels.
-        - [ ] **Observation:**
-            
-        #### 8. ✨ Linear Algebra and PCA Interpretation
-    
-        - **Expectation:** PCA should reduce the dimensionality of the feature matrix while retaining the most significant variations.
-        - **PCA Insight:** The loading vectors (eigenvectors) should reveal which thermodynamic properties are most influential in distinguishing different species or conditions.
-        - [ ] **Observation:**
-    
-    ---
-    
-    !!! tip "🔮 Future Roadmap"
-    
-        - Structured energy spectra
-            - harmonic oscillator, double-well, clustered levels, etc.
-            - compare random vs. structured PCA signatures
-            - Temperature / chemical potential-sweeps to build richer higher-dimensional datasets.
-        - Advanced analytics: 
-            - kernel-PCA, UMAP, clustering
-            - information-theoretic measures (e.g., KL divergence between species)
+                !!! warning "️⚠️ Citation needed!"
 
--->
+            - Phase transitions are often associated with the formation of new phases or the breaking of symmetry, while crossovers are more gradual and can occur within a single phase.
+
+    === "🎭 The Hypothesis"
+
+        In complex fluids, water molecules at the interfacial regions of various hydrophillic materials behave differently than typical "bulk" liquid water.
+        While bulk liquid water is highly entropic, past research has shown water molecules at the interface of such hydrophillic surfaces form a 'structured, quasi-crystalline' complex with distinct energy levels.
+        
+        !!! warning "⚠Citation needed!"
+
+        If such phases of water exist, then changes to variables of their function of state in response to changes in temperature should be fundamentally different from disordered bulk liquid water.
+        
+        !!! warning "Citation needed!"
+            
+            - [ ] Check if function of state is being used appropriately here.
+
+        ??? note "$H_0$ and $H_1$ hypotheses"
+           
+            - $H_0$: There is no significant difference in the function of state between bulk liquid water and hydro-coherent domains.
+            - $H_1$: There is a significant difference in the function of state between bulk liquid water and hydro-coherent domains.
+     
+!!! note "📋 Methods"
+
+    === "🧪 Simlulation Overview"
+
+        We simulate a mixture of $n$ hypothetical molecular species, each with $p$ discrete energy levels.
+        Each species is categorized into two broad classes:
+
+        1. **Disordered Architectures:** Random energy level distributions (analogous to bulk fluid).
+        2. **Structured Architectures:** Ordered energy gaps (e.g., harmonic oscillators, double-wall potentials) corresponding with "quasi-crystalline phases".
+
+        For each $i^\text{th}$ species, we compute the canonical ensemble properties across a temperature sweep $T \in [  50 \, \mathrm{K}, 100 \, \mathrm{K} ]$:
+
+        | **State Variable** | **Interpretation** | **Intensive vs. Extensive** |
+        | :--------- | :----------------- | :-------------------------- |
+        | $\langle E_i \rangle$ | Average Energy | Extensive |
+        | $S_i$ | Entropy (Gibbs / Shannon) | Extensive |
+        | $F_i$ | Helmholtz Free Energy | Extensive |
+        | $Z_i$ | Partition Function | Extensive |
+        | $P_{ij}$ | Boltzmann probability of energy level $j$ | Intensive |
+        | $\% \text{NA}$ | % Inaccessible microstates ($P < 10^{-6}$) | Extensive (by definition, as it is a ratio of extensive quantities) |
+    
+        ??? warning "‼️ Sanity-Check Extenstivity Classification"
+            - [ ] $P_{ij}$ 
+            - [ ] $\% \text{NA}$
+                - [ ] Sanity check the following statement:
+                    
+                    The % Inaccessible microstates metric is calculated as the percentage of energy levels with Boltzmann probabilities below a threshold ($P < 10^{-6}$). This metric is extensive because it is a ratio of extensive quantities (total number of energy levels and number of inaccessible microstates).
+
+    === "🗺️ Concept Map: Thermodynamic PCA"
+
+        We construct a *feature matrix* where rows correspond with individual molecular instances columns are their thermodynamic state variables at a fixed pressure.
+        
+        #### PCA Justificaiton
+
+        1. **Dimension reduction:** Compresses the n-D thermodynamic feature space into principal components. This allows visualization of the data projected onto a 3D Euclidean space, where each axis corresponds with the first three variables that varied the most over the temperature sweep.
+        2. **Clusters:** Determine if "Structured" and "Disordered" architectures naturally separate in this 3D space.
+        3. **Identify Drivers:** Use loading vectors (eigenvectors) of examine which state variable in the feature matrix drives the separation.
+
+            | **Data Science Concept** | **Stat Mech Interpretation** | **PCA Interpretation** |
+            | :----------------------- | :--------------------------- | :--------------------- |
+            | **Samples** | Individual molecular instances | Data points projected in a 3D space (principal component space) |
+            | **Features** | Thermodynamic state variables | Axes of variance |
+            | **Clusters** | Distinct thermodyanmaic phases | Grouped points in principal component space |
+            | **Loadings** | Coupling between properties | Direction of property influence |
+
+---
+
+??? note "Expected Observations & Validation"
+
+    | **Expected Observation** | **Experimental Hypothesis** | **PCA Insight** | **Interpretation** |
+    | :----------------------- | :--------------------------- | :--------------------- | :--------------------- |
+    | **1. Temperature as the Primary Driver** | $H_1$: Low $T$ corresponds with 'frozen' state variables <br> Increasing $T$ leads to increased variance in thermodynamic state variables | PC1 should capture the global thermal excitation trend. | If "Structured" "Disordered" systems separate *despite* this trend, it is evidence suggesting their intrinsic state variables are robust |
+    | **2. The "Structured" Signature** | $H_1$: **Quasi-crystalline phases** (e.g., harmonic oscillator / double-well potential) exhibit lower $S$-values and more negative $F$-values (higher stability) | These systems should separate into distinct clusters in PCA space according to the **Entropy** and **Helmholtz Free Energy** loading eigenvectors | Structured species have points that are more tightly grouped in the principal component space | 
+    | **3. Crossover Regimes (*Not* Phase Transitions)** | $H_1$: Thermal crossover regimes emerge as sharp changes in heat capacity $C_v \approx \frac{d \, \langle E \rangle}{dT}$ between different classes (Structured vs. Disordered) of molecular instances | The PCA clusters should shift or rotate as we sweep the snapshot temperature accross these crossover intervals |  |
+    | **4. Inaccessible States as a Stability Metric** | $H_1$: At moderate $T$, structured molecular instances retain a higher percentage of inacessible states than disordered molecular instances at moderate $T$ (rigidity) | The $\% \text{NA}$ loading should point strongly toward the "Structured" clusters comapred to the "Disordered" ones. | Structured molecular instances should exhibit lower $S$, which corresponds with decreased $\% \text{NA}$ compared to "Disordred" molecular instaces. | 
+
+---
+
+!!! tip "Future Roadmap"
+
+    - [ ] **Interactive Dashboard (Panel):**
+
+        - Real-time temperature sweeps.
+        - Toggle between "Random" vs. "Structured" energy generation.
+        - Dynamic 3D PCA visualization with hover-over thermodynamic details.
+        - The Scriber Experience theme applied with consistent color encoding for different experimental features (see [`thermodynamics-pca-streamlit`](https://github.com/Scriber-Labs/thermo-pca-simulation/tree/197e66ac9811e06a1c8ce578bdec6722457ed0a6/src) for theme, layout, and color preferences ).
+
+    - [ ] **Advanced Analytics:**
+
+        - [ ] **KL Divergence:** Quantify the information distance between the "Disordered" and "Structured" probability distributions.
+            
+            !!! question
+
+                🧙‍♂️ Q: What probabilty distributions are we specifically refering to here?
+            
+                📜 A: We are referring to the probability distributions of molecular states in the "Disordered" and "Structured" clusters. These distributions represent the likelihood of finding a molecule in a particular state at a given temperature.
+        
+        - [ ] **Kernel PCA:** Non-linear mapping to detect subtle phase-like boundaries.
+        - [ ] **Networked Systems:** Couple the species to simulate interaction (moving towards 🧠 territory).
+
+
+
