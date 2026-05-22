@@ -181,7 +181,7 @@ direction LR
 
     gs --> psi0
     gs --> psi1
-    gs --> eps
+    gs --> psi2
 
 
     psi0 --> eigenfunction_stencil
