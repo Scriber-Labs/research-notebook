@@ -13,6 +13,7 @@
             "fontFamily": "'Aclonica', sans-serif",
             "borderRadius": "16"       /* larger radius for more rounded corners */
         },
+        "themeCSS": ".nodeLabel, .edgeLabel, .cluster-label, .cluster-label text, .label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: whitesmoke !important; fill: whitesmoke !important; -webkit-text-fill-color: whitesmoke !important; }",
         "handDrawn": true
     } }%%
 %%====================================================================

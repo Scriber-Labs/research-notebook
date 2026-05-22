@@ -804,6 +804,82 @@ body {
 }
 
 /* ============================================
+   Mermaid diagrams
+   ============================================ */
+
+.md-typeset .mermaid,
+.md-typeset pre.mermaid,
+.md-typeset .mermaid svg,
+.md-typeset .mermaid svg *,
+.md-typeset .mermaid .katex,
+.md-typeset .mermaid .katex *,
+.md-typeset .mermaid .MathJax,
+.md-typeset .mermaid .MathJax *,
+.md-typeset .mermaid mjx-container,
+.md-typeset .mermaid mjx-container * {
+  color: whitesmoke !important;
+  fill: whitesmoke !important;
+  -webkit-text-fill-color: whitesmoke !important;
+  text-shadow: none !important;
+}
+
+/* Specific override for SVG text elements to avoid invisible text due to stroke inheritance */
+.md-typeset .mermaid svg text,
+.md-typeset .mermaid svg text * {
+  stroke: none !important;
+}
+
+.md-typeset .mermaid svg text,
+.md-typeset .mermaid svg text *,
+.md-typeset .mermaid svg .nodeLabel,
+.md-typeset .mermaid svg .edgeLabel,
+.md-typeset .mermaid svg .label,
+.md-typeset .mermaid svg .label text,
+.md-typeset .mermaid svg .label text *,
+.md-typeset .mermaid svg .cluster-label,
+.md-typeset .mermaid svg .cluster-label text,
+.md-typeset .mermaid svg .cluster-label text *,
+.md-typeset .mermaid svg foreignObject,
+.md-typeset .mermaid svg foreignObject * {
+  color: whitesmoke !important;
+  fill: whitesmoke !important;
+  -webkit-text-fill-color: whitesmoke !important;
+}
+
+/* Keep Mermaid text from inheriting global math coloring */
+.md-typeset .mermaid .MathJax,
+.md-typeset .mermaid .MathJax *,
+.md-typeset .mermaid mjx-container,
+.md-typeset .mermaid mjx-container *,
+.md-typeset .mermaid .katex,
+.md-typeset .mermaid .katex * {
+  color: whitesmoke !important;
+  fill: whitesmoke !important;
+}
+
+
+/* Mermaid fallback for renderers that do not keep the .mermaid class on the final SVG */
+.md-typeset svg[id^="mermaid-"] text,
+.md-typeset svg[id^="mermaid-"] .nodeLabel,
+.md-typeset svg[id^="mermaid-"] .edgeLabel,
+.md-typeset svg[id^="mermaid-"] .label,
+.md-typeset svg[id^="mermaid-"] .label text,
+.md-typeset svg[id^="mermaid-"] .cluster-label,
+.md-typeset svg[id^="mermaid-"] .cluster-label text,
+.md-typeset svg[id^="mermaid-"] foreignObject,
+.md-typeset svg[id^="mermaid-"] foreignObject *,
+.md-typeset svg[id^="mermaid-"] .katex,
+.md-typeset svg[id^="mermaid-"] .katex *,
+.md-typeset svg[id^="mermaid-"] .MathJax,
+.md-typeset svg[id^="mermaid-"] .MathJax *,
+.md-typeset svg[id^="mermaid-"] mjx-container,
+.md-typeset svg[id^="mermaid-"] mjx-container * {
+  color: whitesmoke !important;
+  fill: whitesmoke !important;
+  -webkit-text-fill-color: whitesmoke !important;
+}
+
+/* ============================================
    Responsive Design (Mobile & Tablet)
    ============================================ */
 
@@ -902,3 +978,4 @@ body {
     display: none; 
   }
 }
+

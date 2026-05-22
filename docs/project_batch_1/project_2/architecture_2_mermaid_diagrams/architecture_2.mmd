@@ -3,10 +3,14 @@
         "themeVariables": {
             "background": "#0D1117",
             "lineColor": "#14B5FF",
-            "textColor": "#ffffff",
+            "textColor": "whitesmoke",
+            "primaryTextColor": "whitesmoke",
+            "secondaryTextColor": "whitesmoke",
+            "tertiaryTextColor": "whitesmoke",
             "fontFamily": "'Aclonica', sans-serif",
             "borderRadius": "14"
         },
+        "themeCSS": ".nodeLabel, .edgeLabel, .cluster-label, .cluster-label text, .label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: whitesmoke !important; fill: whitesmoke !important; -webkit-text-fill-color: whitesmoke !important; }",
         "flowchart": {
             "curve": "basis",
             "nodeSpacing": 30,
@@ -21,7 +25,7 @@ flowchart TB
 %% COLOR CLASSES (your palette)
 %% ==============================
 style step0 fill:#301934,stroke:#5D3FD3,stroke-width:2px,color:#ffffff,rx:12,ry:12;
-style PIML fill:#161b22,stroke:#14b5ff,stroke-dasharray:6 6,color:#ffffff,rx:36,ry:36;
+style PIML fill:#161b22,stroke:#14b5ff,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
 style synthetic_data fill:#040b30,stroke:#5D3FD3,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
 style domain_norm fill:#1E0026,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12,stroke-dasharray:6 6,rx:12,ry:12;
 style trap fill:#023e00,stroke:#57ffbc,color:#ffffff,stroke-width:2px,rx:12,ry:12;
@@ -78,14 +82,14 @@ direction LR
 
     subgraph synthetic_data["1️⃣ Synthetic Data"]
     direction TB
-        subgraph domain_norm["Domain Normalization"]
+        subgraph domain_norm["Uniform Grid / Trapezoidal Rule"]
             spatial_grid["$$x\in[-5, 5]$$"]:::spatial_stencil
             deltax["$$\Delta x$$"]:::spatial_stencil
             trap["Trapezoidal weights"]
         end
 
 
-        observed_data["$$\rho_n^\text{obs}, \ E_n^\text{obs}$$"]
+        observed_data("$$\rho_n^\text{obs}, \ E_n^\text{obs}$$")
     end
 
     subgraph neural_ansatz["2️⃣ Neural Ansatz"]
@@ -113,11 +117,11 @@ direction LR
         end
     end
 
-    subgraph normalization["3️⃣ Range Constraints"]
+    subgraph normalization["3️⃣ Wavefunction Normalization / Orthonormalization"]
     direction LR
-        apply_trapezoidal_weights["$$\int|\psi_n^\theta |\, dx=\sum{w_i |\psi_n^\theta |^2 \Delta x}$$"]:::norm
-        norm1("L2 Normalize"):::norm
-        gs("Gram-Schmidt"):::norm
+        apply_trapezoidal_weights["$$\int|\psi_n^\theta |^2\, dx=\sum{w_i |\psi_n^\theta |^2 \Delta x}$$"]:::norm
+        norm1("Per-state L2 Normalize"):::norm
+        gs["Sequential Gram-Schmidt<br/>and re-normalize"]:::norm
         eps("$$+\epsilon \ \text{stability}$$"):::norm
     end
 
@@ -164,13 +168,14 @@ direction LR
 
     apply_trapezoidal_weights --> norm1
 
+    eps --> norm1
+
     norm1 --> gs
 
     gs --> psi0
     gs --> psi1
     gs --> eps
 
-    eps --> psi2
 
     psi0 --> eigenfunction_stencil
     psi1 --> eigenfunction_stencil
@@ -186,9 +191,9 @@ direction LR
 
     H --> R --> Lp
 
-    psi0 --> Ln
-    psi1 --> Ln
-    psi2 --> Ln
+    E0 --> Ln
+    E1 --> Ln
+    E2 --> Ln
 
     potential --> Ls
     potential_stencil --> Ls
@@ -196,6 +201,9 @@ direction LR
     psi0 --> Ld
     psi1 --> Ld
     psi2 --> Ld
+    E0 --> Ld
+    E1 --> Ld
+    E2 --> Ld
     observed_data --> Ld
 
     Lp --> opt
