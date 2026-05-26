@@ -1,21 +1,21 @@
 # Project 2 Architecture
 - [ ] POD diagnostics
-  - [ ] Figure out where phase /sign alignment (before/after SVD)?
+  - [x] Figure out where phase /sign alignment (before/after SVD)?
   - [ ] Figure out where POD scaling occurs ($\psi_n^\theta \rightarrow \psi_n^\theta\int{\Delta x}$)
     - Note: phase / sign alignment precedes POD scaling
 
+## Overall Architecture
 ```mermaid
+%%====================================================================
+%%  Final Architecture Diagram
+%%====================================================================
 %%{ init: {
-        "theme": "dark",
+        "theme": "base",
         "themeVariables": {
             "background": "#0D1117",
             "lineColor": "#14B5FF",
-            "textColor": "whitesmoke",
-            "primaryTextColor": "whitesmoke",
-            "secondaryTextColor": "whitesmoke",
-            "tertiaryTextColor": "whitesmoke",
             "fontFamily": "'Aclonica', sans-serif",
-            "borderRadius": "14"
+            "borderRadius": "16"
         },
         "themeCSS": ".nodeLabel, .edgeLabel, .cluster-label, .cluster-label text, .label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: whitesmoke !important; fill: whitesmoke !important; -webkit-text-fill-color: whitesmoke !important; }",
         "flowchart": {
@@ -24,22 +24,35 @@
             "rankSpacing": 50
         },
         "handDrawn": true
-    } }%%
+    }
+}%%
+%%====================================================================
 
 flowchart TB
 
 %% ==============================
-%% COLOR CLASSES (your palette)
+%% COLOR CLASSES & STYLES
 %% ==============================
-style step0 fill:#301934,stroke:#5D3FD3,stroke-width:2px,color:#ffffff,rx:12,ry:12;
-style PIML fill:#161b22,stroke:#14b5ff,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
-style synthetic_data fill:#040b30,stroke:#5D3FD3,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
-style domain_norm fill:#1E0026,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12,stroke-dasharray:6 6,rx:12,ry:12;
-style trap fill:#023e00,stroke:#57ffbc,color:#ffffff,stroke-width:2px,rx:12,ry:12;
-style observed_data fill:#142034,stroke:#5280ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+
+%% Styles from architecture_darker_background_no_normalization.mmd
+style step0 fill:#0f0a25,stroke:#7c5cff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
+style PIML fill:#0b1020,stroke:#5a6cff,stroke-width:4px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
+style potential fill:#11163a,stroke:#5f88ff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
 style neural_ansatz fill:#0d1a30,stroke:#3b82ff,stroke-width:3px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
 style energy_eigenvalues fill:#071320,stroke:#3b9eff,stroke-width:4px,color:#ffffff,stroke-dasharray: 6 6, rx:12px, ry:12px;
-style PINN fill:#103b4f,stroke:#00E8FF,stroke-width:2px,color:#ffffff,stroke-dasharray: 6 6,rx:12,ry:12;
+style PINN fill:#131130,stroke:#7259ff,stroke-width:3px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
+style loss fill:#0a0f1a,stroke:#22d3ee,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
+
+classDef MLP fill:#2a185c,stroke:#9a66ff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
+classDef eigenfunctions fill:#153a55,stroke:#4ec9ff,stroke-width:2px,color:#ffffff,rx:12px, ry:12px;
+classDef energy fill:#0d2238,stroke:#3b9eff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
+classDef loss_terms fill:#0b1326,stroke:#22d3ee,stroke-width:2px,color:#ffffff,rx:12px, ry:12px;
+
+%% Styles from architecture_normalization.mmd (for normalization elements)
+style synthetic_data fill:#040b30,stroke:#5D3FD3,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
+style domain_norm fill:#1E0026,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12,stroke-dasharray:6 6,rx:12,ry:12;
+style observed_data fill:#142034,stroke:#5280ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+style trap fill:#023e00,stroke:#57ffbc,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 style raw_wavefunctions fill:#224261,stroke:#14B5FF,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
 style normalization fill:#0f2335,stroke:#4b54ff,color:#ffffff,stroke-width:2px, stroke-dasharray: 6 6, rx:12, ry:12;
 style normalized_wavefunctions fill:#112230,color:#ffffff,stroke:#4b54ff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
@@ -47,25 +60,18 @@ style finite_difference fill:#011e00,stroke:#31ff48,color:#ffffff,stroke-width:2
 style residual fill:#0d2827,stroke:#03E8BD,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12px,ry:12px;
 style diagnostics fill:#161b22,stroke:#f68080,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
 style pod fill:#2f1616,stroke:#FEB538,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
-style loss fill:#0a0f1a,stroke:#22d3ee,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
-style potential fill:#11163a,stroke:#5f88ff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
-
 
 classDef spatial_stencil fill:#2a0037,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12;
-classDef MLP fill:#2a185c,stroke:#9a66ff,stroke-width:4px,color:#ffffff,rx:12px,ry:12px;
 classDef norm fill:#1e2b4e,stroke:#4b54ff,color:#ffffff,stroke-width:2px,rx:12px,ry:12px;
-classDef energy fill:#0d2238,stroke:#3b9eff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
 classDef psiraw fill:#224261,stroke:#14B5FF,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 classDef psinorm fill:#224261,stroke:#4b54ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
 classDef stencil fill:#023e00,stroke:#31ff48,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 classDef physics fill:#1c5654,stroke:#03E8BD,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 classDef opt fill:#2a071b,stroke:#FE28A2,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
 classDef diag fill:#723c30,stroke:#FEB538,color:#ffffff,stroke-width:2px,rx:12,ry:12;
-classDef loss_terms fill:#15274d,stroke:#22d3ee,stroke-width:2px,color:#ffffff,rx:12px, ry:12px;
-
 
 %% ==============================
-%% NODES (smaller circles)
+%% NODES (Information from architecture_2_normalization_and_diagnostics.mmd)
 %% ==============================
 potential(("$$V_\theta$$"))
 
@@ -94,7 +100,6 @@ direction LR
             deltax["$$\Delta x$$"]:::spatial_stencil
             trap["Trapezoidal weights"]
         end
-
 
         observed_data("$$\rho_n^\text{obs}, \ E_n^\text{obs}$$")
     end
@@ -228,35 +233,134 @@ direction LR
 
 end
 
-step0["0️⃣ Define TISE dynamics"] --> PIML
-
 %% ==============================
 %% DIAGNOSTICS
 %% ==============================
 subgraph diagnostics["Diagnostics"]
+direction TB
 
     sanity["sanity checks"]:::diag
+    pod["7️⃣ POD analysis"]:::diag
 
-    subgraph pod["7️⃣ POD"]
-        SVD("SVD"):::diag
-        spec("σ"):::diag
-        modes("U"):::diag
+    sanity ~~~ pod
 
-        SVD --> spec
-        SVD --> modes
-    end
+    deltax --> pod
+    trap --> pod
 
 end
 
-psi0 --> diagnostics
-psi1 --> diagnostics
-psi2 --> diagnostics
+step0["0️⃣ Define TISE dynamics"] --> PIML
 
-E0 --> diagnostics
-E1 --> diagnostics
-E2 --> diagnostics
+psi0 --> sanity
+psi0 --> pod
+psi1 --> sanity
+psi1 --> pod
+psi2 --> sanity
+psi2 --> pod
 
-potential --> diagnostics
+E0 --> sanity
+E1 --> sanity
+E2 --> sanity
+
+potential --> sanity
+
+%% ==============================
+%% LINKS (subtle)
+%% ==============================
+linkStyle default stroke:#8b949e,stroke-width:1.5px,opacity:0.8
+```
+
+## POD Diagnostics
+```mermaid
+%%{ init: {
+        "theme": "dark",
+        "themeVariables": {
+            "background": "#0D1117",
+            "lineColor": "#14B5FF",
+            "textColor": "whitesmoke",
+            "primaryTextColor": "whitesmoke",
+            "secondaryTextColor": "whitesmoke",
+            "tertiaryTextColor": "whitesmoke",
+            "fontFamily": "'Aclonica', sans-serif",
+            "borderRadius": "14"
+        },
+        "themeCSS": ".nodeLabel, .edgeLabel, .cluster-label, .cluster-label text, .label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: whitesmoke !important; fill: whitesmoke !important; -webkit-text-fill-color: whitesmoke !important; }",
+        "flowchart": {
+            "curve": "basis",
+            "nodeSpacing": 30,
+            "rankSpacing": 50
+        },
+        "handDrawn": true
+    } }%%
+
+flowchart TB
+
+%% ==============================
+%% COLOR CLASSES (your palette)
+%% ==============================
+style synthetic_data fill:#040b30,stroke:#5D3FD3,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
+style domain_norm fill:#1E0026,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12,stroke-dasharray:6 6,rx:12,ry:12;
+style normalized_wavefunctions fill:#112230,color:#ffffff,stroke:#4b54ff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
+style pod fill:#2f1616,stroke:#FEB538,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
+style trap fill:#023e00,stroke:#57ffbc,color:#ffffff,stroke-width:2px,rx:12,ry:12;
+
+classDef spatial_stencil fill:#2a0037,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+classDef psinorm fill:#224261,stroke:#4b54ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+classDef diag fill:#723c30,stroke:#FEB538,color:#ffffff,stroke-width:2px,rx:12,ry:12;
+
+%% ==============================
+%% INPUT BLOCKS
+%% ==============================
+subgraph synthetic_data["1️⃣ Synthetic Data"]
+    direction TB
+    subgraph domain_norm["Uniform Grid / Trapezoidal Rule"]
+        spatial_grid["$$x\in[-5, 5]$$"]:::spatial_stencil
+        deltax["$$\Delta x$$"]:::spatial_stencil
+        trap["Trapezoidal weights"]
+    end
+end
+
+subgraph normalized_wavefunctions["Normalized Wavefunctions"]
+    direction TB
+    psi0(("$$\psi_0^\theta$$")):::psinorm
+    psi1(("$$\psi_1^\theta$$")):::psinorm
+    psi2(("$$\psi_2^\theta$$")):::psinorm
+end
+
+%% ==============================
+%% POD DIAGRAM
+%% ==============================
+subgraph pod["7️⃣ POD"]
+    PsiMat("Snapshot matrix<br/>$$\mathbf{\Psi}^\theta=[\psi_0^\theta,\psi_1^\theta,\psi_2^\theta]$$"):::diag
+    weight("Trapezoidal spatial-measure weighting<br/>$$\mathbf{\Psi}_w^\theta(x_i)=\sqrt{w_i\Delta x}\,\mathbf{\Psi}^\theta(x_i)$$"):::diag
+    SVD("Euclidean SVD<br/>$$\mathbf{\Psi}_w^\theta=U\Sigma V^T$$"):::diag
+    podscale("POD physical scaling<br/>$$u_k^\mathrm{phys}(x_i)=u_k(x_i)/\sqrt{w_i\Delta x}$$"):::diag
+    align("Physical POD phase / sign alignment<br/>after scaling"):::diag
+    note("Note:<br/>SVD modes are sign-ambiguous and Euclidean-normalized.<br/>Physical POD modes require trapezoidal $$w_i\Delta x$$ scaling."):::diag
+    spec("Singular values<br/>$$\sigma_k$$"):::diag
+    modes("Physical POD modes<br/>$$u_k^\mathrm{phys}$$"):::diag
+    overlaps("POD overlaps<br/>$$\langle u_k^\mathrm{phys},\psi_n^\theta\rangle_{\Delta x,w}$$"):::diag
+
+    PsiMat --> weight
+    weight --> SVD
+    SVD --> spec
+    SVD --> podscale
+    podscale --> align
+    align --> modes
+    align --> overlaps
+    note -.-> podscale
+    note -.-> align
+end
+
+%% ==============================
+%% CONNECTIONS
+%% ==============================
+psi0 --> PsiMat
+psi1 --> PsiMat
+psi2 --> PsiMat
+
+deltax --> weight
+trap --> weight
 
 %% ==============================
 %% LINKS (subtle)
