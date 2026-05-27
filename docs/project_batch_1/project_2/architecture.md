@@ -132,10 +132,9 @@ direction LR
         end
     end
 
-    subgraph normalization["3️⃣ Wavefunction Normalization / Orthonormalization"]
+    subgraph normalization["3️⃣ Wavefunction Orthonormalization"]
     direction LR
         apply_trapezoidal_weights["$$\int|\psi_n^\theta |^2\, dx=\sum{w_i |\psi_n^\theta |^2 \Delta x}$$"]:::norm
-        norm1("Per-state L2 Normalize"):::norm
         gs["Sequential Gram-Schmidt<br/>and re-normalize"]:::norm
         eps("$$+\epsilon \ \text{stability}$$"):::norm
     end
@@ -176,15 +175,13 @@ direction LR
     deltax --> apply_trapezoidal_weights
     trap --> apply_trapezoidal_weights
 
-    psi0_raw --> norm1
-    psi1_raw --> norm1
-    psi2_raw --> norm1
+    psi0_raw --> gs
+    psi1_raw --> gs
+    psi2_raw --> gs
 
-    apply_trapezoidal_weights --> norm1
+    apply_trapezoidal_weights --> gs
 
-    eps --> norm1
-
-    norm1 --> gs
+    eps --> gs
 
     gs --> psi0
     gs --> psi1

@@ -23,11 +23,10 @@
                 | **Step** | **Method** | **Type** | **Justification** |
                 | -------- | ---------- | -------- | ---------------- |
                 | 1. Grid Setup | `make_grid` | Domain | Prevents "stiff" gradients originating from extreme input scales |
-                | 2. Wavefunction Normalization | `NormalizedWavefunctionNet` | Range | Guarantees physical probability density = 1. |
-                | 3. Orthonormality | Gram-Schmidt | Range | Prevents mode collapse; ensures unique eigenstates |
-                | 4. Stability | $\epsilon=1e-8$ | Range | Prevents `NaN` during initialization |
-                | 5. Sign Correction | Overlap check | Alignment | Resolves $\pm \psi_n^\theta(x)$ phase ambiguity for plotting |
-                | 6. POD Scaling | $1/\sqrt{dx}$ | Alignment | Maps abstract SVD vectors to physical L2 norms |
+                | 2. Orthonormalization | `model.psi_theta` | Range | Gram-Schmidt + re-normalization; prevents mode collapse and ensures physical density. |
+                | 3. Stability | $\epsilon=1e-8$ | Range | Prevents `NaN` during initialization |
+                | 4. Sign Correction | Overlap check | Alignment | Resolves $\pm \psi_n^\theta(x)$ phase ambiguity for plotting |
+                | 5. POD Scaling | $1/\sqrt{dx}$ | Alignment | Maps abstract SVD vectors to physical L2 norms |
 
 
 # 🔮 Future Implementations
