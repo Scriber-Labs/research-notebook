@@ -342,7 +342,7 @@ subgraph pod["7️⃣ POD"]
     align("Physical POD phase / sign alignment"):::diag
     spec("Singular values<br/>$$\sigma_k$$"):::diag
     modes("Physical POD modes<br/>$$u_k^\mathrm{phys}$$"):::diag
-    overlaps("POD overlaps<br/>$$\langle u_k^\mathrm{phys},\sqrt{w_i\Delta x}\hat{\psi}_n^\theta\rangle_{\Delta x,w}$$"):::diag
+    overlaps("POD overlaps<br/>$$\langle u_k^\mathrm{phys},\hat{\psi}_n^\theta\rangle_{\Delta x,w}$$"):::diag
 
     PsiMat --> weight
     weight --> SVD
@@ -351,7 +351,7 @@ subgraph pod["7️⃣ POD"]
     podscale --> align
     align --> modes
     align --> overlaps
-    weight --> overlaps
+    PsiMat --> overlaps
 end
 
 %% ==============================
@@ -373,5 +373,4 @@ linkStyle default stroke:#8b949e,stroke-width:1.5px,opacity:0.8
 
     - SVD modes are sign-ambiguous and Euclidean-normalized. Thus, physical POD modes $u_k$ require trapezoidal $w_i\Delta x$ scaling. The modes evaluatedi in the analysis are denoted $u_k^\text{phys}$.
     - POD phase / sign alignment occurs after POD scaling.
-        - [ ] Ensure this is the right order of operations for the context of project 2.
-    - [ ] Double check the POD overlaps block (specifically, the learned wavefunctions)
+    - [ ] Write the mathematical expression for the inner product with the subscripts used.
