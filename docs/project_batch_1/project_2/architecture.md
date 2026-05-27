@@ -80,9 +80,9 @@ psi0_raw(("$$\psi_0^\theta$$")):::psiraw
 psi1_raw(("$$\psi_1^\theta$$")):::psiraw
 psi2_raw(("$$\psi_2^\theta$$")):::psiraw
 
-psi0(("$$\psi_0^\theta$$")):::psinorm
-psi1(("$$\psi_1^\theta$$")):::psinorm
-psi2(("$$\psi_2^\theta$$")):::psinorm
+psi0(("$$\hat{\psi}_0^\theta$$")):::psinorm
+psi1(("$$\hat{\psi}_1^\theta$$")):::psinorm
+psi2(("$$\hat{\psi}_2^\theta$$")):::psinorm
 
 E0(("$$E_0^\theta$$")):::energy
 E1(("$$E_1^\theta$$")):::energy
@@ -330,16 +330,16 @@ end
 
 subgraph normalized_wavefunctions["Normalized Wavefunctions"]
     direction TB
-    psi0(("$$\psi_0^\theta$$")):::psinorm
-    psi1(("$$\psi_1^\theta$$")):::psinorm
-    psi2(("$$\psi_2^\theta$$")):::psinorm
+    psi0(("$$\hat{\psi}_0^\theta$$")):::psinorm
+    psi1(("$$\hat{\psi}_1^\theta$$")):::psinorm
+    psi2(("$$\hat{\psi}_2^\theta$$")):::psinorm
 end
 
 %% ==============================
 %% POD DIAGRAM
 %% ==============================
 subgraph pod["7️⃣ POD"]
-    PsiMat("Snapshot matrix<br/>$$\mathbf{\Psi}^\theta=[\psi_0^\theta,\psi_1^\theta,\psi_2^\theta]$$"):::diag
+    PsiMat("Snapshot matrix<br/>$$\mathbf{\Psi}^\theta=[\hat{\psi}_0^\theta,\hat{\psi}_1^\theta,\hat{\psi}_2^\theta]$$"):::diag
     weight("Trapezoidal spatial-measure weighting<br/>$$\mathbf{\Psi}_w^\theta(x_i)=\sqrt{w_i\Delta x}\,\mathbf{\Psi}^\theta(x_i)$$"):::diag
     SVD("Euclidean SVD<br/>$$\mathbf{\Psi}_w^\theta=U\Sigma V^T$$"):::diag
     podscale("POD physical scaling<br/>$$u_k^\mathrm{phys}(x_i)=u_k(x_i)/\sqrt{w_i\Delta x}$$"):::diag
