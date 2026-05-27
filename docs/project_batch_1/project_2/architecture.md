@@ -1,8 +1,4 @@
 # Project 2 Architecture
-- [ ] POD diagnostics
-  - [x] Figure out where phase /sign alignment (before/after SVD)?
-  - [ ] Figure out where POD scaling occurs ($\psi_n^\theta \rightarrow \psi_n^\theta\int{\Delta x}$)
-    - Note: phase / sign alignment precedes POD scaling
 
 ## Overall Architecture
 ```mermaid
@@ -343,11 +339,10 @@ subgraph pod["7️⃣ POD"]
     weight("Trapezoidal spatial-measure weighting<br/>$$\mathbf{\Psi}_w^\theta(x_i)=\sqrt{w_i\Delta x}\,\mathbf{\Psi}^\theta(x_i)$$"):::diag
     SVD("Euclidean SVD<br/>$$\mathbf{\Psi}_w^\theta=U\Sigma V^T$$"):::diag
     podscale("POD physical scaling<br/>$$u_k^\mathrm{phys}(x_i)=u_k(x_i)/\sqrt{w_i\Delta x}$$"):::diag
-    align("Physical POD phase / sign alignment<br/>after scaling"):::diag
-    note("Note:<br/>SVD modes are sign-ambiguous and Euclidean-normalized.<br/>Physical POD modes require trapezoidal $$w_i\Delta x$$ scaling."):::diag
+    align("Physical POD phase / sign alignment"):::diag
     spec("Singular values<br/>$$\sigma_k$$"):::diag
     modes("Physical POD modes<br/>$$u_k^\mathrm{phys}$$"):::diag
-    overlaps("POD overlaps<br/>$$\langle u_k^\mathrm{phys},\psi_n^\theta\rangle_{\Delta x,w}$$"):::diag
+    overlaps("POD overlaps<br/>$$\langle u_k^\mathrm{phys},\sqrt{w_i\Delta x}\hat{\psi}_n^\theta\rangle_{\Delta x,w}$$"):::diag
 
     PsiMat --> weight
     weight --> SVD
@@ -356,8 +351,7 @@ subgraph pod["7️⃣ POD"]
     podscale --> align
     align --> modes
     align --> overlaps
-    note -.-> podscale
-    note -.-> align
+    weight --> overlaps
 end
 
 %% ==============================
@@ -375,3 +369,9 @@ trap --> weight
 %% ==============================
 linkStyle default stroke:#8b949e,stroke-width:1.5px,opacity:0.8
 ```
+!!! note "__Notes on POD Analysis__"
+
+    - SVD modes are sign-ambiguous and Euclidean-normalized. Thus, physical POD modes $u_k$ require trapezoidal $w_i\Delta x$ scaling. The modes evaluatedi in the analysis are denoted $u_k^\text{phys}$.
+    - POD phase / sign alignment occurs after POD scaling.
+        - [ ] Ensure this is the right order of operations for the context of project 2.
+    - Double check the POD overlaps block (specifically, the learned wavefunctions)
