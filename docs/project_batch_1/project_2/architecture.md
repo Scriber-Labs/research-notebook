@@ -149,13 +149,12 @@ direction LR
 
     subgraph finite_difference["3️⃣ Finite difference"]
     direction LR
-        eigenfunction_stencil("$$\frac{\partial^2}{dx^2}\hat{\psi}_n^\theta$$ via"):::stencil
-        potential_stencil("$$V_\theta''(x)$$"):::stencil
+        eigenfunction_stencil("$$\frac{\partial^2}{dx^2}\hat{\psi}_n^\theta$$ via stencil"):::stencil
+        potential_stencil("$$V_\theta''(x)$$ via stencil"):::stencil
     end
 
     subgraph residual["4️⃣ Physics Residual"]
     direction LR
-        H("$$\hat{H}\hat{\psi}_n^\theta$$"):::physics
         R["$$R_n(x)=-\frac{1}{2}\frac{\partial^2}{\partial x^2}\hat{\psi}_n^\theta + V_\theta\hat{\psi}_n^\theta-E_n^\theta\hat{\psi}_n^\theta $$"]:::physics
     end
 
@@ -195,16 +194,20 @@ direction LR
     psi0 --> eigenfunction_stencil
     psi1 --> eigenfunction_stencil
     psi2 --> eigenfunction_stencil
+    
+    psi0 --> R
+    psi1 --> R
+    psi2 --> R
 
     potential --> potential_stencil
 
-    eigenfunction_stencil --> H
-    potential --> H
-    E0 --> H
-    E1 --> H
-    E2 --> H
+    eigenfunction_stencil --> R
+    potential --> R
+    E0 --> R
+    E1 --> R
+    E2 --> R
 
-    H --> R --> Lp
+    R --> Lp
 
     E0 --> Ln
     E1 --> Ln
