@@ -155,8 +155,8 @@ direction LR
 
     subgraph residual["4️⃣ Physics Residual"]
     direction LR
-        H("Ĥψ"):::physics
-        R["$$R_n(x)=-\frac{1}{2}\frac{\partial^2}{\partial x^2}\psi_n^\theta + V_\theta\psi_n^\theta-E_n^\theta\psi_n^\theta $$"]:::physics
+        H("$$\hat{H}\hat{\psi}_n^\theta$$"):::physics
+        R["$$R_n(x)=-\frac{1}{2}\frac{\partial^2}{\partial x^2}\hat{\psi}_n^\theta + V_\theta\hat{\psi}_n^\theta-E_n^\theta\hat{\psi}_n^\theta $$"]:::physics
     end
 
     subgraph loss["5️⃣  Total Loss"]
