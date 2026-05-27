@@ -149,7 +149,7 @@ direction LR
 
     subgraph finite_difference["3️⃣ Finite difference"]
     direction LR
-        eigenfunction_stencil("$$\frac{\partial^2}{dx^2}\psi_n^\theta$$ via"):::stencil
+        eigenfunction_stencil("$$\frac{\partial^2}{dx^2}\hat{\psi}_n^\theta$$ via"):::stencil
         potential_stencil("$$V_\theta''(x)$$"):::stencil
     end
 
