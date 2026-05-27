@@ -106,11 +106,17 @@ direction LR
 
     subgraph neural_ansatz["2️⃣ Neural Ansatz"]
     direction TB
+        subgraph energy_init["Linear Energy Initialization"]
+            E_init["$$E_n = \text{linspace}(0.5, n-0.5, n)$$"]:::energy
+        end
+
         subgraph energy_eigenvalues["Energy Eigenvalues"]
             E0
             E1
             E2
         end
+
+        E_init --> energy_eigenvalues
 
         subgraph PINN["2️⃣ PINN"]
         direction TB
@@ -236,11 +242,12 @@ end
 %% ==============================
 %% DIAGNOSTICS
 %% ==============================
-subgraph diagnostics["Diagnostics"]
+    subgraph diagnostics["Diagnostics"]
 direction TB
 
     sanity["sanity checks"]:::diag
-    pod["7️⃣ POD analysis"]:::diag
+    
+    pod["7️⃣ POD analysis"]:::pod
 
     sanity ~~~ pod
 
