@@ -28,6 +28,7 @@
 
     === "🌍 Global Design Choices"
 
+        - A central difference stencil is used to approximate the $\partial_{xx}$ operator.
         - Since the system is trained on a uniform grid, we implement the Trapezoidal Rule to discretize the continuous Hilbert-space inner product, providing a discrete approximation.
         - Proper orthogonal decomposition (POD) is treated as a diagnostic probe of learned basis geometry.
         - Consistent use of the Trapezoidal Rule throughout the l2 inner product steps and POD weighting ensures consistency in normalization between the learned wavefunctions in the training loop and the POD analysis.
