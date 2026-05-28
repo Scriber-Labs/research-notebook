@@ -28,8 +28,10 @@
 
     === "🌍 Global Design Choices"
 
-        - Wavefunction normalization and orthogonalization are performed using trapezoidal quadrature weights, inducing a discrete approximation to the continuous Hilber-space inner product.
+        - Since the system is trained on a uniform grid, we implement the Trapezoidal Rule to discretize the continuous Hilbert-space inner product, providing a discrete approximation.
         - Proper orthogonal decomposition (POD) is treated as a diagnostic probe of learned basis geometry.
+        - Consistent use of the Trapezoidal Rule throughout the l2 inner product steps and POD weighting ensures consistency in normalization steps between the training loop and the POD analysis.
+        
 
 
 
