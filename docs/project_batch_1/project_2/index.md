@@ -26,15 +26,15 @@
         Consequently, this project emphasizes interpretability and structural consistency rather than exact reconstruction fidelity.
 
 
-    === "🌍 Global Design Choices"
+    === "🌍 Global Design Choices"   
 
         - A central difference stencil is used to approximate the $\partial_{xx}$ operator.
         - A sequential Gram-Schmidt orthogonalization process is employed during training to ensure that learned wavefunctions are orthogonal to eachother (a requirement of Hamiltonian eigenfunctions).
         - Since the system is trained on a uniform grid, we implement the Trapezoidal Rule to discretize the continuous Hilbert-space inner product, providing a discrete approximation.
         - Proper orthogonal decomposition (POD) is treated as a diagnostic probe of learned basis geometry.
         - Consistent use of the Trapezoidal Rule throughout the l2 inner product steps and POD weighting ensures consistency in normalization between the learned wavefunctions in the training loop and the POD analysis.
+        - In the training loop, orthonormalization (via Gram-Schmidt and l2 inner product with trapezoidal weighting) is performed before the loss function is calculated. This results in a learned Hamiltonian $H_\theta \hat{\psi}_n^\theta \approx E_n^\theta \hat{\psi}$ that is minimized by the physics residual. ✨
         
-
 
 
 ??? info "Conceptual Description of What the Model is Learning"
