@@ -30,5 +30,6 @@
 
 
 # 🔮 Future Implementations
-- Implement symplectic loss term.
-- Implement SAFE-NET protocol from https://arxiv.org/html/2502.07209v2
+- Simpson's rule quadrature formula in place of the trapezoidal rule.
+- Symplectic loss term.
+- SAFE-NET protocol from https://arxiv.org/html/2502.07209v2
