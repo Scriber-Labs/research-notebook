@@ -3,19 +3,19 @@
 <div class="grid cards" markdown>
 
 -   🪀 __Project 1 Overview__ 
-    [:octicons-arrow-right-24:``lf-harmonic-oscillator``](https://github.com/Scriber-Labs/lf-pinn-harmonic-oscillator)
+    [``lf-harmonic-oscillator``](https://github.com/Scriber-Labs/lf-pinn-harmonic-oscillator)
 
 -   🏗️ __Architecture__
 
     Detailed view of the PIML framework for the SHO.
 
-    [:octicons-arrow-right-24:View Architecture](architecture.md)
+    [View Architecture](architecture.md)
 
 -   📊 __Figure Analysis__
 
     Analysis of key figures and plots for Project 1.
 
-    [:octicons-arrow-right-24:View Figures](figure-analysis.md)
+    [View Figures](figure-analysis.md)
 
 </div>
 

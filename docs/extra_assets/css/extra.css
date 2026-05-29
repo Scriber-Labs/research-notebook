@@ -28,7 +28,7 @@
 
   /* Typography */
   --ptg-font-heading: 'Aclonica', sans-serif;
-  --ptg-font-body: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --ptg-font-body: 'Aclonica', sans-serif;
   --ptg-font-mono: 'Fira Code', 'Consolas', monospace;
 
   /* Spacing */
@@ -77,37 +77,40 @@
   --ptg-color-link: #33baf5;
   --ptg-color-link-hover: #ad5be6;
 
-  --ptg-glass-bg: rgba(13, 17, 23, 0.75);
-  --ptg-glass-bg-light: rgba(22, 27, 34, 0.6);
-  --ptg-glass-border: rgba(168, 85, 247, 0.2);
-  --ptg-glass-border-hover: rgba(168, 85, 247, 0.4);
-  --ptg-glass-blur: 12px;
-  --ptg-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 40px rgba(168, 85, 247, 0.1);
+  --ptg-glass-bg: rgba(13, 17, 23, 0.88);
+  --ptg-glass-bg-light: rgba(22, 27, 34, 0.7);
+  --ptg-glass-border: rgba(168, 85, 247, 0.3);
+  --ptg-glass-border-hover: rgba(168, 85, 247, 0.5);
+  --ptg-glass-blur: 16px;
+  --ptg-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(168, 85, 247, 0.15);
 
   --md-primary-fg-color:        #7652f5;
   --md-primary-fg-color--light: #a855f7;
   --md-primary-fg-color--dark:  #5a3dd6;
   --md-accent-fg-color:         #14b5ff;
-  --md-accent-fg-color--transparent: rgba(20, 181, 255, 0.1);
+  --md-accent-fg-color--transparent: rgba(20, 181, 255, 0.15);
 
   --md-default-bg-color:        #0d1117;
-  --md-default-fg-color:        whitesmoke;
-  --md-default-fg-color--light: #8b949e;
-  --md-default-fg-color--lighter: rgba(139, 148, 158, 0.5);
-  --md-default-fg-color--lightest: rgba(139, 148, 158, 0.2);
+  --md-default-fg-color:        #e6e6fa;
+  --md-default-fg-color--light: #b0b8c1;
+  --md-default-fg-color--lighter: rgba(176, 184, 193, 0.5);
+  --md-default-fg-color--lightest: rgba(176, 184, 193, 0.2);
 
-  --md-typeset-color:           whitesmoke;
-  --md-typeset-a-color:         #7652f5;
+  --md-typeset-color:           #e6e6fa;
+  --md-typeset-a-color:         #33baf5;
 
-  --md-code-bg-color:           rgba(168, 85, 247, 0.1);
+  --md-code-bg-color:           rgba(168, 85, 247, 0.15);
   --md-code-fg-color:           #00f5db;
-  --md-code-hl-color:           rgba(168, 85, 247, 0.2);
+  --md-code-hl-color:           rgba(168, 85, 247, 0.25);
 
-  --md-footer-bg-color:         rgba(13, 17, 23, 0.75);
-  --md-footer-bg-color--dark:   rgba(13, 17, 23, 0.9);
-  --md-footer-fg-color:         #8b949e;
-  --md-footer-fg-color--light:  whitesmoke;
-  --md-footer-fg-color--lighter: #8b949e;
+  --md-footer-bg-color:         rgba(13, 17, 23, 0.85);
+  --md-footer-bg-color--dark:   rgba(13, 17, 23, 0.95);
+  --md-footer-fg-color:         #b0b8c1;
+  --md-footer-fg-color--light:  #e6e6fa;
+  --md-footer-fg-color--lighter: #b0b8c1;
+
+  --ptg-color-bold: #ff75b5; /* Brighter pink for dark mode */
+  --ptg-color-italic: #b084eb; /* Purple for italic in dark mode */
 
   /* Dark mode heading colors */
   --ptg-heading-h2: var(--ptg-color-primary);
@@ -143,37 +146,37 @@
   --ptg-color-link: #5a3dd6;
   --ptg-color-link-hover: #7652f5;
 
-  --ptg-glass-bg: rgba(255, 255, 255, 0.7);
-  --ptg-glass-bg-light: rgba(255, 255, 255, 0.5);
-  --ptg-glass-border: rgba(118, 82, 245, 0.2);
-  --ptg-glass-border-hover: rgba(118, 82, 245, 0.4);
-  --ptg-glass-blur: 12px;
-  --ptg-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 40px rgba(118, 82, 245, 0.06);
+  --ptg-glass-bg: rgba(255, 255, 255, 0.85);
+  --ptg-glass-bg-light: rgba(255, 255, 255, 0.6);
+  --ptg-glass-border: rgba(118, 82, 245, 0.3);
+  --ptg-glass-border-hover: rgba(118, 82, 245, 0.5);
+  --ptg-glass-blur: 16px;
+  --ptg-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 40px rgba(118, 82, 245, 0.1);
 
   --md-primary-fg-color:        #5a3dd6;
   --md-primary-fg-color--light: #7652f5;
   --md-primary-fg-color--dark:  #4530a8;
   --md-accent-fg-color:         #0a8fd4;
-  --md-accent-fg-color--transparent: rgba(10, 143, 212, 0.1);
+  --md-accent-fg-color--transparent: rgba(10, 143, 212, 0.15);
 
   --md-default-bg-color:        #f0f0f5;
   --md-default-fg-color:        #1a1a2e;
-  --md-default-fg-color--light: #555570;
-  --md-default-fg-color--lighter: rgba(85, 85, 112, 0.5);
-  --md-default-fg-color--lightest: rgba(85, 85, 112, 0.2);
+  --md-default-fg-color--light: #4a4a6a;
+  --md-default-fg-color--lighter: rgba(74, 74, 106, 0.5);
+  --md-default-fg-color--lightest: rgba(74, 74, 106, 0.2);
 
   --md-typeset-color:           #1a1a2e;
   --md-typeset-a-color:         #5a3dd6;
 
-  --md-code-bg-color:           rgba(118, 82, 245, 0.08);
+  --md-code-bg-color:           rgba(118, 82, 245, 0.12);
   --md-code-fg-color:           #0a6e5c;
-  --md-code-hl-color:           rgba(118, 82, 245, 0.15);
+  --md-code-hl-color:           rgba(118, 82, 245, 0.2);
 
-  --md-footer-bg-color:         rgba(255, 255, 255, 0.7);
-  --md-footer-bg-color--dark:   rgba(240, 240, 245, 0.9);
-  --md-footer-fg-color:         #555570;
+  --md-footer-bg-color:         rgba(255, 255, 255, 0.85);
+  --md-footer-bg-color--dark:   rgba(240, 240, 245, 0.95);
+  --md-footer-fg-color:         #4a4a6a;
   --md-footer-fg-color--light:  #1a1a2e;
-  --md-footer-fg-color--lighter: #555570;
+  --md-footer-fg-color--lighter: #4a4a6a;
 
   --ptg-color-bold: #fd6d8e; /* Deep pink */
   --ptg-color-italic: #fd6d8e; /* Medium pink */
@@ -214,18 +217,101 @@
   border-radius: var(--ptg-radius-sm);
 }
 
+.md-typeset .admonition,
+.md-typeset details {
+  background-color: var(--ptg-admonition-bg);
+  border: 1px solid var(--ptg-glass-border);
+  border-left-width: 0.2rem;
+  border-radius: var(--ptg-radius-md);
+  box-shadow: var(--ptg-glass-shadow);
+  backdrop-filter: blur(var(--ptg-glass-blur));
+  -webkit-backdrop-filter: blur(var(--ptg-glass-blur));
+  margin-bottom: 1.5rem; /* Increased margin for better stacking readability */
+  overflow: hidden;
+  transition: transform var(--ptg-transition-normal), box-shadow var(--ptg-transition-normal);
+}
+
+.md-typeset .admonition:hover,
+.md-typeset details:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.md-typeset .admonition.info,
+.md-typeset .admonition.todo,
+.md-typeset .admonition.note {
+  border-left-color: var(--ptg-color-primary);
+}
+
+.md-typeset .admonition.success,
+.md-typeset .admonition.tip {
+  border-left-color: var(--ptg-color-success);
+}
+
+.md-typeset .admonition.warning,
+.md-typeset .admonition.important {
+  border-left-color: var(--ptg-color-warning);
+}
+
+.md-typeset .admonition.danger,
+.md-typeset .admonition.error,
+.md-typeset .admonition.bug {
+  border-left-color: var(--ptg-color-error);
+}
+
+.md-typeset .admonition.abstract,
+.md-typeset .admonition.quote {
+  border-left-color: var(--ptg-color-secondary);
+}
+
 .md-typeset .admonition-title,
 .md-typeset summary {
   font-family: var(--ptg-font-heading);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  background: var(--ptg-gradient-purple) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  color: transparent !important;
+  border-bottom: 1.5px solid rgba(168, 85, 247, 0.2);
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.2rem;
   display: block;
-  width: fit-content;
+  width: 100%;
+}
+
+.md-typeset .admonition.info .admonition-title,
+.md-typeset .admonition.todo .admonition-title,
+.md-typeset .admonition.note .admonition-title {
+  color: var(--ptg-color-primary) !important;
+  -webkit-text-fill-color: var(--ptg-color-primary) !important;
+  border-bottom-color: rgba(20, 181, 255, 0.2);
+}
+
+.md-typeset .admonition.success .admonition-title,
+.md-typeset .admonition.tip .admonition-title {
+  color: var(--ptg-color-success) !important;
+  -webkit-text-fill-color: var(--ptg-color-success) !important;
+  border-bottom-color: rgba(34, 247, 146, 0.2);
+}
+
+.md-typeset .admonition.warning .admonition-title,
+.md-typeset .admonition.important .admonition-title {
+  color: var(--ptg-color-warning) !important;
+  -webkit-text-fill-color: var(--ptg-color-warning) !important;
+  border-bottom-color: rgba(255, 166, 87, 0.2);
+}
+
+.md-typeset .admonition.danger .admonition-title,
+.md-typeset .admonition.error .admonition-title,
+.md-typeset .admonition.bug .admonition-title {
+  color: var(--ptg-color-error) !important;
+  -webkit-text-fill-color: var(--ptg-color-error) !important;
+  border-bottom-color: rgba(247, 129, 102, 0.2);
+}
+
+.md-typeset .admonition.abstract .admonition-title,
+.md-typeset .admonition.quote .admonition-title,
+.md-typeset summary {
+  color: var(--ptg-color-secondary) !important;
+  -webkit-text-fill-color: var(--ptg-color-secondary) !important;
+  border-bottom-color: rgba(168, 85, 247, 0.2);
 }
 
 /* Ensure math and emojis in gradient headers don't inherit gradient/transparency */
@@ -269,12 +355,12 @@
 
 .md-typeset .tabbed-labels label {
   font-family: var(--ptg-font-heading);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--ptg-color-text);
   background: var(--ptg-glass-bg-light);
-  padding: 0.1rem 0.3rem;
+  padding: 0.25rem 0.5rem;
   border: 1px solid var(--ptg-glass-border);
   border-radius: var(--ptg-radius-sm);
   transition: all var(--ptg-transition-fast);
@@ -734,30 +820,65 @@ body {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   border: 1px solid var(--ptg-glass-border);
-  gap: 1rem;
+  gap: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* Card titles (the bold text before the horizontal rule) */
-.md-typeset .grid.cards > li > p:first-child strong,
-.md-typeset .grid.cards > li > strong:first-child,
-.md-typeset .grid.cards blockquote > p:first-child strong,
-.md-typeset .grid.cards li strong {
+.md-typeset .grid.cards > li strong:first-child,
+.md-typeset .grid.cards > li > p:first-child strong:first-child {
   display: block;
   font-family: var(--ptg-font-heading);
   font-size: 0.85rem;
-  background: var(--ptg-gradient-orange) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  color: transparent !important;
+  color: var(--ptg-color-orange) !important;
+  -webkit-text-fill-color: var(--ptg-color-orange) !important;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin: -0.8rem -0.8rem 0.8rem -0.8rem;
-  padding: 0.7rem 0.8rem;
-  background-color: rgba(255, 140, 0, 0.15) !important;
+  margin: 0;
+  padding: 0.7rem 1rem;
+  background-color: rgba(255, 140, 0, 0.1) !important;
   border-bottom: 2px solid var(--ptg-color-secondary) !important;
-  border-radius: var(--ptg-radius-md) var(--ptg-radius-md) 0 0;
-  width: auto !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; -- Removed to allow wrapping if needed, but flex should handle it */
+}
+
+/* Link and Arrow Styling in Cards */
+.md-typeset .grid.cards a {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--ptg-font-heading);
+  font-size: 0.8rem;
+  color: var(--ptg-color-primary) !important;
+  text-decoration: none;
+  transition: all var(--ptg-transition-fast);
+  padding: 0.4rem 0.8rem;
+  background: rgba(20, 181, 255, 0.05);
+  border: 1px solid rgba(20, 181, 255, 0.2);
+  border-radius: var(--ptg-radius-sm);
+  width: fit-content;
+}
+
+.md-typeset .grid.cards a::after {
+  content: "→";
+  font-size: 1.1rem;
+  transition: transform var(--ptg-transition-fast);
+}
+
+.md-typeset .grid.cards a:hover {
+  background: rgba(20, 181, 255, 0.15);
+  border-color: var(--ptg-color-primary);
+  transform: translateX(5px);
+  box-shadow: 0 0 10px rgba(20, 181, 255, 0.2);
+}
+
+.md-typeset .grid.cards a:hover::after {
+  transform: translateX(3px);
 }
 
 /* The middle section/content of the card */
@@ -776,16 +897,29 @@ body {
   background: var(--ptg-code-bg-deep) !important;
   border: 2.5px solid var(--ptg-color-secondary) !important;
   border-radius: var(--ptg-radius-md);
-  padding: 0.8rem;
+  padding: 0 !important; /* Force remove padding to let title fill top */
   transition: all var(--ptg-transition-normal);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
   list-style: none !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  flex: 1;
+}
+
+.md-typeset .grid.cards > li > p {
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .md-typeset .grid.cards > li:hover {
   border-color: #ffffff !important;
   transform: translateY(-6px);
-  background: rgba(15, 15, 35, 0.98);
+  background: rgba(15, 15, 35, 0.98) !important;
   box-shadow: 
     0 15px 30px rgba(0, 0, 0, 0.5),
     0 0 25px rgba(168, 85, 247, 0.4);
@@ -899,21 +1033,53 @@ body {
     gap: var(--ptg-space-md);
   }
 
-  /* Only apply static positioning to sidebars that are NOT part of a hidden/drawer component */
-  .md-sidebar:not([data-md-component="toc"]):not([data-md-component="navigation"]) {
+  /* Ensure TOC (secondary sidebar) is properly handled on mobile */
+  .md-main__inner > .md-sidebar--secondary {
+    position: static;
+    display: block !important;
+    width: 100% !important;
+    order: -1; 
+    margin-bottom: var(--ptg-space-md);
+    background: var(--ptg-glass-bg);
+    border: 1px solid var(--ptg-glass-border);
+    border-radius: var(--ptg-radius-lg);
+    padding: var(--ptg-space-md);
+  }
+
+  .md-sidebar--secondary .md-sidebar__scrollwrap {
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  .md-nav--secondary .md-nav__title {
+    font-size: 0.9rem;
+    color: var(--ptg-color-primary);
+    border-bottom: 1px solid var(--ptg-glass-border);
+    margin-bottom: 0.5rem;
+  }
+
+  .md-nav--secondary .md-nav__list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.25rem;
+  }
+
+  .md-nav--secondary .md-nav__item {
+    width: 100%;
+  }
+
+  .md-nav--secondary .md-nav__link {
+    white-space: normal !important; /* Allow wrapping to prevent horizontal "squishing" */
+    display: block !important;
+    padding: 0.4rem 0.6rem !important;
+    line-height: 1.4;
+  }
+
+  /* Only apply static positioning to other sidebars that are NOT drawers */
+  .md-sidebar:not([data-md-component="toc"]):not([data-md-component="navigation"]):not(.md-sidebar--secondary) {
     position: static;
     width: 100% !important;
     margin-bottom: var(--ptg-space-md);
-  }
-
-  /* In MkDocs Material, on mobile, the sidebars are often hidden and shown via drawers.
-     We want to allow the "embedded" TOC (if any) to be visible but not break the drawer.
-     Specifically, if the sidebar is inside the main content flow (not the drawer), we stack it.
-  */
-  .md-main__inner > .md-sidebar--secondary {
-    position: static;
-    width: 100% !important;
-    order: -1; 
   }
 }
 
