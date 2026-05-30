@@ -57,6 +57,21 @@
 ## Figure 4
 ![learned_energies.png](figure_files/learned_energies.png)
 
+!!! note "🏡 **Take-Home Message**"
+
+    The learned energy spectrum $\{E_n^\theta\}$ matches the observed values and closely follows the theoretical $E_n = n+0.5$ spacing of the 1-D harmonic osicllator.
+
+!!! note "🔑 **Key Insights**"
+
+    - $\mathcal{L}_\text{ordered}$ prevents state-swapping during early training.
+    - The model generalizes from noisy energy observations to a consistent spectrum.
+
+!!! fail "❌ **Failure Modes**"
+
+    - **Collapsed spectrum:** All energies converging to the same value. This was prevented by $\mathcal{L}_\text{ordered}$.
+    - **DC Offset:** Learned energies shifted by a constant, coupled with a vertical shift in $V_\theta(x)$. 
+      - [ ] Need to write a more detailed analysis of the DC offset failure mode, including potential remedies and implications for the model's performance.
+
 ## Figure 5
 ![density.png](figure_files/density.png)
 
