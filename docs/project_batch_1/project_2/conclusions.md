@@ -8,16 +8,25 @@
 
         ??? note "🔷 Identifiabililty"
 
-            - Which features of the ground truth potential $V(x)$ are uniquely recoverable?
-            - Does smoothness regularization bias the recovered potential family?
+            - Q1: Which features of the ground truth potential $V(x)$ are uniquely recoverable?
+            - A1: The overall shape (curvature) is generally recoverable where probability density $rho(x)$ is high. Amplitude and DC offset may be biased by regularization.
+                - [ ] Need to further elaborate!
+            ---
+            - Q2: Does smoothness regularization bias the recovered potential family?
+            - A2: Yes, it penalizes high-frequency oscillations and tends to produce "flatter" potentials if the loss term weight $\lambda_\text{smooth}$ is too high, potentially missing sharp features.
 
         ??? note "🔷 Mode Structure"
-            - Does orthogonality emerge without reinforcement?
-            - Does POD reveal effective low-rank eigenspaces?
+            - Q1: Does orthogonality emerge without reinforcement?
+            - A1: It can weakly emerge through the TISE coupling, but explicit orthonormalization or the energy ordering loss is usually required for stable convergence of multiple states.
+            ---
+            - Q2: Does POD reveal effective low-rank eigenspaces?
+            - A2: Yes, the singular value decay indicates the effective dimensionality of the learned wavefunction space.
 
         ??? note "🔷 Inverse Stability"
-            - Does noise induce mode mixing?
-            - Are certain eigenstates more stable under low-fidelity observation?
+            - Q1: Does noise induce mode mixing?
+            - A1: 
+            ---
+            - Q2: Are certain eigenstates more stable under low-fidelity observation?
 
         ??? note "🔷 Structural Recovery"
             - Is curvature recoverable before amplitude?
