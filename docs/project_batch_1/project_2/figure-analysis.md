@@ -18,8 +18,6 @@
     - High final loss: Optimization stalled in a local minimum.
     - Oscillation: Unbalanced loss weights causing the optimizer to swing back and forth between physics and data.
 
-
-
 ## Figure 2
 ![learned_potential.png](figure_files/learned_potential.png)
 
@@ -123,6 +121,11 @@
 
 ## Figure 11
 ![pod_temporal_overlap.png](figure_files/pod_temporal_overlap.png)
+
+!!! note "🏡 Take-Home Message"
+
+    The inner product beween temporal modes returns the identity matrix. 
+    This indicates that the temporal modes are orthogonal, which is a key property for POD analysis. It validates that each temporal mode represents a unique aspect of the system's dynamics, facilitating efficient and accurate spectral representation of the underlying physical phenomena.
 
 
 ## Figure 12
