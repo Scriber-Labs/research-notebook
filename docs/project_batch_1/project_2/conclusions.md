@@ -1,5 +1,7 @@
 # Conclusions
 
+**Overall Conclusion**: The model successfully solves the inverse Schrödinger problem for a 1-D harmonic oscillator by finding a potential and set of energies that satisfy both physical constraints (TISE) and the observational data (densities and energies). However, the figure analyses reveal that while the observable consistency is high, operator uniqueness remains a challenge.
+
 !!! abstract "__Take-Home Messages__"
 
     === "🧙🏻‍♂️Questions that need answering"
