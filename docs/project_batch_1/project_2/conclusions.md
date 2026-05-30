@@ -2,7 +2,24 @@
 
 !!! abstract "__Take-Home Messages__"
 
-    === "📈 Results"
+    === "🧙🏻‍♂️Questions that need answering"
+
+        ??? note "🔷 Identifiabililty"
+
+            - Which features of the ground truth potential $V(x)$ are uniquely recoverable?
+            - Does smoothness regularization bias the recovered potential family?
+
+        ??? note "🔷 Mode Structure"
+            - Does orthogonality emerge without reinforcement?
+            - Does POD reveal effective low-rank eigenspaces?
+
+        ??? note "🔷 Inverse Stability"
+            - Does noise induce mode mixing?
+            - Are certain eigenstates more stable under low-fidelity observation?
+
+        ??? note "🔷 Structural Recovery"
+            - Is curvature recoverable before amplitude?
+            - Are nodal locations more identifiable than potential amplitude?
 
 
     === "🤯 Lessons Learned"

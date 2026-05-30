@@ -27,7 +27,7 @@ $$ \mathcal{L}_\text{tot} = \lambda_1 \mathcal{L}_\text{TISE} + \lambda_2 \mathc
     
     | **Loss Term**                              | **Soft vs. Hard** | **Classification** | **Notes** | 🐍 **Script** | 🐍 **Relevant Definitions**   |
     |--------------------------------------------|-------------------| ------------------ | --------- |---------------|-------------------------------|
-    | 💙 1. **Schrödinger residual (physics loss)** | Soft              | Physics / consistency loss | Enforces the TISE | `physics.py` | `tise_residual()`, `tise_loss()` |
+    | 💙 1. **Schrödinger residual (physics loss)** | Soft              | Physics / consistency loss | Enforces physical law (TISE). | `physics.py` | `tise_residual()`, `tise_loss()` |
     | 💚 2. **Scale-aware smoothness**              | Soft              | Regularizer / prior | Penalizes curvature in $V_\theta(x)$. Encourages smoother, physically plausible potentials and stabilizes the inverse problem. | `physics.py` | `potential_smoothness_loss()` |
     | 🩷 3. **Data mismatch (observables)**         | Soft              | Supervised data-fit loss | Matches learned energies and densities to noisy observed measurements. | `inverse.py` | `data_mismatch_loss()` |
     | 🩵 4. **Energy ordering**                     | Soft              | Ordering penalty / constraint | Encourages $E_0 < E_1 < \cdots$. Helps prevent state swapping and preserves consistent mode indexing. | `physics.py` | `energy_ordering_loss()` |

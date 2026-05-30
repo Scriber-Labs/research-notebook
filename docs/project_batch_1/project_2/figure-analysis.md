@@ -1,4 +1,4 @@
-# Figure Analysis
+# Figure Analysis (Windows)
 
 ## Figure 1
 ![training_curves.png](figure_files/training_curves.png)
