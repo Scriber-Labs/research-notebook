@@ -24,9 +24,10 @@
 
         ??? note "🔷 Inverse Stability"
             - Q1: Does noise induce mode mixing?
-            - A1: 
+            - A1: Yes, noise in $\rho_n^\text{obs}$ can lead to "aliasing" where the model blends the model blends physical eigenstates to fit the noise.
             ---
             - Q2: Are certain eigenstates more stable under low-fidelity observation?
+            - A2: Typically, lower-endergy (ground) states are more stable as they have simpler nodal structure and higher signal-to-noise ratios in many physical systems.
 
         ??? note "🔷 Structural Recovery"
             - Is curvature recoverable before amplitude?
@@ -58,6 +59,12 @@
 
 
 # 🔮 Future Implementations
-- Simpson's rule quadrature formula in place of the trapezoidal rule.
-- Symplectic loss term.
-- SAFE-NET protocol from https://arxiv.org/html/2502.07209v2
+- Constant $\Delta x$ immplementations:
+  - Dirichlet boundary conditions
+  - Simpson's rule quadrature formula in place of the trapezoidal rule.
+- Adaptive collocation.
+- Symplectic loss term and other Hamiltonian-preserving regularizers.
+- Learnable $\lambda$'s.
+- Fourier features should increase the MLP's ability to capture high-frequency components.
+  - SIREN activation layer.
+  - SAFE-NET protocol from https://arxiv.org/html/2502.07209v2.
