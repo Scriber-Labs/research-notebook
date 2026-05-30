@@ -42,6 +42,18 @@
 ## Figure 3
 ![learned_wavefunctions.png](figure_files/learned_wavefunctions.png)
 
+!!! note "🏡 **Take-Home Message**"
+
+    
+
+!!! note "🔑 **Key Insights**"
+
+    - 
+
+!!! fail "❌ **Failure Modes**"
+
+    - 
+
 ## Figure 4
 ![learned_energies.png](figure_files/learned_energies.png)
 
