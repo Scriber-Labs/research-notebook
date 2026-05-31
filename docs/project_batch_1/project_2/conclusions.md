@@ -30,9 +30,11 @@
             - A2: Typically, lower-endergy (ground) states are more stable as they have simpler nodal structure and higher signal-to-noise ratios in many physical systems.
 
         ??? note "🔷 Structural Recovery"
-            - Is curvature recoverable before amplitude?
-            - Are nodal locations more identifiable than potential amplitude?
-
+            - Q1: Is curvature recoverable before amplitude?
+            - A1: Curvature (the second derivative) is directly linked to the kinetic term in the TISE, making it a primary feature captured during training. Since this is obtained via discretization of the second derivative operator, it is particuarly susceptible to failure modes associated with ill-conditioning.
++           ---
+            - Q2: Are nodal locations more identifiable than potential amplitude?
+            - A2: Yes, nodal points in wavefunctions provide strong geometric constraints that are often more robust to amplitude scaling issues.
 
     === "🤯 Lessons Learned"
 
