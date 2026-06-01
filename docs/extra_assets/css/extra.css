@@ -1519,39 +1519,113 @@ body {
 }
 
 .md-typeset .admonition.eigenote,
+.md-typeset details.admonition.eigenote,
 .md-typeset .admonition.favicon,
-.md-typeset .admonition.ember {
+.md-typeset details.admonition.favicon {
   border-left-color: var(--ptg-color-blue-light);
   background-image: linear-gradient(135deg, rgba(20, 181, 255, 0.2), rgba(121, 82, 245, 0.2)) !important;
   border-color: rgba(20, 181, 255, 0.4);
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 }
 
-.md-typeset .admonition.eigenote .admonition-title {
+.md-typeset .admonition.ember,
+.md-typeset details.admonition.ember {
+  border-left-color: var(--ptg-color-pink-vibrant);
+  background-image: linear-gradient(135deg, rgba(255, 102, 179, 0.2), rgba(255, 157, 87, 0.2)) !important;
+  border-color: rgba(255, 102, 179, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 102, 179, 0.15);
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+@keyframes eigenote-pulse {
+  0% {
+    box-shadow: 0 0 8px rgba(20, 181, 255, 0.4);
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(20, 181, 255, 0.7);
+    transform: translateY(-50%) scale(1.1);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(20, 181, 255, 0.4);
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+@keyframes favicon-pulse {
+  0% {
+    box-shadow: 0 0 6px rgba(20, 181, 255, 0.3);
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(20, 181, 255, 0.6);
+    transform: translateY(-50%) scale(1.1);
+  }
+  100% {
+    box-shadow: 0 0 6px rgba(20, 181, 255, 0.3);
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+@keyframes ember-pulse {
+  0% {
+    box-shadow: 0 0 8px rgba(255, 102, 179, 0.4);
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 157, 87, 0.7);
+    transform: translateY(-50%) scale(1.1);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(255, 102, 179, 0.4);
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.md-typeset .admonition.eigenote > .admonition-title,
+.md-typeset details.admonition.eigenote > summary {
+  background-image: var(--ptg-gradient-6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent !important;
   color: var(--ptg-color-blue-light) !important;
-  -webkit-text-fill-color: var(--ptg-color-blue-light) !important;
   border-bottom-color: rgba(20, 181, 255, 0.2);
   position: relative;
   padding-left: 2.5rem;
+  font-weight: 600;
 }
 
-.md-typeset .admonition.ember .admonition-title {
-  color: var(--ptg-color-blue-light) !important;
-  -webkit-text-fill-color: var(--ptg-color-blue-light) !important;
-  border-bottom-color: rgba(20, 181, 255, 0.2);
+.md-typeset .admonition.ember > .admonition-title,
+.md-typeset details.admonition.ember > summary {
+  background-image: linear-gradient(90deg, var(--ptg-color-pink-vibrant), var(--ptg-color-orange-warm));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent !important;
+  color: var(--ptg-color-pink-vibrant) !important;
+  border-bottom-color: rgba(255, 102, 179, 0.2);
   position: relative;
+  padding-left: 2.5rem;
+  padding-top: 2px;
+  font-weight: 600;
 }
 
-.md-typeset .admonition.favicon .admonition-title {
+.md-typeset .admonition.favicon > .admonition-title,
+.md-typeset details.admonition.favicon > summary {
+  background-image: var(--ptg-gradient-6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent !important;
   color: var(--ptg-color-blue-light) !important;
-  -webkit-text-fill-color: var(--ptg-color-blue-light) !important;
   border-bottom-color: rgba(20, 181, 255, 0.2);
   position: relative;
   padding-left: 2.5rem; /* Shifted right from 2.2rem */
   padding-top: 2px;     /* Lowered text slightly */
+  font-weight: 600;
 }
 
-.md-typeset .admonition.eigenote .admonition-title::before,
-.md-typeset .admonition.ember .admonition-title::before {
+.md-typeset .admonition.eigenote > .admonition-title::before,
+.md-typeset details.admonition.eigenote > summary::before,
+.md-typeset .admonition.ember > .admonition-title::before,
+.md-typeset details.admonition.ember > summary::before {
   content: "";
   position: absolute;
   left: 0.6rem;
@@ -1568,7 +1642,8 @@ body {
   background-color: transparent !important;
 }
 
-.md-typeset .admonition.favicon .admonition-title::before {
+.md-typeset .admonition.favicon > .admonition-title::before,
+.md-typeset details.admonition.favicon > summary::before {
   content: "";
   position: absolute;
   left: 0.75rem; /* Adjusted for smaller size */
@@ -1585,28 +1660,46 @@ body {
   background-color: transparent !important;
 }
 
-.md-typeset .admonition.eigenote .admonition-title::before {
+.md-typeset .admonition.eigenote > .admonition-title::before,
+.md-typeset details.admonition.eigenote > summary::before {
   background-image: url('../images/eigenote.png');
+  animation: eigenote-pulse 3s infinite ease-in-out;
+  border-radius: 50%;
 }
 
-.md-typeset .admonition.favicon .admonition-title::before {
+.md-typeset .admonition.favicon > .admonition-title::before,
+.md-typeset details.admonition.favicon > summary::before {
   background-image: url('../images/favicon.png');
+  animation: favicon-pulse 3s infinite ease-in-out;
+  border-radius: 50%;
 }
 
-.md-typeset .admonition.ember .admonition-title::before {
+.md-typeset .admonition.ember > .admonition-title::before,
+.md-typeset details.admonition.ember > summary::before {
   background-image: url('../images/ember.png');
+  background-color: transparent !important;
+  border-radius: 50%;
+  animation: ember-pulse 3s infinite ease-in-out;
+  backdrop-filter: none;
+  border: none;
 }
 
 /* Hide the default icon for custom admonitions */
-.md-typeset .admonition.eigenote .admonition-title::after,
-.md-typeset .admonition.favicon .admonition-title::after,
-.md-typeset .admonition.ember .admonition-title::after {
+.md-typeset .admonition.eigenote > .admonition-title::after,
+.md-typeset details.admonition.eigenote > summary::after,
+.md-typeset .admonition.favicon > .admonition-title::after,
+.md-typeset details.admonition.favicon > summary::after,
+.md-typeset .admonition.ember > .admonition-title::after,
+.md-typeset details.admonition.ember > summary::after {
   display: none !important;
 }
 
-.md-typeset .admonition.eigenote .admonition-title img.twemoji,
-.md-typeset .admonition.favicon .admonition-title img.twemoji,
-.md-typeset .admonition.ember .admonition-title img.twemoji {
+.md-typeset .admonition.eigenote > .admonition-title img.twemoji,
+.md-typeset details.admonition.eigenote > summary img.twemoji,
+.md-typeset .admonition.favicon > .admonition-title img.twemoji,
+.md-typeset details.admonition.favicon > summary img.twemoji,
+.md-typeset .admonition.ember > .admonition-title img.twemoji,
+.md-typeset details.admonition.ember > summary img.twemoji {
   display: none !important;
 }
 
