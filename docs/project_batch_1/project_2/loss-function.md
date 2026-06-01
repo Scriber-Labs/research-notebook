@@ -3,6 +3,11 @@
 ## Mathematical Formulation
 ## Four Loss Terms
 
+!!! eigenote 
+
+   sdfjlsdjf
+
+
 1. **Schrödinger residual (physics loss)**
 
     $$ \mathcal{L}_\text{TISE} = \sum_{n=1}^N { \left| \hat{H}_\theta\psi_\theta^n(x)-E_n^\theta\psi_n^\theta(x) \right|^2 } $$

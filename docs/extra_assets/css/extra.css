@@ -731,15 +731,20 @@ body {
 /* ============================================
    Header / Top Bar — Glass Effect [Updated: 2026-05-31]
    ============================================ */
-/* Ensure the header inner container is centered and matches the layout */
-.md-header__inner {
+/* Ensure the header and main inner containers are centered */
+.md-header__inner.md-grid,
+.md-main__inner.md-grid {
   margin: 0 auto !important;
   max-width: 1220px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  padding: 0 0.8rem !important;
   width: 100% !important;
+}
+
+/* Ensure the header inner container layout */
+.md-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.8rem;
 }
 
 .md-header {
@@ -766,6 +771,7 @@ body {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) !important;
   letter-spacing: 0.5px !important;
   display: inline-block !important;
+  margin-top: 0.35rem !important; /* Adjust vertical position */
 }
 
 /* ============================================
@@ -774,11 +780,8 @@ body {
 
 /* Ensure the main content area uses proper grid/flex layout */
 .md-main__inner {
-  display: flex !important;
-  gap: var(--ptg-space-lg) !important;
-  width: 100% !important;
-  max-width: 1220px !important;
-  margin: 0 auto !important;
+  display: flex;
+  gap: var(--ptg-space-lg);
 }
 
 /* The content area should take remaining space */
@@ -854,16 +857,16 @@ body {
 /* TOC title styling */
 .md-nav--secondary > .md-nav__title,
 .md-nav--secondary .md-nav__title {
-  padding: var(--ptg-space-sm) var(--ptg-space-md) !important;
-  border-bottom: 1px solid var(--ptg-glass-border) !important;
-  margin-bottom: var(--ptg-space-sm) !important;
-  background-color: transparent !important;
-  font-size: 0.8rem !important;
-  text-transform: uppercase !important;
-  letter-spacing: 1px !important;
-  color: transparent !important; /* Hide original text */
-  display: block !important;
-  line-height: 0 !important;
+  padding: var(--ptg-space-sm) var(--ptg-space-md);
+  border-bottom: 1px solid var(--ptg-glass-border);
+  margin-bottom: var(--ptg-space-sm);
+  background-color: transparent;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: transparent !important; /* Hide original "On this page" text */
+  display: block;
+  line-height: 0;
 }
 
 /* Ensure "About This Page" label is rendered */
@@ -871,12 +874,12 @@ body {
 .md-nav--secondary > .md-nav__title::after {
   content: "About This Page" !important;
   visibility: visible !important;
-  display: block !important;
+  display: block;
   color: var(--ptg-color-primary) !important;
-  line-height: 1.5 !important;
-  font-size: 0.8rem !important;
-  opacity: 1 !important;
-  z-index: 100 !important;
+  line-height: 1.5;
+  font-size: 0.8rem;
+  opacity: 1;
+  z-index: 100;
 }
 
 /* Sidebar header highlight */
@@ -1416,6 +1419,68 @@ body {
 /* White smoke text */
 .text-whitesmoke {
   color: #f5f5f5 !important;
+}
+
+.md-typeset .admonition.eigenote,
+.md-typeset .admonition.favicon,
+.md-typeset .admonition.ember {
+  border-left-color: var(--ptg-color-blue-light);
+  background-image: linear-gradient(135deg, rgba(20, 181, 255, 0.2), rgba(121, 82, 245, 0.2)) !important;
+  border-color: rgba(20, 181, 255, 0.4);
+}
+
+.md-typeset .admonition.eigenote .admonition-title,
+.md-typeset .admonition.favicon .admonition-title,
+.md-typeset .admonition.ember .admonition-title {
+  color: var(--ptg-color-blue-light) !important;
+  -webkit-text-fill-color: var(--ptg-color-blue-light) !important;
+  border-bottom-color: rgba(20, 181, 255, 0.2);
+  padding-left: 2.2rem;
+  position: relative;
+}
+
+.md-typeset .admonition.eigenote .admonition-title::before,
+.md-typeset .admonition.favicon .admonition-title::before,
+.md-typeset .admonition.ember .admonition-title::before {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* Override Material theme's mask-image icon system */
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  background-color: transparent !important;
+}
+
+.md-typeset .admonition.eigenote .admonition-title::before {
+  background-image: url('../images/eigenote.png');
+}
+
+.md-typeset .admonition.favicon .admonition-title::before {
+  background-image: url('../images/favicon.png');
+}
+
+.md-typeset .admonition.ember .admonition-title::before {
+  background-image: url('../images/ember.png');
+}
+
+/* Hide the default icon for custom admonitions */
+.md-typeset .admonition.eigenote .admonition-title::after,
+.md-typeset .admonition.favicon .admonition-title::after,
+.md-typeset .admonition.ember .admonition-title::after {
+  display: none !important;
+}
+
+.md-typeset .admonition.eigenote .admonition-title img.twemoji,
+.md-typeset .admonition.favicon .admonition-title img.twemoji,
+.md-typeset .admonition.ember .admonition-title img.twemoji {
+  display: none !important;
 }
 
 /* Mermaid diagram container */

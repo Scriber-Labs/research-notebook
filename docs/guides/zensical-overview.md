@@ -112,6 +112,9 @@ Hover it, to see a tooltip.
 * :tada: `:tada:`
 * :memo: `:memo:`
 * :eyes: `:eyes:`
+* :eigenote: `:eigenote:`
+* :ember: `:ember:`
+* :favicon: `:favicon:`
 
 ## Maths
 

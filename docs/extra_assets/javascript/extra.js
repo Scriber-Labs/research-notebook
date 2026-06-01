@@ -22,19 +22,20 @@ document$.subscribe(function() {
         // Fix TOC Title
         const tocTitles = document.querySelectorAll('.md-nav--secondary .md-nav__title, .md-nav--secondary > .md-nav__title');
         tocTitles.forEach(title => {
-            if (title.innerText.trim() === '' || title.innerText.trim() === 'On this page' || title.getAttribute('for') === '__toc') {
-                // If it's the default TOC title or empty, we forcefully set it
-                // We use a span to ensure it's visible if we hide the original text via CSS
+            // Check if it already has "About This Page" to avoid double injection
+            if (!title.textContent.includes('About This Page')) {
                 let label = title.querySelector('.md-nav__title__text');
                 if (!label) {
-                    // Create it if it doesn't exist (MkDocs sometimes has different structures)
-                    title.innerHTML = '<span class="md-nav__icon md-icon"></span> About This Page';
-                } else {
+                    // MkDocs often has the text directly in the label or in a span
+                    // We'll replace the text node that says "On this page"
+                    for (let node of title.childNodes) {
+                        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === 'On this page') {
+                            node.textContent = 'About This Page';
+                        }
+                    }
+                } else if (label.innerText.trim() === 'On this page') {
                     label.innerText = 'About This Page';
                 }
-                title.style.color = 'var(--ptg-color-primary)';
-                title.style.visibility = 'visible';
-                title.style.display = 'block';
             }
         });
     }

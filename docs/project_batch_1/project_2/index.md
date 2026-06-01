@@ -38,7 +38,7 @@
 
 ??? info "Conceptual Description of What the Model is Learning $\mathcal{L}$"
     
-    !!! note "What the ML model parameterizes"
+    !!! eigenote "What the ML model parameterizes"
 
         The neural architecture jointly parameterizes:
 
@@ -51,7 +51,7 @@
         using lightweight differentiable neural networks.
 
 
-    !!! warning "The wavefunctions are not freely learned fields."
+    !!! ember "The wavefunctions are not freely learned fields."
 
         The learned eigenstates are constrained by multiple coupled structures:
 
@@ -63,7 +63,7 @@
         Consequently, the architecture behaves as a **constrained operator-eigenfunction system** rather than an unconstrained function approximator.
 
 
-??? warning "♾️ Note on Ill-posedness"
+??? eigenote "♾️ Note on Ill-posedness"
             
     The inverse Schrödinger problem is a challenging task due to the ill-posed nature of the underlying differential equation and the presence of noise observations. 
         
