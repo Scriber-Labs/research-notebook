@@ -488,11 +488,16 @@
 
 .md-nav__link {
   color: var(--ptg-nav-link-color) !important;
+  font-family: var(--ptg-font-heading);
+  font-size: 0.85rem;
+  transition: all var(--ptg-transition-normal);
+  border-radius: var(--ptg-radius-sm);
 }
 
 .md-nav__link:hover {
   color: var(--ptg-color-primary) !important;
   background: var(--ptg-nav-link-hover-bg);
+  transform: translateX(4px);
 }
 
 .md-nav__link--active,
@@ -732,10 +737,15 @@ body {
    Header / Top Bar — Glass Effect [Updated: 2026-05-31]
    ============================================ */
 /* Ensure the header and main inner containers are centered */
-.md-header__inner.md-grid,
-.md-main__inner.md-grid {
+.md-header__inner.md-grid {
   margin: 0 auto !important;
   max-width: 1220px !important;
+  width: 100% !important;
+}
+
+.md-main__inner.md-grid {
+  margin: 0 auto !important;
+  max-width: 100% !important;
   width: 100% !important;
 }
 
@@ -771,7 +781,8 @@ body {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) !important;
   letter-spacing: 0.5px !important;
   display: inline-block !important;
-  margin-top: 0.35rem !important; /* Adjust vertical position */
+  margin-top: 0.6rem !important; /* Positioned further down */
+  margin-left: 0.8rem !important; /* Positioned further right */
 }
 
 /* ============================================
@@ -782,6 +793,8 @@ body {
 .md-main__inner {
   display: flex;
   gap: var(--ptg-space-lg);
+  width: 100%;
+  max-width: 100%;
 }
 
 /* The content area should take remaining space */
@@ -801,7 +814,12 @@ body {
 
 /* Layout adjustments for very wide screens to prevent content from becoming too thin */
 @media screen and (min-width: 1600px) {
-  .md-main__inner, .md-header__inner {
+  .md-main__inner {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+    max-width: 100% !important;
+  }
+  .md-header__inner {
     padding-left: 5% !important;
     padding-right: 5% !important;
     max-width: 90% !important;
@@ -856,30 +874,34 @@ body {
 
 /* TOC title styling */
 .md-nav--secondary > .md-nav__title,
-.md-nav--secondary .md-nav__title {
-  padding: var(--ptg-space-sm) var(--ptg-space-md);
-  border-bottom: 1px solid var(--ptg-glass-border);
-  margin-bottom: var(--ptg-space-sm);
-  background-color: transparent;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.md-nav--secondary .md-nav__title,
+[data-md-component="toc"] .md-nav__title {
+  padding: var(--ptg-space-sm) var(--ptg-space-md) !important;
+  border-bottom: 1px solid var(--ptg-glass-border) !important;
+  margin-bottom: var(--ptg-space-sm) !important;
+  background-color: transparent !important;
+  font-size: 0.8rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
   color: transparent !important; /* Hide original "On this page" text */
-  display: block;
-  line-height: 0;
+  display: block !important;
+  line-height: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Ensure "About This Page" label is rendered */
 .md-nav--secondary .md-nav__title::after,
-.md-nav--secondary > .md-nav__title::after {
+.md-nav--secondary > .md-nav__title::after,
+[data-md-component="toc"] .md-nav__title::after {
   content: "About This Page" !important;
   visibility: visible !important;
-  display: block;
+  display: block !important;
   color: var(--ptg-color-primary) !important;
-  line-height: 1.5;
-  font-size: 0.8rem;
-  opacity: 1;
-  z-index: 100;
+  line-height: 1.5 !important;
+  font-size: 0.8rem !important;
+  opacity: 1 !important;
+  z-index: 100 !important;
 }
 
 /* Sidebar header highlight */
@@ -995,8 +1017,8 @@ body {
   background: rgba(0, 0, 0, 0.25);
   padding: var(--ptg-space-md);
   border-radius: var(--ptg-radius-lg);
-  margin-top: var(--ptg-space-content-gap);
-  margin-bottom: var(--ptg-space-content-gap);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   border: 1px solid var(--ptg-glass-border);
   gap: 1.25rem;
   display: flex;
@@ -1097,10 +1119,10 @@ body {
 .md-typeset .grid.cards > li:hover {
   border-color: #ffffff !important;
   transform: translateY(-6px);
-  background: var(--ptg-code-bg-deep) !important;
-  box-shadow:
+  background: rgba(15, 15, 35, 0.98) !important;
+  box-shadow: 
     0 15px 30px rgba(0, 0, 0, 0.5),
-    0 0 25px rgba(10, 149, 235, 0.4);
+    0 0 25px rgba(168, 85, 247, 0.4);
 }
 
 .md-typeset .grid.cards > li:hover .middle {
@@ -1276,12 +1298,56 @@ body {
     padding: 0.4rem 0.6rem !important;
     line-height: 1.4;
   }
+}
 
-  /* Only apply static positioning to other sidebars that are NOT drawers */
-  .md-sidebar:not([data-md-component="toc"]):not([data-md-component="navigation"]):not(.md-sidebar--secondary) {
-    position: static;
-    width: 100% !important;
-    margin-bottom: var(--ptg-space-md);
+/* Mobile Devices Breakpoint */
+@media screen and (max-width: 768px) {
+  :root {
+    --ptg-space-xl: 1.25rem;
+    --ptg-space-lg: 1rem;
+  }
+
+  .md-content {
+    padding: var(--ptg-space-md) !important;
+    border-radius: var(--ptg-radius-md);
+  }
+
+  .md-typeset h1 {
+    font-size: 1.5rem;
+  }
+
+  .md-typeset h2 {
+    font-size: 1.35rem;
+  }
+
+  .md-typeset h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Header adjustments */
+  .md-header__title .md-ellipsis {
+    font-size: 1rem !important;
+  }
+
+  /* Code block adjustments for mobile */
+  .md-typeset .highlight {
+    margin: 1rem -0.5rem; /* Slight bleed on very small screens */
+    border-radius: var(--ptg-radius-md);
+  }
+
+  .md-typeset .highlight pre {
+    padding: 0.8rem;
+  }
+
+  .md-typeset .highlight pre > code {
+    font-size: 0.75rem;
+  }
+
+  /* Better table handling on small screens */
+  .md-typeset table:not([class]) {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 

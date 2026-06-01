@@ -20,20 +20,30 @@ document$.subscribe(function() {
         }
 
         // Fix TOC Title
-        const tocTitles = document.querySelectorAll('.md-nav--secondary .md-nav__title, .md-nav--secondary > .md-nav__title');
+        const tocTitles = document.querySelectorAll('.md-nav--secondary .md-nav__title, .md-nav--secondary > .md-nav__title, [data-md-component="toc"] .md-nav__title');
         tocTitles.forEach(title => {
             // Check if it already has "About This Page" to avoid double injection
             if (!title.textContent.includes('About This Page')) {
+                // Force visibility
+                title.style.display = 'block';
+                title.style.visibility = 'visible';
+                title.style.opacity = '1';
+
                 let label = title.querySelector('.md-nav__title__text');
                 if (!label) {
-                    // MkDocs often has the text directly in the label or in a span
-                    // We'll replace the text node that says "On this page"
+                    // Try to find if there's any text node to replace
+                    let replaced = false;
                     for (let node of title.childNodes) {
-                        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === 'On this page') {
+                        if (node.nodeType === Node.TEXT_NODE && (node.textContent.trim() === 'On this page' || node.textContent.trim() === 'Table of contents')) {
                             node.textContent = 'About This Page';
+                            replaced = true;
                         }
                     }
-                } else if (label.innerText.trim() === 'On this page') {
+                    if (!replaced && title.innerText.trim() === '') {
+                         // If empty, just append it
+                         title.appendChild(document.createTextNode('About This Page'));
+                    }
+                } else {
                     label.innerText = 'About This Page';
                 }
             }
