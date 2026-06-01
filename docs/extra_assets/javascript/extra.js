@@ -1,6 +1,62 @@
 document$.subscribe(function() {
     console.log("Initialize third-party libraries here.");
 
+    // Replace emoji shortcodes with images
+    const emojiShortcodes = [':favicon:', ':ember:', ':eigenote:'];
+    const iconMap = {
+        ':favicon:': '../extra_assets/images/favicon.png',
+        ':ember:': '../extra_assets/images/ember.png',
+        ':eigenote:': '../extra_assets/images/eigenote.png'
+    };
+
+    // Need to handle relative paths carefully, or use absolute from root
+    const rootPath = document.querySelector('link[rel="canonical"]')?.href || window.location.origin;
+
+    const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    const nodesToReplace = [];
+
+    while (node = walk.nextNode()) {
+        let text = node.nodeValue;
+        let hasMatch = false;
+        for (const shortcode of emojiShortcodes) {
+            if (text.includes(shortcode)) {
+                hasMatch = true;
+                break;
+            }
+        }
+        if (hasMatch && !node.parentElement.closest('code, pre')) {
+            nodesToReplace.push(node);
+        }
+    }
+
+    nodesToReplace.forEach(textNode => {
+        let text = textNode.nodeValue;
+        let hasShortcode = false;
+        for (const shortcode of emojiShortcodes) {
+            if (text.includes(shortcode)) {
+                hasShortcode = true;
+                break;
+            }
+        }
+        if (!hasShortcode) return;
+
+        const span = document.createElement('span');
+        let html = text;
+        for (const [shortcode, path] of Object.entries(iconMap)) {
+            const regex = new RegExp(shortcode.replace(/:/g, '\\:'), 'g');
+            // Use paths relative to the current script location or better, use relative paths derived from the current URL
+            const scriptPath = Array.from(document.querySelectorAll('script')).find(s => s.src.includes('extra.js'))?.src;
+            const assetsImagesPath = scriptPath ? scriptPath.replace('javascript/extra.js', 'images/') : '/extra_assets/images/';
+            const imgHtml = `<img src="${assetsImagesPath}${shortcode.replace(/:/g, '')}.png" class="twemoji" style="width:1.25em; height:1.25em; vertical-align:middle; display:inline-block;" title="${shortcode}" alt="${shortcode}">`;
+            html = html.replace(regex, imgHtml);
+        }
+        span.innerHTML = html;
+        if (textNode.parentNode) {
+            textNode.parentNode.replaceChild(span, textNode);
+        }
+    });
+
     // Fix header centering and layout
     function fixLayout() {
         const headerInner = document.querySelector('.md-header__inner');

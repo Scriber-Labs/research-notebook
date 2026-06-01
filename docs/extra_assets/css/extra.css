@@ -339,6 +339,7 @@
   margin-top: 0;
   margin-bottom: 0.8rem;
   padding-bottom: 0.3rem;
+  padding-left: 2.2rem;
   display: block;
   width: 100%;
 }
@@ -352,17 +353,33 @@
   border-bottom-color: rgba(20, 181, 255, 0.15);
 }
 
+.md-typeset .admonition.info::before,
+.md-typeset .admonition.todo::before,
+.md-typeset .admonition.note::before,
+.md-typeset .admonition.abstract::before {
+  background-color: var(--ptg-color-blue-light) !important;
+}
+
 .md-typeset .admonition.success .admonition-title {
   color: var(--ptg-color-success) !important;
   -webkit-text-fill-color: var(--ptg-color-success) !important;
   border-bottom-color: rgba(148, 232, 68, 0.15);
 }
 
+.md-typeset .admonition.success::before {
+  background-color: var(--ptg-color-success) !important;
+}
+
 .md-typeset .admonition.warning .admonition-title,
 .md-typeset .admonition.important .admonition-title {
-  color: #ffcc95 !important;
-  -webkit-text-fill-color: #ffcc95 !important;
+  color: var(--ptg-color-warning) !important;
+  -webkit-text-fill-color: var(--ptg-color-warning) !important;
   border-bottom-color: rgba(255, 157, 87, 0.35);
+}
+
+.md-typeset .admonition.warning::before,
+.md-typeset .admonition.important::before {
+  background-color: var(--ptg-color-warning) !important;
 }
 
 .md-typeset .admonition.danger .admonition-title,
@@ -373,6 +390,12 @@
   border-bottom-color: rgba(247, 129, 102, 0.35);
 }
 
+.md-typeset .admonition.danger::before,
+.md-typeset .admonition.error::before,
+.md-typeset .admonition.bug::before {
+  background-color: var(--ptg-color-error) !important;
+}
+
 .md-typeset .admonition.quote .admonition-title,
 .md-typeset .admonition.tip .admonition-title,
 .md-typeset summary {
@@ -381,12 +404,20 @@
   border-bottom-color: rgba(168, 85, 247, 0.15);
 }
 
+.md-typeset .admonition.quote::before,
+.md-typeset .admonition.tip::before,
+.md-typeset details::before {
+  background-color: var(--ptg-color-secondary) !important;
+}
+
 .md-typeset .admonition > *:not(.admonition-title),
 .md-typeset details > *:not(summary) {
   font-size: 0.95rem;
 }
 
 /* Ensure math and emojis in gradient headers don't inherit gradient/transparency */
+.md-typeset .admonition-title::after,
+.md-typeset summary::after,
 .md-typeset .admonition-title img.twemoji,
 .md-typeset summary img.twemoji,
 .md-typeset h1 img.twemoji,
@@ -416,7 +447,7 @@
 .eigenscribe-gradient-text .katex,
 .metadata-gradient-text .katex {
   -webkit-text-fill-color: initial !important;
-  color: var(--ptg-color-primary) !important;
+  color: inherit !important;
   background-clip: initial !important;
   -webkit-background-clip: initial !important;
   background: none !important;
@@ -1495,18 +1526,31 @@ body {
   border-color: rgba(20, 181, 255, 0.4);
 }
 
-.md-typeset .admonition.eigenote .admonition-title,
-.md-typeset .admonition.favicon .admonition-title,
+.md-typeset .admonition.eigenote .admonition-title {
+  color: var(--ptg-color-blue-light) !important;
+  -webkit-text-fill-color: var(--ptg-color-blue-light) !important;
+  border-bottom-color: rgba(20, 181, 255, 0.2);
+  position: relative;
+  padding-left: 2.5rem;
+}
+
 .md-typeset .admonition.ember .admonition-title {
   color: var(--ptg-color-blue-light) !important;
   -webkit-text-fill-color: var(--ptg-color-blue-light) !important;
   border-bottom-color: rgba(20, 181, 255, 0.2);
-  padding-left: 2.2rem;
   position: relative;
 }
 
+.md-typeset .admonition.favicon .admonition-title {
+  color: var(--ptg-color-blue-light) !important;
+  -webkit-text-fill-color: var(--ptg-color-blue-light) !important;
+  border-bottom-color: rgba(20, 181, 255, 0.2);
+  position: relative;
+  padding-left: 2.5rem; /* Shifted right from 2.2rem */
+  padding-top: 2px;     /* Lowered text slightly */
+}
+
 .md-typeset .admonition.eigenote .admonition-title::before,
-.md-typeset .admonition.favicon .admonition-title::before,
 .md-typeset .admonition.ember .admonition-title::before {
   content: "";
   position: absolute;
@@ -1515,6 +1559,23 @@ body {
   transform: translateY(-50%);
   width: 1.5rem;
   height: 1.5rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* Override Material theme's mask-image icon system */
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  background-color: transparent !important;
+}
+
+.md-typeset .admonition.favicon .admonition-title::before {
+  content: "";
+  position: absolute;
+  left: 0.75rem; /* Adjusted for smaller size */
+  top: calc(50% + 1px); /* Nudge icon down slightly */
+  transform: translateY(-50%);
+  width: 1.2rem; /* Smaller size */
+  height: 1.2rem; /* Smaller size */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -1547,6 +1608,64 @@ body {
 .md-typeset .admonition.favicon .admonition-title img.twemoji,
 .md-typeset .admonition.ember .admonition-title img.twemoji {
   display: none !important;
+}
+
+/* Custom Icons from :emoji: syntax */
+span.twemoji[title=":eigenote:"],
+span.twemoji[title=":favicon:"],
+span.twemoji[title=":ember:"] {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: middle;
+}
+
+span.twemoji[title=":eigenote:"] {
+  background-image: url('../images/eigenote.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+span.twemoji[title=":favicon:"] {
+  background-image: url('../images/favicon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+span.twemoji[title=":ember:"] {
+  background-image: url('../images/ember.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+span.twemoji[title=":eigenote:"] svg,
+span.twemoji[title=":favicon:"] svg,
+span.twemoji[title=":ember:"] svg {
+  display: none !important;
+}
+
+img.twemoji[title=":eigenote:"],
+img.twemoji[title=":favicon:"],
+img.twemoji[title=":ember:"] {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: middle;
+}
+
+img.twemoji[title=":eigenote:"] {
+  content: url('../images/eigenote.png');
+}
+
+img.twemoji[title=":favicon:"] {
+  content: url('../images/favicon.png');
+}
+
+img.twemoji[title=":ember:"] {
+  content: url('../images/ember.png');
 }
 
 /* Mermaid diagram container */
