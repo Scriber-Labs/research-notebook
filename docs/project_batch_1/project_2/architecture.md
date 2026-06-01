@@ -1,6 +1,6 @@
-# Project 2 Architecture
+# Project 2 Architecture 🏗️
 
-## Overall Architecture
+## Overall Architecture $\mathbf{\Psi}$
 ```mermaid
 %%====================================================================
 %%  Final Architecture Diagram

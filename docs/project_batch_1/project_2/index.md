@@ -1,11 +1,16 @@
-# Project 2: Low-Fidelity Inverse Schrödinger Problem
+# Project 2: Low-Fidelity Inverse Schrödinger Problem ⚛️
 
 !!! abstract "__Overview__"
 
     === "🥅 Goal"
 
-        The purpose of project 2 is to study which spectral and geometric operator features remain identifiable under low-fidelity discretization, noisy observations, and constrained Hilbert-space geometry in the inverse Schrödinger problem.
-        
+        - Study which operator features remain identifiable under low-fidelity discretization, noisy observations, and constrained Hilbert-space geometry in the inverse Schrödinger problem.
+        - It is NOT to obtain a perfect reconstruction of the ground truth potential $V(x)$.
+
+    === "🗝️ Key Points"
+
+        - **Indirect supervision:** Project 2 architecture resembles a *coupled operator-eigenfunction learning system*.
+        - **Proper orthogonal decomposition (POD)** is used as a geometry-aware diagnostic tool for analyzing basis conditioning, variance structure, and mode coupling in the learned eigenstate manifold.
         
     === "5️⃣ 5 Brunton Steps"
 
@@ -17,13 +22,7 @@
         | 4. **Loss function**              | Composite loss with physics, smoothness, ordering, and data-consistency terms defined over a weighted discrete Hilbert-space geometry. | ✔️ |
         | 5. **Optimization**               | - Adam optimizer with a fixed learning rate. <br/> - Forward pass training loop that computes loss terms and uses backpropagation to update $V_\theta$ and $\psi_n^\theta$. | ❌⚠️ As in project 1, the optimizer is intentionally vanilla; the aim is to expose how the physics prior interacts with noisy data, not to chase maximal performance |
 
-    === "♾️ Note on Ill-posedness"
-            
-        The inverse Schrödinger problem is a challenging task due to the ill-posed nature of the underlying differential equation and the presence of noise observations. 
-        
-        In particular, the inverse mapping is fundamentally non-unique: multiple potentials may reproduce similar spectral measurements and probability-density observations.
-        
-        Consequently, this project emphasizes interpretability and structural consistency rather than exact reconstruction fidelity.
+   
 
 
     === "🌍 Global Design Choices"   
@@ -37,7 +36,7 @@
         
 
 
-??? info "Conceptual Description of What the Model is Learning"
+??? info "Conceptual Description of What the Model is Learning $\mathcal{L}$"
     
     !!! note "What the ML model parameterizes"
 
@@ -63,17 +62,11 @@
 
         Consequently, the architecture behaves as a **constrained operator-eigenfunction system** rather than an unconstrained function approximator.
 
-    !!! note "Each optimization step updates a coupled quantum system."
 
-        Each epoch updates the shared parameters governing:
-
-        $$
-        \{V_\theta, \psi_n^\theta, E_n^\theta\}
-        $$
-
-        via minimization of the composite physics-informed loss functional.
-
-??? tip "🗝️ Key Points"
-
-    - **Indirect supervision:** Project 2 architecture resembles a *coupled operator-eigenfunction learning system*.
-    - **Proper orthogonal decomposition (POD)** is used as a geometry-aware diagnostic tool for analyzing basis conditioning, variance structure, and mode coupling in the learned eigenstate manifold.
+??? warning "♾️ Note on Ill-posedness"
+            
+    The inverse Schrödinger problem is a challenging task due to the ill-posed nature of the underlying differential equation and the presence of noise observations. 
+        
+    In particular, the inverse mapping is fundamentally non-unique: multiple potentials may reproduce similar spectral measurements and probability-density observations.
+        
+    Consequently, this project emphasizes interpretability and structural consistency rather than exact reconstruction fidelity.
