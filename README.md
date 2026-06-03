@@ -1,5 +1,7 @@
 # Scriber Labs Research Journal for Scriber Labs.
 
-> ``zensical serve``
+```bash 
+zensical serve
+```
 
 ## ✅ TODO
