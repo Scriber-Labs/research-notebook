@@ -5,3 +5,5 @@ zensical serve
 ```
 
 ## ✅ TODO
+
+- [ ] Fix horizontal folder styling
