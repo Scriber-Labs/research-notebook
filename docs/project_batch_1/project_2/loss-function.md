@@ -4,8 +4,7 @@
 ## Four Loss Terms
 
 !!! eigenote 
-
-   sdfjlsdjf
+ 
 
 
 1. **Schrödinger residual (physics loss)**
