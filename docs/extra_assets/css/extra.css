@@ -1671,7 +1671,8 @@ body {
 .md-typeset details.admonition.favicon > summary::before {
   background-image: url('../images/favicon.png');
   animation: favicon-pulse 3s infinite ease-in-out;
-  border-radius: 50%;
+  background-size: 75%;
+  border-radius: 80%;
 }
 
 .md-typeset .admonition.ember > .admonition-title::before,
@@ -1722,9 +1723,10 @@ span.twemoji[title=":eigenote:"] {
 
 span.twemoji[title=":favicon:"] {
   background-image: url('../images/favicon.png');
-  background-size: contain;
+  background-size: 80%;
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 100%;
 }
 
 span.twemoji[title=":ember:"] {
@@ -1757,9 +1759,11 @@ img.twemoji[title=":favicon:"] {
   content: url('../images/favicon.png');
 }
 
+
 img.twemoji[title=":ember:"] {
   content: url('../images/ember.png');
 }
+
 
 /* Mermaid diagram container */
 .mermaid-container svg {

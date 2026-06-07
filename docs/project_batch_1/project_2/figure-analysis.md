@@ -3,7 +3,7 @@
 ## Figure 1
 ![training_curves.png](figure_files/training_curves.png)
 
-!!! note "🏡 **Take-Home Message**"
+!!! favicon "🏡 **Take-Home Message**"
 
     The optimizer exhibits three distinct regime transitions before settling on a stable plateau.
 
