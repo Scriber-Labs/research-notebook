@@ -61,7 +61,7 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
        ]},
        { "Project 2" = [
           { "Overview" = "project_batch_1/project_2/index.md" },
-          { "Setting the Stage" = "project_batch_1/project_2/background.md" },
+          { "Background" = "project_batch_1/project_2/background.md" },
           { "Architecture" = "project_batch_1/project_2/architecture.md" },
           { "Loss Function" = "project_batch_1/project_2/loss-function.md" },
           { "Figure Analysis" = "project_batch_1/project_2/figure-analysis.md" },
