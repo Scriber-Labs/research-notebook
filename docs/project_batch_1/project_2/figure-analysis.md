@@ -108,55 +108,141 @@
 
 !!! note "🏡 **Take-Home Message**"
 
-    The POD spectrum shows how many independent "modes" are present in the learned wavefunction ensemble. Three dominant values indicate a rank-3 subspace.
-
+    Singular values from the POD of the learned wavefunction matrix decrease (log scale) from $\approx 1$.
 
 !!! note "🔑 **Key Insights**"
 
-    - Singular value decay is evident from the sharp drop of in $\sigma_n$ after $N=3$. This suggests the model effectively captured the target dimensionality.
-    - Note: Small but non-zero singular values represent residual noise or model complexity (noise floor).
-
+    1. **Rank efficiency** - Rapid two-decade decay indicates a low-dimensional basis.
+    2. **Basis conditioning** - Separation between $\sigma_0$, $\sigma_1$, and $\sigma_2$ quantifies how much "physics" each node carries.
 
 !!! fail "❌ **Failure Modes**"
     
-    - **Degenerate singular values**: Multiple modes having equivalent singualr values, indicating either physical symmetry or model under-parameterization. Figure 6 shows this degeneracy was succeessfully avoided by the model.
-    - **Slow decay**: Indicates that the basis is not compact and the model is capturing too much noise.
-        - [ ] Need to elaborate on this in the context of singular value results in figure 6.
+    | **Verdict** | **Failure Mode** | **Description** | **Explanation**                                            |
+    | :---------- | :--------------- | :-------------- |:-----------------------------------------------------------|
+    | ❌ | Flat spectrum | All $\sigma_i$ nearly equal $\Rightarrow$ modes are independent, but unphysical. | Would signal noise-dominated snapshots (❓).                |
+    | ❌ | Slow decay | $\tfrac{\sigma_{2}}{\sigma_{0}} \geq 0.3 \Rightarrow$ redundant or correlated modes. | Implies over-fitting or aliasing in $\hat{\psi}_n^\theta$. |
     
 ## Figure 7
 ![overlap_heatmap.png](figure_files/overlap_heatmap.png)
 
 !!! note "🏡 **Take-Home Message**"
     
-    Orthonormalization was successful and POD analysis is appropriately perfomed so that learned wavefunctions and POD modes are represented in terms of orthogonal basis functions, facilitating efficient and accurate representation of the underlying physical phenomena.
+    Overlap matrix $\langle \hat{\psi}_i^\theta | \hat{\psi}_j^\theta \rangle$ confirms orthogonality of learned eigenfunctions.
 
-!!! note "🔑 **Key Idea**
+!!! note "🔑 **Key Insights**"
     
-    - **Self-Orthogonality**: The inner product between learned wavefunctions gives the identity matrix, confirming orthonormalizaiton.
-    - **Coupling**: Even if states are orthonormal, they remain coupled through the shared learned potential $V_\theta(x)$ and the TISE loss.
+    1. **Orthogonality:** - Diagonals are $\approx 1$, off-diagonals are $\approx 0$ confirms Hermitian structure.
+    2. **Basis consistency** - Any bright off-diagonal would expose weak $\mathcal{L}_\text{physics}$.
 
-!!! fail "❌ **Failure Modes**
+!!! fail "❌ **Failure Modes**"
 
-    - Non-identity diagonals: Indicates numerical error in the normalization layer of integration. Figure 6 confirms this failure mode did not occur in the current analysis.
-    - Significant off-diagonals: Loss of orthogonality, liekly due to optimization failure or conflicting gradients. Figure 6 confirms this failure mode did not occur in the current analysis.
+    | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
+    | :---------- | :--------------- | :-------------- | :-------------- |
+    | ✔️ | Non-orthogonality | Off-diagonal $> 0.1$ indicates incomplete convergence | Here, max off-diagonal is $\ge 0.02$ $\Rightarrow$ passes. | 
 
 ## Figure 8
 ![pod_modes.png](figure_files/pod_modes.png)
 
+!!! note "🏡 **Take-Home Message**"
+
+    First three POD modes (blue) compared with learned $\hat{\psi}_i^\theta$ (green) and ground truth $\hat{\psi}_i$ (red).
+
+!!! note "🔑 **Key Insights**"
+
+    1. **Geometric structure** – Similarity to $\hat{\psi}_n$ indicates a stable, data-driven basis.
+    2. **Feature extraction** - POD isolates the most persistent spatial patterns.
+
+!!! fail "❌ **Failure Modes**"
+
+    | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
+    | :---------- | :--------------- | :-------------- | :-------------- |
+    | ❌ | Mode mixing | Pod modes do not resemble any physical eigenfunction. | Blue curves visibly shifted (see Sec. A.6); fix requires re-weighting. |
+
 ## Figure 9
 ![cross_overlap_heatmap.png](figure_files/cross_overlap_heatmap.png)
 
+!!! note "🏡 **Take-Home Message**"
+
+    Overlaps $\langle u_k | \hat{\psi}_n^\theta \rangle$ between POD spatial modes and learned wavefunctions.
+
+!!! note "🔑 **Key Insights**"
+
+    1. **Alignment** - Ideal result is $\pm$ identity; here large off-diagonals show mis-alignment.
+    2. **Energy concentration** – Color magnitude reveals how energy distributes across modes.
+
+!!! fail "❌ **Failure Modes**"
+
+    | **Verdict** | **Failure Mode** | **Description**                                           | **Explanation** |
+    | :---------- | :--------------- |:----------------------------------------------------------| :-------------- |
+    | ❌ | Distributed overlap | Single $u_k$ projects onto several $\hat{\psi}_n^\theta$. | 🔮 Further investigation required to understand the root cause and impact on POD basis stability and interpretability. |
+
 ## Figure 10
-![pod_temporal_modes.png](figure_files/pod_temporal_modes.png)
+![pod_eigen_alignment.png](figure_files/pod_eigen_alignment.png)
+
+!!! note "🏡 **Take-Home Message**"
+
+    Cross-overlap $\langle u_k | \hat{\psi}_n\rangle$ between physical POD modes and analytic ground-truth eigenfunctions.
+
+!!! note "🔑 **Key Insights**"
+
+    1. **Absolute consistency** - High diagonal elements validate that the POD basis can recover the true physical basis.
+    2. **Spectral recovery** - Confirms operator structure even when $V_\theta$ differs.    
+
+!!! fail "❌ **Failure Modes**"
+
+    | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
+    | :---------- | :--------------- | :-------------- | :-------------- |
+    | ❌ | Mis-alignment | Off-diagonal $> 0.2$ indicates POD not yet physical | Here $\rangle u_0, \hat{\psi}_1 \rangle \approx 0.3 \Rightarrow $ Fix via rescaling (see text). 
+
 
 ## Figure 11
+![pod_temporal_modes.png](figure_files/pod_temporal_modes.png)
+
+!!! note "🏡 **Take-Home Message**"
+
+    Columns of $V$ from $\Psi=U\Sigma V^T$: modal composition per state.
+
+!!! note "🔑 **Key Insights**"
+
+    1. **Coefficient distribution** - Shows how each POD mode contributes to each learned state.
+
+!!! fail "❌ **Failure Modes**"
+
+    | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
+    | :---------- | :--------------- | :-------------- | :-------------- |
+    | ❌ | Incoherent coefficients | Random sign / magnitude pattern across rows of $V$. | Magnitudes scatter (cf. Fig. 13) $\Rightarrow$ indicates prior mis-alignment. |
+
+## Figure 12
 ![pod_temporal_overlap.png](figure_files/pod_temporal_overlap.png)
 
 !!! note "🏡 Take-Home Message"
 
-    The inner product beween temporal modes returns the identity matrix. 
-    This indicates that the temporal modes are orthogonal, which is a key property for POD analysis. It validates that each temporal mode represents a unique aspect of the system's dynamics, facilitating efficient and accurate spectral representation of the underlying physical phenomena.
+    Overlap $\langle v_m | v_n \rangle  \approx I$, as expected.
 
+!!! note "🔑 **Key Insights**"
 
-## Figure 12
+    1. **Unitary property** - Diagonals $\approx 1$, off-diagonals $\approx 0$ verifies numerical stability of SVD.
+
+!!! fail "❌ **Failure Modes**"
+
+    | **Verdict** | **Failure Mode** | **Description**                                                                                  | **Explanation**                                                                                |
+    | :---------- | :--------------- |:-------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------|
+    | ✔️ | Identity deviation | Large off-diagonals | Largest off-diagonal $\approx 3\times 10^{-3} \Rightarrow$ within tolerance $\therefore$ pass. |
+
+## Figure 13
 ![pod_temporal_cross_overlap.png](figure_files/pod_temporal_cross_overlap.png)
+
+!!! note "🏡 Take-Home Message"
+
+    Absolute coefficients $|V_{nk}| = |\langle \mathbf{e}_n | v_k \rangle|$ (basis vector vs. temporal mode).
+
+
+!!! note "🔑 **Key Insights**"
+
+    1. **Modal dominance** - Ideally sparse with a bright diagonal; here large off-diagonals repeat the spatial misalignment story.
+
+!!! fail "❌ **Failure Modes**"
+
+    | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
+    | :---------- | :--------------- | :-------------- | :-------------- |
+    | ❌ | Spread dominance | No clear diagonal; each state draws from several $v_k$. | Reflects same weighting bug; correcting $\psi_n^\theta$-scaling collapses to identity. | 
