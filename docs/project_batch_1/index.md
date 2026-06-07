@@ -6,21 +6,21 @@
 
     ---
 
-      [🔗 Overview](project_1/index.md)
+    [🔗 Overview](project_1/index.md)
 
 
 - :favicon: __Project 2 - Inverse Schrödinger Equation__
 
     ---
 
-      [🔗 Overview](project_2/index.md)
+    [🔗 Overview](project_2/index.md)
 
-      [🎭 Background](project_2/terminology_and_tables.md)
+    [🎭 Background](project_2/terminology_and_tables.md)
 
-      [📊 Figure analysis](project_2/figure-analysis.md)
+    [📊 Figure analysis](project_2/figure-analysis.md)
 
-      - [ ] Update architecture
-      - [ ] Look into mode mixing
+    - [ ] Update architecture
+    - [ ] Look into mode mixing
 
 </div>
 
