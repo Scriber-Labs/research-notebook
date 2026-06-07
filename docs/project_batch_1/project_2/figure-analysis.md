@@ -3,18 +3,18 @@
 ## Figure 1
 ![training_curves.png](figure_files/training_curves.png)
 
-!!! favicon "🏡 **Take-Home Message**"
+!!! favicon "**Take-Home Message**"
 
     The optimizer exhibits three distinct regime transitions before settling on a stable plateau.
 
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. **Spike 1 ($\approx$ 0-50 epochs)** - Expected transient while the network adjusts from random initial weights.
     2. **Spike 2 ($\approx$ 800 epochs)** - Discovery of a higher-curvature potential: smoothness and total loss spike, physics and data terms rise only moderately.
     3. **Spike 3 ($\approx$ 2000 epoochs)** - Order-of-magnitude jump in the smootheness term propagates into the physics loss; a new plateau follows with lower smothness fidelity, but improved data fit.
 
-!!! fail "❌ **Failure Modes**"
+=== "__:ember: **Failure Modes**__"
 
     | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
     | :---------- | :--------------- | :-------------- | :-------------- |
@@ -27,16 +27,16 @@
 ## Figure 2
 ![learned_potential.png](figure_files/learned_potential.png)
 
-!!! note "🏡 **Take-Home Message**"
+!!! favicon "**Take-Home Message**"
 
     The learned potential $V_\theta(x)$ (sigmoidal) differs markedly from the harmonic ground truth $V(x)=\tfrac12 x^2$.
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. Central regions of the learned eigenfunctions (Fig. 3) and densities (Fig. 5) match the ground truth far better than the tails.
     2. The model learns only the portion of $H_\theta$ required to reproduce high-probability regions, exposing the inverse problem's under-determinism.
 
-!!! fail "❌ **Failure Modes**"
+=== "__:ember: **Failure Modes**__"
 
     | **Verdict** | **Failure Mode**              | **Description**                                                                          | **Explanation**                                                    |
     |:------------|:------------------------------|:-----------------------------------------------------------------------------------------|:-------------------------------------------------------------------|
@@ -47,17 +47,17 @@
 ## Figure 3
 ![learned_wavefunctions.png](figure_files/learned_wavefunctions.png)
 
-!!! note "🏡 **Take-Home Message**"
+!!! favicon "**Take-Home Message**"
 
     Learned eigenfunctions $\psi_n^\theta(x)$ capture the nodal pattern but diverge in low-amplitude tail regions.
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. **Phase matching** - Correct nodal count confirms energy ordering.
     2. **Central accuracy** - Highest fidelity occurs where $|\psi_n|^2$ is largest.
     3. **Tail divergence** - For $x \in (-4.5, -2] \cup [2, 4.5)$, the learned curves overshoot, reflecting data scarcity.
 
-!!! fail "❌ **Failure Modes**"
+=== "__:ember: **Failure Modes**__"
 
     | **Verdict** | **Failure Mode** | **Description** | **Explanation**                            |
     | :---------- | :--------------- | :-------------- |:-------------------------------------------|
@@ -69,16 +69,16 @@
 ## Figure 4
 ![learned_energies.png](figure_files/learned_energies.png)
 
-!!! note "🏡 **Take-Home Message**"
+!!! favicon "**Take-Home Message**"
 
     Learned energies $E_n^\theta$ follow the harmonic spectrum $E_n=n+\tfrac12$ and match observations within 5 %.
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. Correct ordering suggests $\mathcal{L}_\text{order}$ is effective.
     2. Spectrum remains stable despite 2 % Gaussian noise in training data.
 
-!!! fail "❌ **Failure Modes**"
+=== "__❌ **Failure Modes**__"
 
     | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
     | :---------- | :--------------- | :-------------- | :-------------- |
@@ -87,16 +87,16 @@
 ## Figure 5
 ![density.png](figure_files/density.png)
 
-!!! note "🏡 **Take-Home Message**"
+!!! favicon "**Take-Home Message**"
 
     Learned densities, $\rho_n^\theta = |\psi_n^\theta|^2$ agree with 2 %-noise observations.
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. **Noise filtering** - PINN acts as a physics-informed smoother.
     2. **Data dominance** - Good density fit persists even with incorrect potential (Fig. 2), confirming $\mathcal{L}_\text{data}$ is easy to minimize.
 
-!!! fail "❌ **Failure Modes**"
+=== "__:ember: **Failure Modes**__"
 
     | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
     | :---------- | :--------------- | :-------------- | :-------------- |
@@ -106,17 +106,17 @@
 ## Figure 6
 ![pod_singular_values.png](figure_files/pod_singular_values.png)
 
-!!! note "🏡 **Take-Home Message**"
+!!! favicon "**Take-Home Message**"
 
     Singular values from the POD of the learned wavefunction matrix decrease (log scale) from $\approx 1$.
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. **Rank efficiency** - Rapid two-decade decay indicates a low-dimensional basis.
     2. **Basis conditioning** - Separation between $\sigma_0$, $\sigma_1$, and $\sigma_2$ quantifies how much "physics" each node carries.
 
-!!! fail "❌ **Failure Modes**"
-    
+=== "__:ember: **Failure Modes**__"
+
     | **Verdict** | **Failure Mode** | **Description** | **Explanation**                                            |
     | :---------- | :--------------- | :-------------- |:-----------------------------------------------------------|
     | ❌ | Flat spectrum | All $\sigma_i$ nearly equal $\Rightarrow$ modes are independent, but unphysical. | Would signal noise-dominated snapshots (❓).                |
@@ -125,16 +125,16 @@
 ## Figure 7
 ![overlap_heatmap.png](figure_files/overlap_heatmap.png)
 
-!!! note "🏡 **Take-Home Message**"
+!!! favicon "**Take-Home Message**"
     
     Overlap matrix $\langle \hat{\psi}_i^\theta | \hat{\psi}_j^\theta \rangle$ confirms orthogonality of learned eigenfunctions.
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
     
     1. **Orthogonality:** - Diagonals are $\approx 1$, off-diagonals are $\approx 0$ confirms Hermitian structure.
     2. **Basis consistency** - Any bright off-diagonal would expose weak $\mathcal{L}_\text{physics}$.
 
-!!! fail "❌ **Failure Modes**"
+=== "__:ember: **Failure Modes**__"
 
     | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
     | :---------- | :--------------- | :-------------- | :-------------- |
@@ -143,16 +143,16 @@
 ## Figure 8
 ![pod_modes.png](figure_files/pod_modes.png)
 
-!!! note "🏡 **Take-Home Message**"
+!!! favicon "**Take-Home Message**"
 
     First three POD modes (blue) compared with learned $\hat{\psi}_i^\theta$ (green) and ground truth $\hat{\psi}_i$ (red).
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. **Geometric structure** – Similarity to $\hat{\psi}_n$ indicates a stable, data-driven basis.
     2. **Feature extraction** - POD isolates the most persistent spatial patterns.
 
-!!! fail "❌ **Failure Modes**"
+=== "__:ember: **Failure Modes**__"
 
     | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
     | :---------- | :--------------- | :-------------- | :-------------- |
@@ -161,16 +161,16 @@
 ## Figure 9
 ![cross_overlap_heatmap.png](figure_files/cross_overlap_heatmap.png)
 
-!!! note "🏡 **Take-Home Message**"
+!!! favicon "**Take-Home Message**"
 
     Overlaps $\langle u_k | \hat{\psi}_n^\theta \rangle$ between POD spatial modes and learned wavefunctions.
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. **Alignment** - Ideal result is $\pm$ identity; here large off-diagonals show mis-alignment.
     2. **Energy concentration** – Color magnitude reveals how energy distributes across modes.
 
-!!! fail "❌ **Failure Modes**"
+=== "__:ember: **Failure Modes**__"
 
     | **Verdict** | **Failure Mode** | **Description**                                           | **Explanation** |
     | :---------- | :--------------- |:----------------------------------------------------------| :-------------- |
@@ -179,16 +179,16 @@
 ## Figure 10
 ![pod_eigen_alignment.png](figure_files/pod_eigen_alignment.png)
 
-!!! note "🏡 **Take-Home Message**"
+!!! favicon "**Take-Home Message**"
 
     Cross-overlap $\langle u_k | \hat{\psi}_n\rangle$ between physical POD modes and analytic ground-truth eigenfunctions.
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. **Absolute consistency** - High diagonal elements validate that the POD basis can recover the true physical basis.
     2. **Spectral recovery** - Confirms operator structure even when $V_\theta$ differs.    
 
-!!! fail "❌ **Failure Modes**"
+=== "__:ember: **Failure Modes**__"
 
     | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
     | :---------- | :--------------- | :-------------- | :-------------- |
@@ -198,15 +198,15 @@
 ## Figure 11
 ![pod_temporal_modes.png](figure_files/pod_temporal_modes.png)
 
-!!! note "🏡 **Take-Home Message**"
+!!! favicon "**Take-Home Message**"
 
     Columns of $V$ from $\Psi=U\Sigma V^T$: modal composition per state.
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. **Coefficient distribution** - Shows how each POD mode contributes to each learned state.
 
-!!! fail "❌ **Failure Modes**"
+=== "__:ember: **Failure Modes**__"
 
     | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
     | :---------- | :--------------- | :-------------- | :-------------- |
@@ -215,15 +215,15 @@
 ## Figure 12
 ![pod_temporal_overlap.png](figure_files/pod_temporal_overlap.png)
 
-!!! note "🏡 Take-Home Message"
+!!! favicon "Take-Home Message"
 
     Overlap $\langle v_m | v_n \rangle  \approx I$, as expected.
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. **Unitary property** - Diagonals $\approx 1$, off-diagonals $\approx 0$ verifies numerical stability of SVD.
 
-!!! fail "❌ **Failure Modes**"
+=== "__:ember: **Failure Modes**__"
 
     | **Verdict** | **Failure Mode** | **Description**                                                                                  | **Explanation**                                                                                |
     | :---------- | :--------------- |:-------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------|
@@ -232,16 +232,16 @@
 ## Figure 13
 ![pod_temporal_cross_overlap.png](figure_files/pod_temporal_cross_overlap.png)
 
-!!! note "🏡 Take-Home Message"
+!!! favicon "Take-Home Message"
 
     Absolute coefficients $|V_{nk}| = |\langle \mathbf{e}_n | v_k \rangle|$ (basis vector vs. temporal mode).
 
 
-!!! note "🔑 **Key Insights**"
+=== "__🔑 **Key Insights**__"
 
     1. **Modal dominance** - Ideally sparse with a bright diagonal; here large off-diagonals repeat the spatial misalignment story.
 
-!!! fail "❌ **Failure Modes**"
+=== "__:ember: **Failure Modes**__"
 
     | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
     | :---------- | :--------------- | :-------------- | :-------------- |

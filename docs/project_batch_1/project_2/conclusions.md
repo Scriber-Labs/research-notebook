@@ -1,6 +1,6 @@
 # Conclusions
 
-!!! favucib "__Figure Analysis Overview__"
+!!! eigenote "__Figure Analysis Overview__"
 
     1. Figures 2, 3, 4, and 5 all together suggest accurate recovery of low-energy spectral information does not necessarily require accurate recovery of the underlying potential.
 
