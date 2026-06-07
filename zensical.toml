@@ -45,19 +45,12 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
 # Read more: https://zensical.org/docs/setup/navigation/
  nav = [
    { "🏘️ Home" = "index.md" },
-   {  "💠 My Widgets" = [
-       { ":eigenote: Overview" = "widgets/index.md" },
-       { "Periodic Table" = "widgets/periodic-table.md" },
-       { "Solid Angle<br/>Visualizer" = "widgets/solid-angle-visualizer.md" }
-   ]},
+
    { "🌀 Kuramoto Benchmark Data" = [
        { ":eigenote: Overview" = "kuramoto-benchmark/index.md" },
        { "Mathematical Foundations" = "kuramoto-benchmark/mathematical-foundations.md" },
        { "Numerical Methods" = "kuramoto-benchmark/numerical-methods.md" },
        { "Implementation" = "kuramoto-benchmark/source-code.md" }
-   ]},
-   { "🐦‍🔥 PCA Partition Panel" = [
-       { "Overview" = "partition-pca/index.md" }
    ]},
    { "⚙️ PIML Projects" = [
        { "Overview " = "project_batch_1/index.md" },
@@ -74,6 +67,14 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
           { "Figure Analysis" = "project_batch_1/project_2/figure-analysis.md" },
           { "Conclusions" = "project_batch_1/project_2/conclusions.md"}
        ]},
+   ]},
+   { "🐦‍🔥 PCA Partition Panel" = [
+       { "Overview" = "partition-pca/index.md" }
+   ]},
+   {  "💠 My Widgets" = [
+     { ":eigenote: Overview" = "widgets/index.md" },
+     { "Periodic Table" = "widgets/periodic-table.md" },
+     { "Solid Angle<br/>Visualizer" = "widgets/solid-angle-visualizer.md" }
    ]},
    { "🔖 References" = "references/references.md" },
    { "📖 Guides" = [

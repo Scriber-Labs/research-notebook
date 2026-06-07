@@ -1,19 +1,24 @@
 # Computational Methods for Kuramoto Benchmark
 
-## 🎗️ Numerical Discretization: Taylor Series Expansion
-We can numerically solve $\dot{\theta}_i(t)=f(\theta, t)$ using a Taylor series expansion to approximate the solution at $t + \Delta t$:
+## Numerical Discretization: Taylor Series Expansion
 
-$$ \theta_i(t+\Delta t) = \theta_i(t) + \dot{\theta}_i(t) \, \Delta t + \frac{1}{2}\ddot{\theta}_i(t) \, \Delta t^2 + \dots \, .$$
+!!! recall "🎗️ **Recall**"
 
-<div class="grid cards" markdown>
+    We can numerically solve $\dot{\theta}_i(t)=f(\theta, t)$ using a Taylor series expansion to approximate the solution at $t + \Delta t$:
 
-- 🟢 __Euler's Method__
+    $$ \theta_i(t+\Delta t) = \theta_i(t) + \dot{\theta}_i(t) \, \Delta t + \frac{1}{2}\ddot{\theta}_i(t) \, \Delta t^2 + \dots \, .$$
 
-    Only retains the first-order term $\mathcal{O}(\Delta t)$.
 
-- 🔴 __Runge-Kutta Methods__
 
-    Approximates higher-order terms (HOTs) via evaluation of $f$ at multiple grid points within the interval $[t, t+\Delta t] without requiring explicit HOTs.
+<div class="grid" markdown>
+
+🟢 __Euler's Method__ Only retains the first-order term $\mathcal{O}(\Delta t)$.
+{ .card }
+
+
+🔴 __Runge-Kutta Methods__ Approximates higher-order terms (HOTs) via evaluation of $f$ at multiple grid points within the interval $[t, t+\Delta t] without requiring explicit HOTs.
+{ .card }
+
 
 </div>
 

@@ -1,6 +1,7 @@
 # Figure Analysis (Windows)
 
 ## Figure 1 - Training Curves
+---
 
 ![training_curves.png](figure_files/training_curves.png)
 
@@ -27,7 +28,7 @@
 
 
 ## Sanity Checks
-
+---
 
 ### Figure 2 - $V_\theta$ vs. $V(x)$
 
@@ -269,7 +270,7 @@
         | :---------- | :--------------- |:-------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------|
         | ✔️ | Identity deviation | Large off-diagonals | Largest off-diagonal $\approx 3\times 10^{-3} \Rightarrow$ within tolerance $\therefore$ pass. |
 
-### Figure 13
+### Figure 13 - $|\langle \mathbf{e}_n | v_n \rangle|$
 
 ![pod_temporal_cross_overlap.png](figure_files/pod_temporal_cross_overlap.png)
 

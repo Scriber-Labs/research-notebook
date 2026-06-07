@@ -1,5 +1,8 @@
 # 🎭 Setting the Stage
+
+
 ## 🔰 Overview
+
 - The PIML learns $N=3$ orthonormalized eigenfunctions $\hat{\psi}_n^\theta$ where $n=\{0, 1, ..., N-1\}$. 
 - Eigenvalues $E_n^\theta$ are predicted for the energy eigenvalues. These are constrained to be ordered $E_0 < E_1 < E_2$.
 - The neural network architecture $V_\theta : \mathbb{R} \rightarrow \mathbb{R}$ approximates the unknown potential $V_\theta(x)$.
