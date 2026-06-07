@@ -560,7 +560,7 @@
 
 .md-typeset table:not([class]) td {
   padding: 0.8rem 1rem;
-  border-bottom: 1px solid var(--ptg-glass-border-light, rgba(168, 85, 247, 0.1));
+  border-bottom: 1px solid var(--ptg-glass-border);
 }
 
 .md-typeset table:not([class]) tr:last-child td {
@@ -1769,5 +1769,43 @@ img.twemoji[title=":ember:"] {
 .mermaid-container svg {
   max-width: 100%;
   height: auto;
+}
+
+/* 🖼️ Image Framing and Sizing */
+.md-typeset img {
+  border: 1px solid var(--ptg-glass-border);
+  border-radius: var(--ptg-radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: border-color var(--ptg-transition-normal), box-shadow var(--ptg-transition-normal);
+  background: var(--ptg-glass-bg);
+  padding: 4px;
+}
+
+.md-typeset img:hover {
+  border-color: var(--ptg-glass-border-hover);
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.2);
+}
+
+/* Decrease the size of large images */
+.md-typeset img.image-small {
+  max-width: 350px;
+  width: 100%;
+  display: block;
+  margin: 1rem 0;
+}
+
+.md-typeset img.image-medium {
+  max-width: 600px;
+  width: 100%;
+  display: block;
+  margin: 1rem 0;
+}
+
+/* Ensure twemoji icons aren't framed */
+.md-typeset img.twemoji {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
 }
 

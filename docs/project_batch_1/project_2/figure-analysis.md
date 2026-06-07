@@ -1,8 +1,8 @@
 # Figure Analysis (Windows)
-
-## Figure 1 - Training Curves
 ---
 
+## Figure 1 - Training Curves
+    
 ![training_curves.png](figure_files/training_curves.png)
 
 !!! eigenote "**Figure 1 Analysis**"
@@ -147,7 +147,7 @@
     
 ### Figure 7 - Overlap matrix $\langle \hat{\psi}_m^\theta | \hat{\psi}_n^\theta \rangle $
 
-![overlap_heatmap.png](figure_files/overlap_heatmap.png)
+![overlap_heatmap.png](figure_files/overlap_heatmap.png){: .image-medium}
 
 !!! eigenote "Figure 7 Analysis"
 
@@ -189,7 +189,7 @@
 
 ### Figure 9 - Overlap matrix $\langle u_k | \hat{\psi}_n^\theta \rangle$
 
-![cross_overlap_heatmap.png](figure_files/cross_overlap_heatmap.png)
+![cross_overlap_heatmap.png](figure_files/cross_overlap_heatmap.png){: .image-medium}
 
 !!! eigenote "Figure 9 Analysis"
 
@@ -210,7 +210,7 @@
 
 ### Figure 10 - Overlap matrix $\langle u_k | \hat{\psi}_n \rangle$ 
 
-![pod_eigen_alignment.png](figure_files/pod_eigen_alignment.png)
+![pod_eigen_alignment.png](figure_files/pod_eigen_alignment.png){: .image-medium}
 
 !!! eigenote "Figure 10 Analysis"
 
@@ -232,7 +232,7 @@
 
 ### Figure 11 - Temporal Modes
 
-![pod_temporal_modes.png](figure_files/pod_temporal_modes.png)
+![pod_temporal_modes.png](figure_files/pod_temporal_modes.png){ .image-medium }
 
 !!! eigenote "Figure 11 Analysis"
 
@@ -252,7 +252,7 @@
 
 ### Figure 12 - Overlap Matrix $\langle v_m | v_n \rangle$
 
-![pod_temporal_overlap.png](figure_files/pod_temporal_overlap.png)
+![pod_temporal_overlap.png](figure_files/pod_temporal_overlap.png){: .image-medium}
 
 !!! eigenote "Figure 12 Analysis"
 
@@ -272,7 +272,7 @@
 
 ### Figure 13 - Overlap Matrix $|\langle \mathbf{e}_n | v_n \rangle|$
 
-![pod_temporal_cross_overlap.png](figure_files/pod_temporal_cross_overlap.png)
+![pod_temporal_cross_overlap.png](figure_files/pod_temporal_cross_overlap.png){: .image-medium}
 
 !!! eigenote "Figure 13 Analysis"
 
