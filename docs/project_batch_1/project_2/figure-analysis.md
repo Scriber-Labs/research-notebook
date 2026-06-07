@@ -5,73 +5,103 @@
 
 !!! note "🏡 **Take-Home Message**"
 
-    The model successfully minimizes the total loss by balancing data fidelity with physical consistency (TISE) and smoothness constraints.
+    The optimizer exhibits three distinct regime transitions before settling on a stable plateau.
 
 
 !!! note "🔑 **Key Insights**"
 
-    - Insight 1
-    - Insight 2
+    1. **Spike 1 ($\approx$ 0-50 epochs)** - Expected transient while the network adjusts from random initial weights.
+    2. **Spike 2 ($\approx$ 800 epochs)** - Discovery of a higher-curvature potential: smoothness and total loss spike, physics and data terms rise only moderately.
+    3. **Spike 3 ($\approx$ 2000 epoochs)** - Order-of-magnitude jump in the smootheness term propagates into the physics loss; a new plateau follows with lower smothness fidelity, but improved data fit.
 
 !!! fail "❌ **Failure Modes**"
 
-    - High final loss: Optimization stalled in a local minimum.
-    - Oscillation: Unbalanced loss weights causing the optimizer to swing back and forth between physics and data.
+    | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
+    | :---------- | :--------------- | :-------------- | :-------------- |
+    | ❌ | High final loss | Optimizer stalls in a local minimum. | Total loss remains greater than 1e-1 at epoch 6000. |
+    | ✔️ | Oscillation avoided | Unbalanced loss weights can cause loss terms to oscillate. | Curves converge monotonically after Spike 3. |
+    | ❌ | Physics collapse | Data loss decreases, while TISE residual increases. | Indicates operator inconsistency. |
+    | ❌ | Over-regularization | Smoothness term dominates, spectrum becomes innacurate. | Post-Spike 3 plateau shows $\lambda_\text{smooth}$ is much greater than others. | 
+
 
 ## Figure 2
 ![learned_potential.png](figure_files/learned_potential.png)
 
 !!! note "🏡 **Take-Home Message**"
 
-    The learned potential reproduces localized confinement structure and spectral consistency within regions supported by the learned eigenfunctions. However, the sigmoidal / piecewise-flat shape of $V_\theta(x)$ deviating substantially from expected quadratic shape of  the ground-truth harmonic potential.
+    The learned potential $V_\theta(x)$ (sigmoidal) differs markedly from the harmonic ground truth $V(x)=\tfrac12 x^2$.
 
 !!! note "🔑 **Key Insights**"
 
-    - Local structure is more identifiable than global structure.
-    - The inverse Schrödinger problem remains fundamentally non-unique.
-    - Constraint strength depends on wavefunction support.
-    - Smoothness regularization stabilizes the inverse problem but biases geometry.
+    1. Central regions of the learned eigenfunctions (Fig. 3) and densities (Fig. 5) match the ground truth far better than the tails.
+    2. The model learns only the portion of $H_\theta$ required to reproduce high-probability regions, exposing the inverse problem's under-determinism.
 
 !!! fail "❌ **Failure Modes**"
 
-    - Spectrally consistent but geometrically incorrect operators.
-    - Boundary under-constraint.
+    | **Verdict** | **Failure Mode**              | **Description**                                                                          | **Explanation**                                                    |
+    |:------------|:------------------------------|:-----------------------------------------------------------------------------------------|:-------------------------------------------------------------------|
+    | ❌           | Gemoetric mismatch       | Learned $V_\theta$ shape incompatible with true quadratic.                               | Central well too narrow; tails saturate at $V_\theta \approx \pm 12 $. |
+    | ❌           | Boundary under-constraint | Sparse data at $x \in (-\infty, -4.5] \cup [4.5, \infty)$ allows the potential to drift. | Grey dashed domain limits show no training points beyond. |
+
 
 ## Figure 3
 ![learned_wavefunctions.png](figure_files/learned_wavefunctions.png)
 
 !!! note "🏡 **Take-Home Message**"
 
-    
+    Learned eigenfunctions $\psi_n^\theta(x)$ capture the nodal pattern but diverge in low-amplitude tail regions.
 
 !!! note "🔑 **Key Insights**"
 
-    - 
+    1. **Phase matching** - Correct nodal count confirms energy ordering.
+    2. **Central accuracy** - Highest fidelity occurs where $|\psi_n|^2$ is largest.
+    3. **Tail divergence** - For $x \in (-4.5, -2] \cup [2, 4.5)$, the learned curves overshoot, reflecting data scarcity.
 
 !!! fail "❌ **Failure Modes**"
 
-    - 
+    | **Verdict** | **Failure Mode** | **Description** | **Explanation**                            |
+    | :---------- | :--------------- | :-------------- |:-------------------------------------------|
+    | ❌ | Nodal mis-count | Extra nodes appear beyond $x \approx \pm 3$) | Indicates spectral leakage.                |
+    | ✔️ | Sign / parity flip | Unaligned solutions may invert parity | Sign aligned; parity matches ground truth. |
+    | ❌ | Spurious oscillations | High-frequency ripples in tails from weak $V_\theta$ smoothness. | Visible beyond $x\approx \pm 4$.           |
+
 
 ## Figure 4
 ![learned_energies.png](figure_files/learned_energies.png)
 
 !!! note "🏡 **Take-Home Message**"
 
-    The learned energy spectrum $\{E_n^\theta\}$ matches the observed values and closely follows the theoretical $E_n = n+0.5$ spacing of the 1-D harmonic osicllator.
+    Learned energies $E_n^\theta$ follow the harmonic spectrum $E_n=n+\tfrac12$ and match observations within 5 %.
 
 !!! note "🔑 **Key Insights**"
 
-    - $\mathcal{L}_\text{ordered}$ prevents state-swapping during early training.
-    - The model generalizes from noisy energy observations to a consistent spectrum.
+    1. Correct ordering suggests $\mathcal{L}_\text{order}$ is effective.
+    2. Spectrum remains stable despite 2 % Gaussian noise in training data.
 
 !!! fail "❌ **Failure Modes**"
 
-    - **Collapsed spectrum:** All energies converging to the same value. This was prevented by $\mathcal{L}_\text{ordered}$.
-    - **DC Offset:** Learned energies shifted by a constant, coupled with a vertical shift in $V_\theta(x)$. 
-        - [ ] Need to write a more detailed analysis of the DC offset failure mode, including potential remedies and implications for the model's performance.
+    | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
+    | :---------- | :--------------- | :-------------- | :-------------- |
+    | ❌ | Spectral fit, wrong operator | Energies match, but $V_\theta$ deviates (see Fig. 2) |
 
 ## Figure 5
 ![density.png](figure_files/density.png)
+
+!!! note "🏡 **Take-Home Message**"
+
+    Learned densities, $\rho_n^\theta = |\psi_n^\theta|^2$ agree with 2 %-noise observations.
+
+!!! note "🔑 **Key Insights**"
+
+    1. **Noise filtering** - PINN acts as a physics-informed smoother.
+    2. **Data dominance** - Good density fit persists even with incorrect potential (Fig. 2), confirming $\mathcal{L}_\text{data}$ is easy to minimize.
+
+!!! fail "❌ **Failure Modes**"
+
+    | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
+    | :---------- | :--------------- | :-------------- | :-------------- |
+    | ✔️ | Peak flattening | Excessive $\lambda_\text{smooth}$ can lower peaks | Peaks are preserved $\Rightarrow$ smoothing is well-tuned. |
+    | ✔️ | Mode merging | Energy mis-ordering can collapse multiple states onto one density. |
 
 ## Figure 6
 ![pod_singular_values.png](figure_files/pod_singular_values.png)

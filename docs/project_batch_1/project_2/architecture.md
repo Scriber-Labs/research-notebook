@@ -388,6 +388,4 @@ linkStyle default stroke:#8b949e,stroke-width:1.5px,opacity:0.8
 ```
 !!! note "__Notes on POD Analysis__"
 
-    - SVD modes are sign-ambiguous and Euclidean-normalized. Thus, physical POD modes $u_k$ require trapezoidal $w_i\Delta x$ scaling. The modes evaluatedi in the analysis are denoted $u_k^\text{phys}$.
-    - POD phase / sign alignment occurs after POD scaling.
     - [ ] Write the mathematical expression for the inner product with the subscripts used.
