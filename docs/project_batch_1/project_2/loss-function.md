@@ -4,28 +4,28 @@
 
 !!! eigenote "Four Loss Terms"
 
-    1. **Schrödinger residual (physics loss)**
+    1. **💙 Schrödinger residual (physics loss)**
 
         $$ \mathcal{L}_\text{TISE} = \sum_{n=1}^N { \left| \hat{H}_\theta\psi_\theta^n(x)-E_n^\theta\psi_n^\theta(x) \right|^2 } $$
 
-    2. **Scale-aware smoothness**
+    2. **💚 Scale-aware smoothness**
 
         $$ \mathcal{L}_\text{smooth} = \Big< \frac{\left\| V_\theta''(x)  \right\|^2}{\epsilon+\left\| V_\theta(x) \right\|^2}  \Big> $$
 
-    3. **Data mismatch (noisy observables)**
+    3. **🩷 Data mismatch (noisy observables)**
    
         $$ \mathcal{L}_\text{data} = \frac{1}N\sum_{n=1}^N{\big(E_n^\theta-E_n^\text{obs}\big)^2} + \frac{1}N\sum_{n=1}^{N}\frac{1}{M}\sum_{j=1}^M{\Big( |\psi_{n}^\theta(x_j)|^2-\rho_n^\text{obs}(x_j)\Big) ^2} $$
 
-    4. **Energy ordering**
+    4. **🩵 Energy ordering**
    
         $$ \mathcal{L}_\text{order} = \frac{1}{N-1}\sum_{n=0}^{N-2}{\bigg[\max{\big(0, E_n^\theta - E_{n+1}^\theta\big)} \bigg]^2} $$
 
-!!! eigenote "Total Loss"
+!!! eigenote "💜 **Total Loss**"
 
     $$ \mathcal{L}_\text{tot} = \lambda_1 \mathcal{L}_\text{TISE} + \lambda_2 \mathcal{L}_\text{smooth} + \lambda_3 \mathcal{L}_\text{data} + \lambda_4 \mathcal{L}_\text{order} $$
 
 ## Description of Terms
-??? tip "Loss Table"
+!!! eigenote "Loss Table"
     
     | **Loss Term**                              | **Soft vs. Hard** | **Classification** | **Notes** | 🐍 **Script** | 🐍 **Relevant Definitions**   |
     |--------------------------------------------|-------------------| ------------------ | --------- |---------------|-------------------------------|
