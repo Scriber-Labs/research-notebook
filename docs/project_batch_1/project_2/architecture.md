@@ -1,8 +1,6 @@
-# Project 2 Architecture 🏗️
+# Project 2 Architecture
 
-
-
-## Overall Architecture $\mathbf{\Psi}$
+## Overall Architecture
 ```mermaid
 %%====================================================================
 %%  Final Architecture Diagram
@@ -127,17 +125,16 @@ direction LR
                 psi2_raw
             end
 
-            MLP1("MLP for V"):::MLP --> potential
-            MLP2("MLP for ψ0"):::MLP --> psi0_raw
-            MLP3("MLP for ψ1"):::MLP --> psi1_raw
-            MLP4("MLP for ψ2"):::MLP --> psi2_raw
+            MLP1("MLP"):::MLP --> potential
+            MLP2("MLP"):::MLP --> psi0_raw
+            MLP3("MLP"):::MLP --> psi1_raw
+            MLP4("MLP"):::MLP --> psi2_raw
         end
     end
 
     subgraph normalization["3️⃣ Wavefunction Orthonormalization"]
     direction LR
         apply_trapezoidal_weights["$$\int|\psi_n^\theta |^2\, dx=\sum{w_i |\psi_n^\theta |^2 \Delta x}$$"]:::norm
-        norm1("Per-state L2 Normalize"):::norm
         gs["Sequential Gram-Schmidt<br/>and re-normalize"]:::norm
         eps("$$+\epsilon \ \text{stability}$$"):::norm
     end
@@ -151,13 +148,12 @@ direction LR
 
     subgraph finite_difference["3️⃣ Finite difference"]
     direction LR
-        eigenfunction_stencil("$$\frac{\partial^2}{\partial x^2}\hat{\psi}_n^\theta$$ via stencil"):::stencil
-        potential_stencil("$$\frac{\partial^2}{\partial x^2}V_\theta(x)$$ via stencil"):::stencil
+        eigenfunction_stencil("$$\frac{\partial^2}{dx^2}\hat{\psi}_n^\theta$$ via stencil"):::stencil
+        potential_stencil("$$V_\theta''(x)$$ via stencil"):::stencil
     end
 
     subgraph residual["4️⃣ Physics Residual"]
     direction LR
-        H("$$\bar{H}_\theta\hat{\psi}_n^\theta$$"):::physics
         R["$$R_n(x)=-\frac{1}{2}\frac{\partial^2}{\partial x^2}\hat{\psi}_n^\theta + V_\theta\hat{\psi}_n^\theta-E_n^\theta\hat{\psi}_n^\theta $$"]:::physics
     end
 
@@ -179,15 +175,13 @@ direction LR
     deltax --> apply_trapezoidal_weights
     trap --> apply_trapezoidal_weights
 
-    psi0_raw --> norm1
-    psi1_raw --> norm1
-    psi2_raw --> norm1
+    psi0_raw --> gs
+    psi1_raw --> gs
+    psi2_raw --> gs
 
-    apply_trapezoidal_weights --> norm1
+    apply_trapezoidal_weights --> gs
 
-    eps --> norm1
-
-    norm1 --> gs
+    eps --> gs
 
     gs --> psi0
     gs --> psi1
@@ -197,20 +191,19 @@ direction LR
     psi0 --> eigenfunction_stencil
     psi1 --> eigenfunction_stencil
     psi2 --> eigenfunction_stencil
-
-    psi0 --> H
-    psi1 --> H
-    psi2 --> H
+    
+    psi0 --> R
+    psi1 --> R
+    psi2 --> R
 
     potential --> potential_stencil
 
-    eigenfunction_stencil --> H
-    potential --> H
-    E0 --> H
-    E1 --> H
-    E2 --> H
+    eigenfunction_stencil --> R
+    potential --> R
+    E0 --> R
+    E1 --> R
+    E2 --> R
 
-    H --> R
     R --> Lp
 
     E0 --> Ln
@@ -250,8 +243,8 @@ end
 direction TB
 
     sanity["sanity checks"]:::diag
-
-    pod["7️⃣ POD analysis"]
+    
+    pod["7️⃣ POD analysis"]:::pod
 
     sanity ~~~ pod
 
@@ -395,6 +388,6 @@ linkStyle default stroke:#8b949e,stroke-width:1.5px,opacity:0.8
 ```
 !!! note "__Notes on POD Analysis__"
 
-    - SVD modes are sign-ambiguous and Euclidean-normalized. Thus, physical POD modes $u_k$ require trapezoidal $w_i\Delta x$ scaling. The modes evaluated in the analysis are denoted $u_k^\text{phys}$.
+    - SVD modes are sign-ambiguous and Euclidean-normalized. Thus, physical POD modes $u_k$ require trapezoidal $w_i\Delta x$ scaling. The modes evaluatedi in the analysis are denoted $u_k^\text{phys}$.
     - POD phase / sign alignment occurs after POD scaling.
     - [ ] Write the mathematical expression for the inner product with the subscripts used.
