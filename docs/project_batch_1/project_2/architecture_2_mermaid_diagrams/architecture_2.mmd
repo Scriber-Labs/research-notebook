@@ -1,14 +1,13 @@
+%%====================================================================
+%%  Final Architecture Diagram
+%%====================================================================
 %%{ init: {
-        "theme": "dark",
+        "theme": "base",
         "themeVariables": {
             "background": "#0D1117",
             "lineColor": "#14B5FF",
-            "textColor": "whitesmoke",
-            "primaryTextColor": "whitesmoke",
-            "secondaryTextColor": "whitesmoke",
-            "tertiaryTextColor": "whitesmoke",
             "fontFamily": "'Aclonica', sans-serif",
-            "borderRadius": "14"
+            "borderRadius": "16"
         },
         "themeCSS": ".nodeLabel, .edgeLabel, .cluster-label, .cluster-label text, .label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: whitesmoke !important; fill: whitesmoke !important; -webkit-text-fill-color: whitesmoke !important; }",
         "flowchart": {
@@ -17,48 +16,55 @@
             "rankSpacing": 50
         },
         "handDrawn": true
-    } }%%
+    }
+}%%
+%%====================================================================
 
-flowchart TB
+flowchart LR
 
 %% ==============================
-%% COLOR CLASSES (your palette)
+%% COLOR CLASSES & STYLES
 %% ==============================
-style step0 fill:#301934,stroke:#5D3FD3,stroke-width:2px,color:#ffffff,rx:12,ry:12;
-style PIML fill:#161b22,stroke:#14b5ff,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
-style synthetic_data fill:#040b30,stroke:#5D3FD3,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
-style domain_norm fill:#1E0026,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12,stroke-dasharray:6 6,rx:12,ry:12;
-style trap fill:#023e00,stroke:#57ffbc,color:#ffffff,stroke-width:2px,rx:12,ry:12;
-style observed_data fill:#142034,stroke:#5280ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+
+%% Styles from architecture_darker_background_no_normalization.mmd
+style step0 fill:#0f0a25,stroke:#7c5cff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
+style PIML fill:#0b1020,stroke:#5a6cff,stroke-width:4px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
+style potential fill:#11163a,stroke:#5f88ff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
 style neural_ansatz fill:#0d1a30,stroke:#3b82ff,stroke-width:3px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
+style energy_init fill:#1a233a,stroke:#3b82ff,stroke-width:2px,color:#ffffff,stroke-dasharray:5 5,rx:12px,ry:12px;
 style energy_eigenvalues fill:#071320,stroke:#3b9eff,stroke-width:4px,color:#ffffff,stroke-dasharray: 6 6, rx:12px, ry:12px;
-style PINN fill:#103b4f,stroke:#00E8FF,stroke-width:2px,color:#ffffff,stroke-dasharray: 6 6,rx:12,ry:12;
+style PINN fill:#131130,stroke:#7259ff,stroke-width:3px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
+style loss fill:#0a0f1a,stroke:#22d3ee,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
+
+classDef MLP fill:#2a185c,stroke:#9a66ff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
+classDef eigenfunctions fill:#153a55,stroke:#4ec9ff,stroke-width:2px,color:#ffffff,rx:12px, ry:12px;
+classDef energy fill:#0d2238,stroke:#3b9eff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
+classDef loss_terms fill:#0b1326,stroke:#22d3ee,stroke-width:2px,color:#ffffff,rx:12px, ry:12px;
+
+%% Styles from architecture_normalization.mmd (for normalization elements)
+style synthetic_data fill:#010209,stroke:#5D3FD3,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
+style domain_norm fill:#0c0010,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12,stroke-dasharray:6 6,rx:12,ry:12;
+style observed_data fill:#142034,stroke:#5280ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+style trap fill:#023e00,stroke:#57ffbc,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 style raw_wavefunctions fill:#224261,stroke:#14B5FF,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
 style normalization fill:#0f2335,stroke:#4b54ff,color:#ffffff,stroke-width:2px, stroke-dasharray: 6 6, rx:12, ry:12;
 style normalized_wavefunctions fill:#112230,color:#ffffff,stroke:#4b54ff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
 style finite_difference fill:#011e00,stroke:#31ff48,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
 style residual fill:#0d2827,stroke:#03E8BD,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12px,ry:12px;
 style diagnostics fill:#161b22,stroke:#f68080,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
-style pod fill:#2f1616,stroke:#FEB538,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
-style loss fill:#0a0f1a,stroke:#22d3ee,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12px, ry:12px;
-style potential fill:#11163a,stroke:#5f88ff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
-
+style pod fill:#0d1b2a,stroke:#00d4ff,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
 
 classDef spatial_stencil fill:#2a0037,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12;
-classDef MLP fill:#2a185c,stroke:#9a66ff,stroke-width:4px,color:#ffffff,rx:12px,ry:12px;
 classDef norm fill:#1e2b4e,stroke:#4b54ff,color:#ffffff,stroke-width:2px,rx:12px,ry:12px;
-classDef energy fill:#0d2238,stroke:#3b9eff,stroke-width:4px,color:#ffffff,rx:12px, ry:12px;
 classDef psiraw fill:#224261,stroke:#14B5FF,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 classDef psinorm fill:#224261,stroke:#4b54ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
 classDef stencil fill:#023e00,stroke:#31ff48,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 classDef physics fill:#1c5654,stroke:#03E8BD,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 classDef opt fill:#2a071b,stroke:#FE28A2,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
-classDef diag fill:#723c30,stroke:#FEB538,color:#ffffff,stroke-width:2px,rx:12,ry:12;
-classDef loss_terms fill:#15274d,stroke:#22d3ee,stroke-width:2px,color:#ffffff,rx:12px, ry:12px;
-
+classDef diag fill:#2f1616,stroke:#FEB538,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
 
 %% ==============================
-%% NODES (smaller circles)
+%% NODES (Information from architecture_2_normalization_and_diagnostics.mmd)
 %% ==============================
 potential(("$$V_\theta$$"))
 
@@ -66,9 +72,9 @@ psi0_raw(("$$\psi_0^\theta$$")):::psiraw
 psi1_raw(("$$\psi_1^\theta$$")):::psiraw
 psi2_raw(("$$\psi_2^\theta$$")):::psiraw
 
-psi0(("$$\psi_0^\theta$$")):::psinorm
-psi1(("$$\psi_1^\theta$$")):::psinorm
-psi2(("$$\psi_2^\theta$$")):::psinorm
+psi0(("$$\hat{\psi}_0^\theta$$")):::psinorm
+psi1(("$$\hat{\psi}_1^\theta$$")):::psinorm
+psi2(("$$\hat{\psi}_2^\theta$$")):::psinorm
 
 E0(("$$E_0^\theta$$")):::energy
 E1(("$$E_1^\theta$$")):::energy
@@ -81,27 +87,32 @@ subgraph PIML["PIML Framework"]
 direction LR
 
     subgraph synthetic_data["1️⃣ Synthetic Data"]
-    direction TB
-        subgraph domain_norm["Uniform Grid / Trapezoidal Rule"]
+    direction LR
+        subgraph domain_norm["Uniform Grid"]
             spatial_grid["$$x\in[-5, 5]$$"]:::spatial_stencil
             deltax["$$\Delta x$$"]:::spatial_stencil
-            trap["Trapezoidal weights"]
         end
 
-
+        trap["Trapezoidal weights"]
         observed_data("$$\rho_n^\text{obs}, \ E_n^\text{obs}$$")
     end
 
     subgraph neural_ansatz["2️⃣ Neural Ansatz"]
     direction TB
+        subgraph energy_init["Linear Energy Initialization (linspace 0.5...n-0.5)"]
+            E_init["$$E_n = \text{linspace}(0.5, n-0.5, n)$$"]:::energy
+        end
+
         subgraph energy_eigenvalues["Energy Eigenvalues"]
             E0
             E1
             E2
         end
 
+        E_init --> energy_eigenvalues
+
         subgraph PINN["2️⃣ PINN"]
-        direction TB
+        direction LR
 
             subgraph raw_wavefunctions["Raw Learned Wavefunctions"]
             direction TB
@@ -117,13 +128,13 @@ direction LR
         end
     end
 
-    subgraph normalization["3️⃣ Wavefunction Normalization / Orthonormalization"]
-    direction LR
+    subgraph normalization["3️⃣A Orthonormalization"]
+    direction TB
         apply_trapezoidal_weights["$$\int|\psi_n^\theta |^2\, dx=\sum{w_i |\psi_n^\theta |^2 \Delta x}$$"]:::norm
-        norm1("Per-state L2 Normalize"):::norm
-        gs["Sequential Gram-Schmidt<br/>and re-normalize"]:::norm
+        gs["GS+re-norm"]:::norm
         eps("$$+\epsilon \ \text{stability}$$"):::norm
     end
+    click gs "callback" "Gram-Schmidt Orthonormalization"
 
     subgraph normalized_wavefunctions["Normalized Wavefunctions"]
     direction TB
@@ -132,19 +143,20 @@ direction LR
         psi2
     end
 
-    subgraph finite_difference["3️⃣ Finite difference"]
-    direction LR
-        eigenfunction_stencil("$$\frac{\partial^2}{dx^2}\psi_n^\theta$$ via"):::stencil
-        potential_stencil("$$V_\theta''(x)$$"):::stencil
+    subgraph finite_difference["3️⃣B Finite difference"]
+    direction TB
+        eigenfunction_stencil("$$\frac{\partial^2}{dx^2}\hat{\psi}_n^\theta$$ via stencil"):::stencil
+        potential_stencil("$$V_\theta''(x)$$ via stencil"):::stencil
     end
 
     subgraph residual["4️⃣ Physics Residual"]
     direction LR
-        H("Ĥψ"):::physics
-        R("$$R_n(x)=-\frac{1}{2}\frac{\partial^2}{\partial x^2}\psi_n^\theta + V_\theta\psi_n^\theta-E_n^\theta\psi_n^\theta $$"):::physics
+        R["$$R_n(x)=-\frac{1}{2}\frac{\partial^2}{\partial x^2}\hat{\psi}_n^\theta + V_\theta\hat{\psi}_n^\theta-E_n^\theta\hat{\psi}_n^\theta $$"]:::physics
+        style R stroke-width:5px;
     end
 
     subgraph loss["5️⃣  Total Loss"]
+    direction TB
         Lp["Physics loss"]:::loss_terms
         Ln["Order"]:::loss_terms
         Ls["Smoothness"]:::loss_terms
@@ -162,15 +174,13 @@ direction LR
     deltax --> apply_trapezoidal_weights
     trap --> apply_trapezoidal_weights
 
-    psi0_raw --> norm1
-    psi1_raw --> norm1
-    psi2_raw --> norm1
+    psi0_raw --> gs
+    psi1_raw --> gs
+    psi2_raw --> gs
 
-    apply_trapezoidal_weights --> norm1
+    apply_trapezoidal_weights --> gs
 
-    eps --> norm1
-
-    norm1 --> gs
+    eps --> gs
 
     gs --> psi0
     gs --> psi1
@@ -181,15 +191,19 @@ direction LR
     psi1 --> eigenfunction_stencil
     psi2 --> eigenfunction_stencil
 
+    psi0 --> R
+    psi1 --> R
+    psi2 --> R
+
     potential --> potential_stencil
 
-    eigenfunction_stencil --> H
-    potential --> H
-    E0 --> H
-    E1 --> H
-    E2 --> H
+    eigenfunction_stencil --> R
+    potential --> R
+    E0 --> R
+    E1 --> R
+    E2 --> R
 
-    H --> R --> Lp
+    R --> Lp
 
     E0 --> Ln
     E1 --> Ln
@@ -197,6 +211,9 @@ direction LR
 
     potential --> Ls
     potential_stencil --> Ls
+    psi0 --> Ls
+    psi1 --> Ls
+    psi2 --> Ls
 
     psi0 --> Ld
     psi1 --> Ld
@@ -211,45 +228,47 @@ direction LR
     Ls --> opt
     Ld --> opt
 
-    opt --> MLP1
-    opt --> MLP2
-    opt --> MLP3
-    opt --> MLP4
-    opt --> E0
-    opt --> E1
-    opt --> E2
+    opt ==> MLP1
+    opt ==> MLP2
+    opt ==> MLP3
+    opt ==> MLP4
+    opt ==> E0
+    opt ==> E1
+    opt ==> E2
+
+end
+
+%% ==============================
+%% DIAGNOSTICS
+%% ==============================
+subgraph diagnostics["7️⃣ Diagnostics"]
+direction TB
+
+    sanity["sanity checks"]:::diag
+
+    pod["7️⃣ POD analysis"]:::pod
+
+    sanity ~~~ pod
+
+    deltax --> pod
+    trap --> pod
 
 end
 
 step0["0️⃣ Define TISE dynamics"] --> PIML
 
-%% ==============================
-%% DIAGNOSTICS
-%% ==============================
-subgraph diagnostics["Diagnostics"]
+psi0 --> sanity
+psi0 --> pod
+psi1 --> sanity
+psi1 --> pod
+psi2 --> sanity
+psi2 --> pod
 
-    sanity["sanity checks"]:::diag
+E0 --> sanity
+E1 --> sanity
+E2 --> sanity
 
-    subgraph pod["7️⃣ POD"]
-        SVD("SVD"):::diag
-        spec("σ"):::diag
-        modes("U"):::diag
-
-        SVD --> spec
-        SVD --> modes
-    end
-
-end
-
-psi0 --> diagnostics
-psi1 --> diagnostics
-psi2 --> diagnostics
-
-E0 --> diagnostics
-E1 --> diagnostics
-E2 --> diagnostics
-
-potential --> diagnostics
+potential --> sanity
 
 %% ==============================
 %% LINKS (subtle)

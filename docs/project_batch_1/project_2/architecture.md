@@ -1,5 +1,6 @@
 # Project 2 Architecture
 
+
 ## Overall Architecture
 ```mermaid
 %%====================================================================
@@ -24,7 +25,7 @@
 }%%
 %%====================================================================
 
-flowchart TB
+flowchart LR
 
 %% ==============================
 %% COLOR CLASSES & STYLES
@@ -46,8 +47,8 @@ classDef energy fill:#0d2238,stroke:#3b9eff,stroke-width:4px,color:#ffffff,rx:12
 classDef loss_terms fill:#0b1326,stroke:#22d3ee,stroke-width:2px,color:#ffffff,rx:12px, ry:12px;
 
 %% Styles from architecture_normalization.mmd (for normalization elements)
-style synthetic_data fill:#040b30,stroke:#5D3FD3,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
-style domain_norm fill:#1E0026,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12,stroke-dasharray:6 6,rx:12,ry:12;
+style synthetic_data fill:#010209,stroke:#5D3FD3,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
+style domain_norm fill:#0c0010,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12,stroke-dasharray:6 6,rx:12,ry:12;
 style observed_data fill:#142034,stroke:#5280ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
 style trap fill:#023e00,stroke:#57ffbc,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 style raw_wavefunctions fill:#224261,stroke:#14B5FF,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
@@ -56,7 +57,7 @@ style normalized_wavefunctions fill:#112230,color:#ffffff,stroke:#4b54ff,stroke-
 style finite_difference fill:#011e00,stroke:#31ff48,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
 style residual fill:#0d2827,stroke:#03E8BD,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:12px,ry:12px;
 style diagnostics fill:#161b22,stroke:#f68080,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
-style pod fill:#2f1616,stroke:#FEB538,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
+style pod fill:#0d1b2a,stroke:#00d4ff,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
 
 classDef spatial_stencil fill:#2a0037,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12;
 classDef norm fill:#1e2b4e,stroke:#4b54ff,color:#ffffff,stroke-width:2px,rx:12px,ry:12px;
@@ -65,7 +66,7 @@ classDef psinorm fill:#224261,stroke:#4b54ff,stroke-width:2px,color:#ffffff,rx:1
 classDef stencil fill:#023e00,stroke:#31ff48,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 classDef physics fill:#1c5654,stroke:#03E8BD,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 classDef opt fill:#2a071b,stroke:#FE28A2,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
-classDef diag fill:#723c30,stroke:#FEB538,color:#ffffff,stroke-width:2px,rx:12,ry:12;
+classDef diag fill:#2f1616,stroke:#FEB538,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
 
 %% ==============================
 %% NODES (Information from architecture_2_normalization_and_diagnostics.mmd)
@@ -91,19 +92,19 @@ subgraph PIML["PIML Framework"]
 direction LR
 
     subgraph synthetic_data["1️⃣ Synthetic Data"]
-    direction TB
-        subgraph domain_norm["Uniform Grid / Trapezoidal Rule"]
+    direction LR
+        subgraph domain_norm["Uniform Grid"]
             spatial_grid["$$x\in[-5, 5]$$"]:::spatial_stencil
             deltax["$$\Delta x$$"]:::spatial_stencil
-            trap["Trapezoidal weights"]
         end
-
+        
+        trap["Trapezoidal weights"]
         observed_data("$$\rho_n^\text{obs}, \ E_n^\text{obs}$$")
     end
 
     subgraph neural_ansatz["2️⃣ Neural Ansatz"]
     direction TB
-        subgraph energy_init["Linear Energy Initialization"]
+        subgraph energy_init["Linear Energy Initialization (linspace 0.5...n-0.5)"]
             E_init["$$E_n = \text{linspace}(0.5, n-0.5, n)$$"]:::energy
         end
 
@@ -116,7 +117,7 @@ direction LR
         E_init --> energy_eigenvalues
 
         subgraph PINN["2️⃣ PINN"]
-        direction TB
+        direction LR
 
             subgraph raw_wavefunctions["Raw Learned Wavefunctions"]
             direction TB
@@ -132,12 +133,13 @@ direction LR
         end
     end
 
-    subgraph normalization["3️⃣ Wavefunction Orthonormalization"]
-    direction LR
+    subgraph normalization["3️⃣A Orthonormalization"]
+    direction TB
         apply_trapezoidal_weights["$$\int|\psi_n^\theta |^2\, dx=\sum{w_i |\psi_n^\theta |^2 \Delta x}$$"]:::norm
-        gs["Sequential Gram-Schmidt<br/>and re-normalize"]:::norm
+        gs["GS+re-norm"]:::norm
         eps("$$+\epsilon \ \text{stability}$$"):::norm
     end
+    click gs "callback" "Gram-Schmidt Orthonormalization"
 
     subgraph normalized_wavefunctions["Normalized Wavefunctions"]
     direction TB
@@ -146,8 +148,8 @@ direction LR
         psi2
     end
 
-    subgraph finite_difference["3️⃣ Finite difference"]
-    direction LR
+    subgraph finite_difference["3️⃣B Finite difference"]
+    direction TB
         eigenfunction_stencil("$$\frac{\partial^2}{dx^2}\hat{\psi}_n^\theta$$ via stencil"):::stencil
         potential_stencil("$$V_\theta''(x)$$ via stencil"):::stencil
     end
@@ -155,9 +157,11 @@ direction LR
     subgraph residual["4️⃣ Physics Residual"]
     direction LR
         R["$$R_n(x)=-\frac{1}{2}\frac{\partial^2}{\partial x^2}\hat{\psi}_n^\theta + V_\theta\hat{\psi}_n^\theta-E_n^\theta\hat{\psi}_n^\theta $$"]:::physics
+        style R stroke-width:5px;
     end
 
     subgraph loss["5️⃣  Total Loss"]
+    direction TB
         Lp["Physics loss"]:::loss_terms
         Ln["Order"]:::loss_terms
         Ls["Smoothness"]:::loss_terms
@@ -212,6 +216,9 @@ direction LR
 
     potential --> Ls
     potential_stencil --> Ls
+    psi0 --> Ls
+    psi1 --> Ls
+    psi2 --> Ls
 
     psi0 --> Ld
     psi1 --> Ld
@@ -226,20 +233,20 @@ direction LR
     Ls --> opt
     Ld --> opt
 
-    opt --> MLP1
-    opt --> MLP2
-    opt --> MLP3
-    opt --> MLP4
-    opt --> E0
-    opt --> E1
-    opt --> E2
+    opt ==> MLP1
+    opt ==> MLP2
+    opt ==> MLP3
+    opt ==> MLP4
+    opt ==> E0
+    opt ==> E1
+    opt ==> E2
 
 end
 
 %% ==============================
 %% DIAGNOSTICS
 %% ==============================
-    subgraph diagnostics["Diagnostics"]
+subgraph diagnostics["7️⃣ Diagnostics"]
 direction TB
 
     sanity["sanity checks"]:::diag
@@ -274,6 +281,21 @@ potential --> sanity
 linkStyle default stroke:#8b949e,stroke-width:1.5px,opacity:0.8
 ```
 
+!!! eigenote "End-to-end PIML pipeline"
+
+    The diagram illustrates the physics-informed machine learning pipeline for solving the Schrödinger equation implemented in project 2. 
+
+    | Step #     | Descripition     |
+    | :--------- | :--------------- |
+    | 0️⃣ | Definition of the physical system (TISE).|
+    | 1️⃣ | Synthetic data generation on a uniform grid with trapezoidal weights. |
+    | 2️⃣ | Neual ansatz comprising MLPs for the potential $V_\theta$ and wavefunctions $\psi_n^\theta$, alongside trainable energy eigenvalues $E_n^\theta$. |
+    | 3️⃣ | Wavefunction orthonormalization via Gram-Schmidt and finite-difference derivative calculation. |
+    | 4️⃣ | Calculation of the physics residual $R_n(x)$ where the governing law is enforced. |
+    | 5️⃣ | Total loss computation combining physics, smoothness, and data mismatch terms. |
+    | 6️⃣ | Optimization via Adam, feeding back into the trainable parameters (thick arrows). |
+    | 7️⃣ | Parallel analysis including sanity checks and POD. |
+
 ## POD Diagnostics
 ```mermaid
 %%{ init: {
@@ -302,12 +324,11 @@ flowchart TB
 %% ==============================
 %% COLOR CLASSES (your palette)
 %% ==============================
-style synthetic_data fill:#040b30,stroke:#5D3FD3,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
-style domain_norm fill:#1E0026,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12,stroke-dasharray:6 6;
-style normalized_wavefunctions fill:#112230,color:#ffffff,stroke:#4b54ff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
-style pod fill:#2f1616,stroke:#FEB538,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
+style synthetic_data fill:#010209,stroke:#5D3FD3,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
+style domain_norm fill:#0c0010,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12,stroke-dasharray:6 6,rx:12,ry:12;
+style pod fill:#0d1b2a,stroke:#00d4ff,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
 style trap fill:#023e00,stroke:#57ffbc,color:#ffffff,stroke-width:2px,rx:12,ry:12;
-
+style normalized_wavefunctions fill:#112230,color:#ffffff,stroke:#4b54ff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
 style PsiMat fill:#112230,stroke:#4b54ff,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 style trap_pod fill:#1f4e5f,stroke:#f78166,stroke-width:2px,color:#ffffff,rx:12,ry:12;
 
@@ -315,7 +336,7 @@ classDef spatial_modes fill:#5c2c6d,stroke:#ff66b3,stroke-width:2px,color:#fffff
 classDef temporal_modes fill:#1a6b63,stroke:#00f5db,stroke-width:2px,color:#ffffff,rx:12,ry:12;
 classDef spatial_stencil fill:#2a0037,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12;
 classDef psinorm fill:#224261,stroke:#4b54ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
-classDef diag fill:#723c30,stroke:#FEB538,color:#ffffff,stroke-width:2px,rx:12,ry:12;
+classDef diag fill:#1b263b,stroke:#00d4ff,color:#ffffff,stroke-width:2px,rx:12,ry:12;
 
 %% ==============================
 %% INPUT BLOCKS
@@ -325,8 +346,8 @@ subgraph synthetic_data["1️⃣ Synthetic Data"]
     subgraph domain_norm["Uniform Grid / Trapezoidal Rule"]
         spatial_grid["$$x\in[-5, 5]$$"]:::spatial_stencil
         deltax["$$\Delta x$$"]:::spatial_stencil
-        trap["Trapezoidal weights"]
     end
+    trap["Trapezoidal weights"]
 end
 
 subgraph normalized_wavefunctions["Normalized Wavefunctions"]
@@ -336,24 +357,26 @@ subgraph normalized_wavefunctions["Normalized Wavefunctions"]
     psi2(("$$\hat{\psi}_2^\theta$$")):::psinorm
 end
 
+
 %% ==============================
 %% POD DIAGRAM
 %% ==============================
-subgraph pod["7️⃣ POD"]
-    PsiMat("Snapshot matrix<br/>$$\mathbf{\Psi}^\theta=[\hat{\psi}_0^\theta,\hat{\psi}_1^\theta,\hat{\psi}_2^\theta]$$")
-    trap_pod("Trapezoidal spatial-measure weighting<br/>$$\mathbf{\Psi}_w^\theta(x_i)=\sqrt{w_i\Delta x}\,\mathbf{\Psi}^\theta(x_i)$$")
-    SVD("Euclidean SVD<br/>$$\mathbf{\Psi}_w^\theta=U\Sigma V^T$$"):::diag
-    podscale("POD physical scaling<br/>$$u_k^\mathrm{phys}(x_i)=u_k(x_i)/\sqrt{w_i\Delta x}$$"):::spatial_modes
-    align("Physical POD phase / sign alignment"):::spatial_modes
-    spec("Singular values<br/>$$\sigma_k$$"):::diag
-    modes("Physical POD modes<br/>$$u_k^\mathrm{phys}$$"):::spatial_modes
-    overlaps("POD overlaps<br/>$$\langle u_k^\mathrm{phys},\hat{\psi}_n^\theta\rangle_{\Delta x,w}$$"):::spatial_modes
-    temporal_scaling("Temporal mode extraction from SVD<br/>$$\mathbf{V}^T$$"):::temporal_modes
-    temporal_alignment("Phase/sign alignment<br/>(Inherited from $$\mathbf{U}$$)"):::temporal_modes
-    temporal_mode_heatmap("Temporal POD modes<br/>(Composition Matrix $$V_{nk}$$)"):::temporal_modes
-    temporal_overlap("POD temporal overlap<br/>$$\langle v_m, v_n \rangle = \delta_{mn}$$"):::temporal_modes
-    cross_temporal("Temporal cross-overlap<br/>$$|\langle \mathbf{e}_n, v_k \rangle|$$"):::temporal_modes
+subgraph pod["7️⃣ POD Diagnostics"]
+    PsiMat("Snapshot matrix construction<br/>$$\mathbf{\Psi}^\theta = [\hat{\psi}_0, \hat{\psi}_1, \hat{\psi}_2]$$")
+    trap_pod("L² spatial weighting<br/>$$\mathbf{\Psi}_w = \sqrt{w \Delta x} \odot \mathbf{\Psi}$$")
+    SVD("Euclidean SVD<br/>$$\mathbf{\Psi}_w = U \Sigma V^T$$"):::diag
+    podscale("Physical mode recovery<br/>$$u_k^\text{phys} = u_k / \sqrt{w \Delta x}$$"):::spatial_modes
+    align("Phase/Sign Alignment<br/>(Relative to Ground Truth)"):::spatial_modes
+    spec("Singular values spectrum $$\sigma_k$$"):::diag
+    modes("Physical Basis Functions $$u_k^\text{phys}$$"):::spatial_modes
+    overlaps("Overlap matrix $$C_{kn}$$<br/>$$\langle u_k^\text{phys}, \hat{\psi}_n \rangle$$"):::spatial_modes
+    temporal_scaling("Temporal mode projection from $$V^T$$"):::temporal_modes
+    temporal_alignment("Global U(1) Phase Alignment"):::temporal_modes
+    temporal_mode_heatmap("Composition Heatmap (Matrix $$V_{nk}$$)"):::temporal_modes
+    temporal_overlap("Orthogonality Check $$\langle v_m, v_n \rangle = \delta_{mn}$$"):::temporal_modes
+    cross_temporal("Cross-State Projections $$|\langle \mathbf{e}_n, v_k \rangle|$$"):::temporal_modes
     
+    %% POD Companion Panels
     PsiMat --> trap_pod
     trap_pod --> SVD
     SVD --> spec
@@ -361,7 +384,6 @@ subgraph pod["7️⃣ POD"]
     SVD --> temporal_scaling
     podscale --> align
     align --> modes
-    align --> overlaps
     PsiMat --> overlaps
 
     temporal_scaling --> temporal_alignment
@@ -386,6 +408,17 @@ trap --> trap_pod
 %% ==============================
 linkStyle default stroke:#8b949e,stroke-width:1.5px,opacity:0.8
 ```
-!!! note "__Notes on POD Analysis__"
 
-    - [ ] Write the mathematical expression for the inner product with the subscripts used.
+!!! eigenote "Proper Orthogonal Decomposition (POD) Diagnostics"
+  
+    This figure details the weighted POD pipeline used for diagnostic verification.
+ 
+    - **Snapshot Matrix**: Formed from normalized wavefunctions.
+    - **Weighting**: Scaling with $\sqrt{w_i \Delta x}$ ensures the L2 inner product maps to a Euclidean dot product for SVD.
+    - **Physical Scaling**: Rescaling SVD modes back to physical space.
+    - **Overlaps**: Calculation of the overlap matrix $C_{kn}$ to assess mode orthogonality and alignment with learned states.
+
+
+    - [x] Write the mathematical expression for the inner product with the subscripts used. 
+
+    $$\langle f, g \rangle_{\Delta x, w} = \sum_i w_i f(x_i)^* g(x_i) \Delta x$$

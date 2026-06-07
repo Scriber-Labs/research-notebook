@@ -1,0 +1,109 @@
+%%{ init: {
+        "theme": "dark",
+        "themeVariables": {
+            "background": "#0D1117",
+            "lineColor": "#14B5FF",
+            "textColor": "whitesmoke",
+            "primaryTextColor": "whitesmoke",
+            "secondaryTextColor": "whitesmoke",
+            "tertiaryTextColor": "whitesmoke",
+            "fontFamily": "'Aclonica', sans-serif",
+            "borderRadius": "14"
+        },
+        "themeCSS": ".nodeLabel, .edgeLabel, .cluster-label, .cluster-label text, .label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: whitesmoke !important; fill: whitesmoke !important; -webkit-text-fill-color: whitesmoke !important; }",
+        "flowchart": {
+            "curve": "basis",
+            "nodeSpacing": 30,
+            "rankSpacing": 50
+        },
+        "handDrawn": true
+    } }%%
+
+flowchart TB
+
+%% ==============================
+%% COLOR CLASSES (your palette)
+%% ==============================
+style synthetic_data fill:#010209,stroke:#5D3FD3,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:12,ry:12;
+style domain_norm fill:#0c0010,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12,stroke-dasharray:6 6,rx:12,ry:12;
+style pod fill:#0d1b2a,stroke:#00d4ff,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:12px,ry:12px;
+style trap fill:#023e00,stroke:#57ffbc,color:#ffffff,stroke-width:2px,rx:12,ry:12;
+style normalized_wavefunctions fill:#112230,color:#ffffff,stroke:#4b54ff,stroke-width:2px,stroke-dasharray:6 6,rx:12,ry:12;
+style PsiMat fill:#112230,stroke:#4b54ff,color:#ffffff,stroke-width:2px,rx:12,ry:12;
+style trap_pod fill:#1f4e5f,stroke:#f78166,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+
+classDef spatial_modes fill:#5c2c6d,stroke:#ff66b3,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+classDef temporal_modes fill:#1a6b63,stroke:#00f5db,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+classDef spatial_stencil fill:#2a0037,stroke:#750071,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+classDef psinorm fill:#224261,stroke:#4b54ff,stroke-width:2px,color:#ffffff,rx:12,ry:12;
+classDef diag fill:#1b263b,stroke:#00d4ff,color:#ffffff,stroke-width:2px,rx:12,ry:12;
+
+%% ==============================
+%% INPUT BLOCKS
+%% ==============================
+subgraph synthetic_data["1️⃣ Synthetic Data"]
+    direction TB
+    subgraph domain_norm["Uniform Grid / Trapezoidal Rule"]
+        spatial_grid["$$x\in[-5, 5]$$"]:::spatial_stencil
+        deltax["$$\Delta x$$"]:::spatial_stencil
+    end
+    trap["Trapezoidal weights"]
+end
+
+subgraph normalized_wavefunctions["Normalized Wavefunctions"]
+    direction TB
+    psi0(("$$\hat{\psi}_0^\theta$$")):::psinorm
+    psi1(("$$\hat{\psi}_1^\theta$$")):::psinorm
+    psi2(("$$\hat{\psi}_2^\theta$$")):::psinorm
+end
+
+
+%% ==============================
+%% POD DIAGRAM
+%% ==============================
+subgraph pod["7️⃣ POD Diagnostics"]
+    PsiMat("Snapshot matrix construction<br/>$$\mathbf{\Psi}^\theta = [\hat{\psi}_0, \hat{\psi}_1, \hat{\psi}_2]$$")
+    trap_pod("L² spatial weighting<br/>$$\mathbf{\Psi}_w = \sqrt{w \Delta x} \odot \mathbf{\Psi}$$")
+    SVD("Euclidean SVD<br/>$$\mathbf{\Psi}_w = U \Sigma V^T$$"):::diag
+    podscale("Physical mode recovery<br/>$$u_k^\text{phys} = u_k / \sqrt{w \Delta x}$$"):::spatial_modes
+    align("Phase/Sign Alignment<br/>(Relative to Ground Truth)"):::spatial_modes
+    spec("Singular values spectrum $$\sigma_k$$"):::diag
+    modes("Physical Basis Functions $$u_k^\text{phys}$$"):::spatial_modes
+    overlaps("Overlap matrix $$C_{kn}$$<br/>$$\langle u_k^\text{phys}, \hat{\psi}_n \rangle$$"):::spatial_modes
+    temporal_scaling("Temporal mode projection from $$V^T$$"):::temporal_modes
+    temporal_alignment("Global U(1) Phase Alignment"):::temporal_modes
+    temporal_mode_heatmap("Composition Heatmap (Matrix $$V_{nk}$$)"):::temporal_modes
+    temporal_overlap("Orthogonality Check $$\langle v_m, v_n \rangle = \delta_{mn}$$"):::temporal_modes
+    cross_temporal("Cross-State Projections $$|\langle \mathbf{e}_n, v_k \rangle|$$"):::temporal_modes
+
+    %% POD Companion Panels
+    PsiMat --> trap_pod
+    trap_pod --> SVD
+    SVD --> spec
+    SVD --> podscale
+    SVD --> temporal_scaling
+    podscale --> align
+    align --> modes
+    PsiMat --> overlaps
+
+    temporal_scaling --> temporal_alignment
+    temporal_alignment --> temporal_mode_heatmap
+    temporal_alignment --> temporal_overlap
+    temporal_alignment --> cross_temporal
+    PsiMat --> cross_temporal
+end
+
+%% ==============================
+%% CONNECTIONS
+%% ==============================
+psi0 --> PsiMat
+psi1 --> PsiMat
+psi2 --> PsiMat
+
+deltax --> trap_pod
+trap --> trap_pod
+
+%% ==============================
+%% LINKS (subtle)
+%% ==============================
+linkStyle default stroke:#8b949e,stroke-width:1.5px,opacity:0.8

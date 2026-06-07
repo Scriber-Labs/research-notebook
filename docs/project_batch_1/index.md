@@ -15,7 +15,7 @@
 
     [🔗 Overview](project_2/index.md)
 
-    [🎭 Background](project_2/terminology_and_tables.md)
+    [🎭 Background](project_2/background.md)
 
     [📊 Figure analysis](project_2/figure-analysis.md)
 
