@@ -270,7 +270,7 @@
         | :---------- | :--------------- |:-------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------|
         | ✔️ | Identity deviation | Large off-diagonals | Largest off-diagonal $\approx 3\times 10^{-3} \Rightarrow$ within tolerance $\therefore$ pass. |
 
-### Figure 13 - $|\langle \mathbf{e}_n | v_n \rangle|$
+### Figure 13 - Overlap Matrix $|\langle \mathbf{e}_n | v_n \rangle|$
 
 ![pod_temporal_cross_overlap.png](figure_files/pod_temporal_cross_overlap.png)
 
