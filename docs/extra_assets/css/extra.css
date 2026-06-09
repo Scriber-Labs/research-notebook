@@ -278,6 +278,20 @@
   transition: transform var(--ptg-transition-normal), box-shadow var(--ptg-transition-normal);
 }
 
+.md-typeset .admonition.info,
+.md-typeset .admonition.todo,
+.md-typeset .admonition.abstract {
+  background-image: var(--ptg-admonition-info-bg);
+  border-color: rgba(20, 181, 255, 0.4);
+  border-left-color: var(--ptg-color-primary);
+}
+
+.md-typeset .admonition.note {
+  border-left-color: var(--ptg-color-primary);   /* ← overwritten */
+  background-image: var(--ptg-admonition-note-bg);
+  border-color: rgba(121, 82, 245, 0.4);          /* ← wins, resets all sides */
+}
+
 .md-typeset .admonition:hover,
 .md-typeset details:hover {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
@@ -1181,7 +1195,9 @@ body {
 .md-typeset .mermaid .MathJax,
 .md-typeset .mermaid .MathJax *,
 .md-typeset .mermaid mjx-container,
-.md-typeset .mermaid mjx-container * {
+.md-typeset .mermaid mjx-container *,
+.md-typeset .mermaid .katex,
+.md-typeset .mermaid .katex * {
   color: whitesmoke !important;
   fill: whitesmoke !important;
   -webkit-text-fill-color: whitesmoke !important;
@@ -1626,186 +1642,3 @@ body {
 .md-typeset details.admonition.eigenote > summary::before,
 .md-typeset .admonition.ember > .admonition-title::before,
 .md-typeset details.admonition.ember > summary::before {
-  content: "";
-  position: absolute;
-  left: 0.6rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1.5rem;
-  height: 1.5rem;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  /* Override Material theme's mask-image icon system */
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-  background-color: transparent !important;
-}
-
-.md-typeset .admonition.favicon > .admonition-title::before,
-.md-typeset details.admonition.favicon > summary::before {
-  content: "";
-  position: absolute;
-  left: 0.75rem; /* Adjusted for smaller size */
-  top: calc(50% + 1px); /* Nudge icon down slightly */
-  transform: translateY(-50%);
-  width: 1.2rem; /* Smaller size */
-  height: 1.2rem; /* Smaller size */
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  /* Override Material theme's mask-image icon system */
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-  background-color: transparent !important;
-}
-
-.md-typeset .admonition.eigenote > .admonition-title::before,
-.md-typeset details.admonition.eigenote > summary::before {
-  background-image: url('../images/eigenote.png');
-  animation: eigenote-pulse 3s infinite ease-in-out;
-  border-radius: 50%;
-}
-
-.md-typeset .admonition.favicon > .admonition-title::before,
-.md-typeset details.admonition.favicon > summary::before {
-  background-image: url('../images/favicon.png');
-  animation: favicon-pulse 3s infinite ease-in-out;
-  background-size: 75%;
-  border-radius: 80%;
-}
-
-.md-typeset .admonition.ember > .admonition-title::before,
-.md-typeset details.admonition.ember > summary::before {
-  background-image: url('../images/ember.png');
-  background-color: transparent !important;
-  border-radius: 50%;
-  animation: ember-pulse 3s infinite ease-in-out;
-  backdrop-filter: none;
-  border: none;
-}
-
-/* Hide the default icon for custom admonitions */
-.md-typeset .admonition.eigenote > .admonition-title::after,
-.md-typeset details.admonition.eigenote > summary::after,
-.md-typeset .admonition.favicon > .admonition-title::after,
-.md-typeset details.admonition.favicon > summary::after,
-.md-typeset .admonition.ember > .admonition-title::after,
-.md-typeset details.admonition.ember > summary::after {
-  display: none !important;
-}
-
-.md-typeset .admonition.eigenote > .admonition-title img.twemoji,
-.md-typeset details.admonition.eigenote > summary img.twemoji,
-.md-typeset .admonition.favicon > .admonition-title img.twemoji,
-.md-typeset details.admonition.favicon > summary img.twemoji,
-.md-typeset .admonition.ember > .admonition-title img.twemoji,
-.md-typeset details.admonition.ember > summary img.twemoji {
-  display: none !important;
-}
-
-/* Custom Icons from :emoji: syntax */
-span.twemoji[title=":eigenote:"],
-span.twemoji[title=":favicon:"],
-span.twemoji[title=":ember:"] {
-  display: inline-block;
-  width: 1.25em;
-  height: 1.25em;
-  vertical-align: middle;
-}
-
-span.twemoji[title=":eigenote:"] {
-  background-image: url('../images/eigenote.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-span.twemoji[title=":favicon:"] {
-  background-image: url('../images/favicon.png');
-  background-size: 80%;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 100%;
-}
-
-span.twemoji[title=":ember:"] {
-  background-image: url('../images/ember.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-span.twemoji[title=":eigenote:"] svg,
-span.twemoji[title=":favicon:"] svg,
-span.twemoji[title=":ember:"] svg {
-  display: none !important;
-}
-
-img.twemoji[title=":eigenote:"],
-img.twemoji[title=":favicon:"],
-img.twemoji[title=":ember:"] {
-  display: inline-block;
-  width: 1.25em;
-  height: 1.25em;
-  vertical-align: middle;
-}
-
-img.twemoji[title=":eigenote:"] {
-  content: url('../images/eigenote.png');
-}
-
-img.twemoji[title=":favicon:"] {
-  content: url('../images/favicon.png');
-}
-
-
-img.twemoji[title=":ember:"] {
-  content: url('../images/ember.png');
-}
-
-
-/* Mermaid diagram container */
-.mermaid-container svg {
-  max-width: 100%;
-  height: auto;
-}
-
-/* 🖼️ Image Framing and Sizing */
-.md-typeset img {
-  border: 1px solid var(--ptg-glass-border);
-  border-radius: var(--ptg-radius-md);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: border-color var(--ptg-transition-normal), box-shadow var(--ptg-transition-normal);
-  background: var(--ptg-glass-bg);
-  padding: 4px;
-}
-
-.md-typeset img:hover {
-  border-color: var(--ptg-glass-border-hover);
-  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.2);
-}
-
-/* Decrease the size of large images */
-.md-typeset img.image-small {
-  max-width: 350px;
-  width: 100%;
-  display: block;
-  margin: 1rem 0;
-}
-
-.md-typeset img.image-medium {
-  max-width: 600px;
-  width: 100%;
-  display: block;
-  margin: 1rem 0;
-}
-
-/* Ensure twemoji icons aren't framed */
-.md-typeset img.twemoji {
-  border: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  padding: 0 !important;
-}
-
