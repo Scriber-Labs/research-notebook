@@ -45,7 +45,7 @@
            
             ??? eigenote "__Answers__"
 
-                - A1: In this architecture, curvature (the second derivative) is an 'operator' that is a major component of the kinetic term of the TISE. Thus, it is a primary feature that should be captured while training. 
+                - A1: In this architecture, curvature (the second derivative) is an 'operator' that is a major component of the kinetic term of the TISE. Thus, the optimizer is highly sensitive to curvature since both the Schrödinger residual and the smoothness regularizer loss terms depend on second derivatives.  
                 - A2: Based on the results in the figure analysis, nodal points corresponded with regions of the trained curves that were more aligned with the ground truth wavefunctions. This agrees with the intuition that nodes are more robust to potential fluctuations.
 
     === "__:ember: Lessons Learned__"

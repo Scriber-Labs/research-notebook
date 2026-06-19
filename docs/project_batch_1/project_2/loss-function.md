@@ -1,12 +1,21 @@
 # Loss Function
 
+The Project 2 loss function is a linear combination of terms that encode:
+- physical consistency
+- observational agreement
+- regularization
+- spectral ordering.
+
+This is designed so that the weighted summation of these terms defines a family of admissible Hamiltonians to be explored by the model during training. As such, the recovered potential should be interpreted as a single plausible solution within a constrained inverse-problem solution space rather than a unique reconstruction of the ground-truth operator.
+
+
 ## Mathematical Formulation
 
 !!! eigenote "Four Loss Terms"
 
     1. **💙 Schrödinger residual (physics loss)**
 
-        $$ \mathcal{L}_\text{TISE} = \sum_{n=1}^N { \left| \hat{H}_\theta\psi_n^\theta(x)-E_n^\theta\psi_n^\theta(x) \right|^2 } $$
+        $$ \mathcal{L}_\text{TISE} = \sum_{n=1}^N { \left| \hat{H}_\theta\hat{\psi}_n^\theta(x)-E_n^\theta \hat{\psi}_n^\theta(x) \right|^2 } $$
 
     2. **💚 Scale-aware smoothness**
 
@@ -14,7 +23,7 @@
 
     3. **🩷 Data mismatch (noisy observables)**
    
-        $$ \mathcal{L}_\text{data} = \frac{1}N\sum_{n=1}^N{\big(E_n^\theta-E_n^\text{obs}\big)^2} + \frac{1}N\sum_{n=1}^{N}\frac{1}{M}\sum_{j=1}^M{\Big( |\psi_{n}^\theta(x_j)|^2-\rho_n^\text{obs}(x_j)\Big) ^2} $$
+        $$ \mathcal{L}_\text{data} = \frac{1}N\sum_{n=1}^N{\big(E_n^\theta-E_n^\text{obs}\big)^2} + \frac{1}N\sum_{n=1}^{N}\frac{1}{M}\sum_{j=1}^M{\Big( |\hat{\psi}_{n}^\theta(x_j)|^2-\rho_n^\text{obs}(x_j)\Big) ^2} $$
 
     4. **🩵 Energy ordering**
    
