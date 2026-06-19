@@ -1,7 +1,5 @@
 # Kuramoto Benchmark Suite
 
-[🔗 GitHub Repo](https://github.com/Scriber-Labs/kuramoto-benchmark-suite){ .md-button .md-button--primary }
-
 A reproducible benchmark and dataset generator for coupled oscillator systems based on the Kuramoto model.
 
 🥅 **Goal:** Supply a **high-quality synthetic dynamical dataset** that can be used downstream in:
@@ -11,3 +9,7 @@ A reproducible benchmark and dataset generator for coupled oscillator systems ba
 - Synchronization and phase-transition studies
 
 ---
+
+<div class="center-button" markdown>
+[🔗 GitHub Repo](https://github.com/Scriber-Labs/kuramoto-benchmark-suite){ .md-button .md-button--primary }
+</div>

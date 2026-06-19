@@ -6,7 +6,7 @@
 
     1. **💙 Schrödinger residual (physics loss)**
 
-        $$ \mathcal{L}_\text{TISE} = \sum_{n=1}^N { \left| \hat{H}_\theta\psi_\theta^n(x)-E_n^\theta\psi_n^\theta(x) \right|^2 } $$
+        $$ \mathcal{L}_\text{TISE} = \sum_{n=1}^N { \left| \hat{H}_\theta\psi_n^\theta(x)-E_n^\theta\psi_n^\theta(x) \right|^2 } $$
 
     2. **💚 Scale-aware smoothness**
 
@@ -33,5 +33,5 @@
     | 💚 2. **Scale-aware smoothness**              | Soft              | Regularizer / prior | Penalizes curvature in $V_\theta(x)$. Encourages smoother, physically plausible potentials and stabilizes the inverse problem. | `physics.py` | `potential_smoothness_loss()` |
     | 🩷 3. **Data mismatch (observables)**         | Soft              | Supervised data-fit loss | Matches learned energies and densities to noisy observed measurements. | `inverse.py` | `data_mismatch_loss()` |
     | 🩵 4. **Energy ordering**                     | Soft              | Ordering penalty / constraint | Encourages $E_0 < E_1 < \cdots$. Helps prevent state swapping and preserves consistent mode indexing. | `physics.py` | `energy_ordering_loss()` |
-    | 💜 **Total loss**                          | Soft              | Composite objective | Weighted sum of the active terms. Static scalar weights are used. | `train.py` | `train_step()` |
+    | 💜 **Total loss**                          | Soft                 | Composite objective | Weighted sum of the active terms. Static scalar weights are used. | `train.py` | `train_step()` |
 
