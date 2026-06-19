@@ -4,13 +4,13 @@
 
     === "🥅 Goal"
 
-        - Study which operator features remain identifiable under low-fidelity discretization, noisy observations, and constrained Hilbert-space geometry in the inverse Schrödinger problem.
+        - Study which structural featrues of an unknown Hamiltonian remain identifiable under low-fidelity discretization, noisy observations, and constrained Hilbert-space geometry in the inverse Schrödinger problem.
         - It is NOT to obtain a perfect reconstruction of the ground truth potential $V(x)$.
 
     === "🗝️ Key Points"
 
         - **Indirect supervision:** Project 2 architecture resembles a *coupled operator-eigenfunction learning system*.
-        - **Proper orthogonal decomposition (POD)** is used as a geometry-aware diagnostic tool for analyzing basis conditioning, variance structure, and mode coupling in the learned eigenstate manifold.
+        - **Proper orthogonal decomposition (POD)** is used as a geometry-aware diagnostic framework for analyzing basis conditioning, variance concentration, mode alignment, and ⁉️potential mode mixing⁉️ withinin the learned eigenstate manifold.
         
     === "5️⃣ 5 Brunton Steps"
 
@@ -22,18 +22,15 @@
         | 4. **Loss function**              | Composite loss with physics, smoothness, ordering, and data-consistency terms defined over a weighted discrete Hilbert-space geometry. | ✔️ |
         | 5. **Optimization**               | - Adam optimizer with a fixed learning rate. <br/> - Forward pass training loop that computes loss terms and uses backpropagation to update $V_\theta$ and $\psi_n^\theta$. | ❌⚠️ As in project 1, the optimizer is intentionally vanilla; the aim is to expose how the physics prior interacts with noisy data, not to chase maximal performance |
 
-   
-
-
     === "🌍 Global Design Choices"   
 
         - A central difference stencil is used to approximate the $\partial_{xx}$ operator.
-        - A sequential Gram-Schmidt orthogonalization process is employed during training to ensure that learned wavefunctions are orthogonal to eachother (a requirement of Hamiltonian eigenfunctions).
-        - Since the system is trained on a uniform grid, we implement the Trapezoidal Rule to discretize the continuous Hilbert-space inner product, providing a discrete approximation.
         - Proper orthogonal decomposition (POD) is treated as a diagnostic probe of learned basis geometry.
-        - Consistent use of the Trapezoidal Rule throughout the l2 inner product steps and POD weighting ensures consistency in normalization between the learned wavefunctions in the training loop and the POD analysis.
-        - In the training loop, orthonormalization (via Gram-Schmidt and l2 inner product with trapezoidal weighting) is performed before the loss function is calculated. This results in a learned Hamiltonian $H_\theta \hat{\psi}_n^\theta \approx E_n^\theta \hat{\psi}$ that is minimized by the physics residual. ✨
-        
+        - In the training loop, orthonormalization (via Gram-Schmidt and l2 inner product with trapezoidal weighting) is performed before the loss function is calculated. Consequently, the physics residual is evaluated using orthonormalized eigenfunctions, giving a learned Hamiltonian system $$H_\theta \hat{\psi}_n^\theta \approx E_n^\theta \hat{\psi}_n^\theta \, , $$ whose deviation from the eigenvalue equation is minimized during training. ✨
+            - Sequential Gram-Schmidt orthogonalization ensures learned orthogonal wavefunctions are orthgonal and consistent with the requirement that Hamiltonian eigenfunction be orthgonal.
+            - Since the system is trained on a uniform grid, we implement the Trapezoidal Rule to provide a discrete approximation of the continuous Hilbert-space inner product.
+            - Consistent use of the Trapezoidal Rule throughout the l2 inner product steps and POD weighting ensures consistency in normalization between the learned wavefunctions in the training loop and the POD analysis.
+
 
 
 ??? info "Conceptual Description of What the Model is Learning $\mathcal{L}$"
@@ -69,4 +66,4 @@
         
     In particular, the inverse mapping is fundamentally non-unique: multiple potentials may reproduce similar spectral measurements and probability-density observations.
         
-    Consequently, this project emphasizes interpretability and structural consistency rather than exact reconstruction fidelity.
+    In order to gain conceptual insight under the limitations of ill-posedness, the primary objective of Project 2 is not to exact reconstruction of the ground truth potential $V(x)$, but rather the identificaiton of operator structures that remain stable under limited information and measurement noise.

@@ -1,5 +1,11 @@
 # Project Batch 1: Low-Fidelity Physics Informed Machine Learning
 
+!!! eigenote "__Project Batch Overview__ "
+
+    **Project 1** asks whether a physics-informed machine learning architecture can be used to solve an inverse problem.
+    
+    **Project 2** builds on this by asking what information remains identifiable in the context of a deliberately imperfect inverse problem.
+
 <div class="grid cards" markdown>
 
 - :favicon: __Project 1 - Harmonic Oscillator__
@@ -14,12 +20,11 @@
     ---
 
     [🔗 Overview](project_2/index.md)
-
     [🎭 Background](project_2/background.md)
 
     [📊 Figure analysis](project_2/figure-analysis.md)
 
-    - [ ] Update architecture
+    - [x] Update architecture
     - [ ] Look into mode mixing
 
 </div>

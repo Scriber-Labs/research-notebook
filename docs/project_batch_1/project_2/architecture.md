@@ -1,5 +1,13 @@
 # Project 2 Architecture
 
+## Conceptual Overview
+
+Project 2 employs a coupled physics-informed architecture that jointly learns:
+$$
+V_\theta(x) \, , \qquad \psi_n^\theta(x) \, , \qquad E_n^\theta \,.
+$$
+
+This results in a model that behaves as a constrained operator-learning system whose goal is to identify physically consistent Hamiltonian structure rather than simply interpolate observed data.
 
 ## Overall Architecture
 
