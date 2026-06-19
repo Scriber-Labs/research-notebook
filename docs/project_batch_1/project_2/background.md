@@ -11,11 +11,11 @@ Project 2 investigates this setting for the 1-D time-independent Schrödinger eq
 - The neural network architecture $V_\theta : \mathbb{R} \rightarrow \mathbb{R}$ approximates the unknown potential $V_\theta(x)$.
 
 ## 📒 Core Terminology
+- **Identifiability**: The extent to which information contained in the observed densities and energies constrains the underlying learned potential.
+  - Perfect identifiabillity corresponds to unique recovery, while poor identifiability permits multiple distinct potentials to explain the same observations.
 - **Physics Residual**: Used in the loss function to ensure the learned wavefunctions and learned potential are physically consistent.
 - **1-D TISE (Time-Independent Schrödinger Equation)**: The physical constraint $ \hat{H}\psi_n = E_n\psi_n $ where $$ \hat{H}=-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+V(x)$$ is used to define the physics residual for the inverse problem.
 - **POD (Proper Orthogonal Decomposition)**: A data-driven method (equivalent to PCA) used to find the spatial features (modes) in the learned wavefunctions along which the variance in the data varies the most.
-- **Identifiability**: The extent to which information contained in the observed densities and energies constrains the underlying learned potential.
-  - Perfect identifiabillity corresponds to unique recovery, while poor identifiability permits multiple distinct potentials to explain the same observations.
 - **Mode Mixing**: A failure mode in which a learned basis state contains contributions from multiple physical eigenstates, reducing interpretability and obscuring state-to-state correspondence.
 
 ## 📊 Summary Tables: 
