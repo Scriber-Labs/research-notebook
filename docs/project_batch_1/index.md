@@ -21,10 +21,11 @@
 
     [🔗 Overview](project_2/index.md)
     [🎭 Background](project_2/background.md)
-
+    [🔵 Loss Function](project_2/loss-function.md)
+    [🏗️ Architecture](project_2/architecture.md)
     [📊 Figure analysis](project_2/figure-analysis.md)
+    [🏁 Conclusion](project_2/conclusions.md)
 
-    - [x] Update architecture
     - [ ] Look into mode mixing
 
 </div>
