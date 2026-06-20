@@ -25,7 +25,7 @@
     === "🌍 Global Design Choices"   
 
         ```mermaid
-        %%{ init: {
+            %%{ init: {
                 "theme": "base",
                 "themeVariables": {
                     "background": "#0D1117",
@@ -36,7 +36,7 @@
                     "secondaryColor": "#0070EB",
                     "tertiaryColor": "#0D1117",
                     "fontFamily": "'Aclonica', sans-serif",
-                    "fontSize": "16px",
+                    "fontSize": "24px",
                     "clusterBkg": "rgba(20, 181, 255, 0.02)",
                     "clusterBorder": "#14B5FF",
                     "edgeLabelBackground":"#0D1117",
@@ -45,7 +45,7 @@
                     "borderRadius": "16"
                 },
                 "themeCSS": ".node rect, .node circle, .node ellipse, .node polygon, .node path { stroke-width: 2.618px !important; filter: drop-shadow(0px 4px 6px rgba(0,0,0, 0.5)); } .node { filter: saturate(1.2) contrast(1.1); } .cluster rect { rx: 25.8; ry: 25.8; stroke-width: 1px; stroke-dasharray: 10,5; } .nodeLabel, .edgeLabel, .cluster-label, .label text, text { color: #F0F6FC !important; fill: #F0F6FC !important; font-weight: 300; } #PIML .cluster-label { fill: #00FFFF !important; font-size: 20px; } #PIML rect { stroke: #00E8FF; fill: rgba(0, 232, 255, 0.04); }",
-        
+                
                 "flowchart": {
                     "curve": "basis",
                     "useMaxWidth": true,
@@ -54,192 +54,48 @@
                     "nodeSpacing": 81
                 }
             }[]()
-        }%%
+            }%%
+                
+            flowchart LR
+            style A fill:#2a0037,stroke:#7952F5,stroke-width:4px,color:#FFF9D6,rx:16, ry:16;
+            %%style A fill:#2a071b,stroke:#FE28A2,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:16,ry:16;
+            style B fill:#142034,stroke:#5280ff,stroke-width:2px,color:#ffffff,rx:16,ry:16;
+            style C fill:#0d1a30,stroke:#3b82ff,stroke-width:3px,color:#ffffff,rx:16, ry:16;
+            style D fill:#0d2827,stroke:#03E8BD,stroke-width:2px,color:#ffffff,rx:16,ry:16;
+            style E fill:#0a0f1a,stroke:#22d3ee,stroke-width:2px,color:#ffffff,rx:16, ry:16;
+            style F fill:#0d1b2a,stroke:#00d4ff,color:#ffffff,stroke-width:2px,rx:16,ry:16;
+            style G fill:#1a1a1a,stroke:#ffcc00,stroke-width:3px,color:#ffffff,rx:16,ry:16;
         
-        flowchart TB
         
-        %% ==============================
-        %% COLOR CLASSES & STYLES
-        %% ==============================
-        %% Node colors preserved as requested, but with golden ratio radius (rx:16, ry:16)
-        style step0 fill:#FFF9D6,stroke:#7952F5,stroke-width:4px,color:#000000,rx:16, ry:16;
-        style PIML fill:#0b1020,stroke:#00FFFF,stroke-width:4px,color:#ffffff,stroke-dasharray:6 6,rx:16, ry:16;
-        style potential fill:#11163a,stroke:#5f88ff,stroke-width:4px,color:#ffffff,rx:16, ry:16;
-        style neural_ansatz fill:#0d1a30,stroke:#3b82ff,stroke-width:3px,color:#ffffff,stroke-dasharray:6 6,rx:16, ry:16;
-        style energy_init fill:#1a233a,stroke:#3b82ff,stroke-width:2px,color:#ffffff,stroke-dasharray:5 5,rx:16,ry:16;
-        style energy_eigenvalues fill:#071320,stroke:#3b9eff,stroke-width:4px,color:#ffffff,stroke-dasharray:6 6,rx:16,ry:16;
-        style PINN fill:#131130,stroke:#7259ff,stroke-width:3px,color:#ffffff,stroke-dasharray:6 6,rx:16, ry:16;
-        style loss fill:#0a0f1a,stroke:#22d3ee,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:16, ry:16;
-        
-        classDef MLP fill:#2a185c,stroke:#9a66ff,stroke-width:4px,color:#ffffff,rx:16, ry:16;
-        classDef eigenfunctions fill:#153a55,stroke:#4ec9ff,stroke-width:2px,color:#ffffff,rx:16, ry:16;
-        classDef energy fill:#0d2238,stroke:#3b9eff,stroke-width:4px,color:#ffffff,rx:16, ry:16;
-        classDef loss_terms fill:#0b1326,stroke:#22d3ee,stroke-width:2px,color:#ffffff,rx:16, ry:16;
-        
-        style synthetic_data fill:#010209,stroke:#5D3FD3,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:16,ry:16;
-        style domain_norm fill:#0c0010,stroke:#750071,stroke-width:2px,color:#ffffff,rx:16,ry:16,stroke-dasharray:6 6;
-        style observed_data fill:#142034,stroke:#5280ff,stroke-width:2px,color:#ffffff,rx:16,ry:16;
-        style trap fill:#023e00,stroke:#57ffbc,color:#ffffff,stroke-width:2px,rx:16,ry:16;
-        style raw_wavefunctions fill:#224261,stroke:#14B5FF,stroke-width:2px,stroke-dasharray:6 6,color:#ffffff,rx:16,ry:16;
-        style normalization fill:#0f2335,stroke:#4b54ff,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:16,ry:16;
-        style normalized_wavefunctions fill:#112230,color:#ffffff,stroke:#4b54ff,stroke-width:2px,stroke-dasharray:6 6,rx:16,ry:16;
-        style finite_difference fill:#011e00,stroke:#31ff48,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:16,ry:16;
-        style residual fill:#0d2827,stroke:#03E8BD,stroke-width:2px,color:#ffffff,stroke-dasharray:6 6,rx:16,ry:16;
-        style diagnostics fill:#161b22,stroke:#FF66B3,stroke-dasharray:6 6,color:#ffffff,rx:16,ry:16;
-        style pod fill:#0d1b2a,stroke:#00d4ff,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:16,ry:16;
-        
-        classDef spatial_stencil fill:#2a0037,stroke:#750071,stroke-width:2px,color:#ffffff,rx:16,ry:16;
-        classDef norm fill:#1e2b4e,stroke:#4b54ff,color:#ffffff,stroke-width:2px,rx:16,ry:16;
-        classDef psiraw fill:#224261,stroke:#14B5FF,color:#ffffff,stroke-width:2px,rx:16,ry:16;
-        classDef psinorm fill:#224261,stroke:#4b54ff,stroke-width:2px,color:#ffffff,rx:16,ry:16;
-        classDef stencil fill:#023e00,stroke:#31ff48,color:#ffffff,stroke-width:2px,rx:16,ry:16;
-        classDef physics fill:#1c5654,stroke:#03E8BD,color:#ffffff,stroke-width:2px,rx:16,ry:16;
-        classDef opt fill:#2a071b,stroke:#FE28A2,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:16,ry:16;
-        classDef diag fill:#2f1616,stroke:#FF66B3,stroke-width:2px,stroke-dasharray:6 6,rx:16,ry:16;
-        
-        %% ==============================
-        %% NODES
-        %% ==============================
-        potential(("$$V_\theta$$"))
-        
-        psi0_raw(("$$ \psi_0^\theta $$")):::psiraw
-        psi1_raw(("$$\psi_1^\theta$$")):::psiraw
-        psi2_raw(("$$\psi_2^\theta$$")):::psiraw
-        
-        psi0(("$$\hat{\psi}_0^\theta$$")):::psinorm
-        psi1(("$$\hat{\psi}_1^\theta$$")):::psinorm
-        psi2(("$$\hat{\psi}_2^\theta$$")):::psinorm
-        
-        E0(("$$E_0^\theta$$")):::energy
-        E1(("$$E_1^\theta$$")):::energy
-        E2(("$$E_2^\theta$$")):::energy
-        
-        %% ==============================
-        %% PIPELINE
-        %% ==============================
-        subgraph PIML["PIML Framework"]
-        direction LR
-        
-            subgraph synthetic_data["1️⃣ Synthetic Data"]
-            direction LR
-                subgraph domain_norm["Uniform Grid"]
-                    spatial_grid["$$x\in[-5, 5]$$"]:::spatial_stencil
-                    deltax["$$\Delta x$$"]:::spatial_stencil
-                end
-                trap["Trapezoidal weights"]
-                observed_data("$$\rho_n^\text{obs}, \ E_n^\text{obs}$$")
-            end
-        
-            subgraph neural_ansatz["2️⃣ Neural Ansatz"]
-            direction TB
-                subgraph energy_init["Linear Energy Initialization"]
-                    E_init["$$E_n = \text{linspace}(0.5, n-0.5, n)$$"]:::energy
-                end
-                subgraph energy_eigenvalues["Energy Eigenvalues"]
-                    E0
-                    E1
-                    E2
-                end
-                E_init --> energy_eigenvalues
-        
-                subgraph PINN["2️⃣ PINN"]
-                direction LR
-                    subgraph raw_wavefunctions["Raw Learned Wavefunctions"]
-                    direction TB
-                        psi0_raw
-                        psi1_raw
-                        psi2_raw
-                    end
-                    MLP1("MLP"):::MLP --> potential
-                    MLP2("MLP"):::MLP --> psi0_raw
-                    MLP3("MLP"):::MLP --> psi1_raw
-                    MLP4("MLP"):::MLP --> psi2_raw
-                end
-            end
-        
-            subgraph normalization["3️⃣A Orthonormalization"]
-            direction TB
-                apply_trapezoidal_weights["$$\int|\psi_n^\theta |^2 dx$$"]:::norm
-                gs["GS+re-norm"]:::norm
-                eps("$$+\epsilon \ \text{stability}$$"):::norm
-            end
-        
-            subgraph normalized_wavefunctions["Normalized Wavefunctions"]
-            direction TB
-                psi0
-                psi1
-                psi2
-            end
-        
-            subgraph finite_difference["3️⃣B Finite difference"]
-            direction TB
-                eigenfunction_stencil("$$\frac{\partial^2}{dx^2}\hat{\psi}_n^\theta$$"):::stencil
-                potential_stencil("$$V_\theta''(x)$$"):::stencil
-            end
-        
-            subgraph residual["4️⃣ Physics Residual"]
-                direction LR
-                R["$$R_n(x)=-\frac{1}{2}\nabla^2\hat{\psi} + (V-E)\hat{\psi}$$"]:::physics
-            end
-            style R stroke-width:5px;
-        
-            subgraph loss["5️⃣ Total Loss"]
-            direction TB
-                Lp["Physics loss"]:::loss_terms
-                Ln["Order"]:::loss_terms
-                Ls["Smoothness"]:::loss_terms
-                Ld["Data mismatch"]:::loss_terms
-            end
-        
-            opt["6️⃣ Optimizer (Adam)"]:::opt
-        
-            %% FLOW
-            spatial_grid --> MLP1 & MLP2 & MLP3 & MLP4
-            deltax & trap --> apply_trapezoidal_weights
-            psi0_raw & psi1_raw & psi2_raw --> gs
-            apply_trapezoidal_weights & eps --> gs
-            gs --> psi0 & psi1 & psi2
-            psi0 & psi1 & psi2 --> eigenfunction_stencil & R
-            potential --> potential_stencil & R
-            eigenfunction_stencil --> R
-            E0 & E1 & E2 --> R & Ln & Ld
-            R --> Lp
-            potential & potential_stencil --> Ls
-            psi0 & psi1 & psi2 --> Ls & Ld
-            observed_data --> Ld
-            Lp & Ln & Ls & Ld --> opt
-            opt ==> MLP1
-            opt ==> MLP2
-            opt ==> MLP3
-            opt ==> MLP4
-            opt ==> E0
-            opt ==> E1
-            opt ==> E2
-        end
-        
-        %% ==============================
-        %% DIAGNOSTICS
-        %% ==============================
-        subgraph diagnostics["7️⃣ Diagnostics"]
-        direction TB
-            sanity["sanity checks"]:::diag
-            pod["7️⃣ POD analysis"]:::pod
-            sanity ~~~ pod
-        end
-        
-        step0["0️⃣ Define TISE dynamics"]:::step0 --> PIML
-        
-        psi0 & psi1 & psi2 --> sanity & pod
-        E0 & E1 & E2 --> sanity
-        potential --> sanity
-        deltax & trap --> pod
-        
-        %% ==============================
-        %% LINKS
-        %% ==============================
-        linkStyle default stroke:#4CC9F0,stroke-width:1.618px,opacity:0.6
+                
+                A("️1️⃣ Define known TISE <br> dynamics for <br> 1-D Harmonic <br> Oscillator") --> B("2️⃣ Generate <br> noisy <br> observations")
+                B --> C("3️⃣ Learn potential <br> and <br> associated <br> eigenstates")
+                C --> D("4️⃣ Constrain with <br> physics residual")
+                D --> E("5️⃣ Regularize with <br> smoothness")
+                E --> F("6️⃣ Analyze learned <br> geometry via POD")
+                F --> G("7️⃣ Determine what <br> information remains <br> identifiable?")
+                
         ```
 
+        !!! info "Conceptual description of what the model is learning (step 3️⃣)"
+
+            The [neural architecture](architecture.md) jointly parameterizes:
+
+            $$ V_\theta(x)\, , \quad \psi_n^\theta(x) \, , \quad E_n^\theta$$
+        
+            for $i=0,1,2$ using lightweight differentiable neural networks.
+
+            
+            !!! ember "The eigenfunctions $\psi_n^\theta(x)$ are not freely learned fields."
+
+                The learned eigenstates are constrained by multiple coupled structures:
+                    
+                - The time-independent Schrödinger equation (TISE).
+                - Weighted $L^2$ normalization.
+                - Sequential Grahm-Schmidt orthogonalization.
+                - Shared dependence on the learned potential $V_\theta(x)$.
+
+                Thus, the architecture beaves as a **constrained operator-eigenfunciton system** rather than an unconstrained function approximator.
 
     === "🔢 Numerical Methods"
 
@@ -252,35 +108,6 @@
         !!! eigenote "Note on POD usage in Project 2"
             
             Proper orthogonal decomposition (POD) is treated as a diagnostic probe of learned basis geometry rather as a computational tool for dimension reduction.
-
-
-
-??? info "Conceptual Description of What the Model is Learning $\mathcal{L}$"
-    
-    !!! eigenote "What the ML model parameterizes"
-
-        The neural architecture jointly parameterizes:
-
-        $$
-        V_\theta(x), \qquad
-        \psi_n^\theta(x), \qquad
-        E_n^\theta
-        $$
-
-        using lightweight differentiable neural networks.
-
-
-    !!! ember "The wavefunctions are not freely learned fields."
-
-        The learned eigenstates are constrained by multiple coupled structures:
-
-        - the time-independent Schrödinger equation (TISE),
-        - weighted $L^2$ normalization,
-        - sequential Gram-Schmidt orthogonalization,
-        - and shared dependence on the learned potential $V_\theta$.
-
-        Consequently, the architecture behaves as a **constrained operator-eigenfunction system** rather than an unconstrained function approximator.
-
 
 ??? eigenote "♾️ Note on Ill-posedness"
             

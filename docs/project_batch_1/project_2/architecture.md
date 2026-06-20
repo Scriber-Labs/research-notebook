@@ -49,7 +49,8 @@ flowchart TB
 %% COLOR CLASSES & STYLES
 %% ==============================
 %% Node colors preserved as requested, but with golden ratio radius (rx:16, ry:16)
-style step0 fill:#FFF9D6,stroke:#7952F5,stroke-width:4px,color:#000000,rx:16, ry:16;
+style step0 fill:#2a071b,stroke:#FE28A2,color:#ffffff,stroke-width:2px,stroke-dasharray:6 6,rx:16,ry:16;
+style step0 fill:#000000,stroke:#7952F5,stroke-width:4px,color:#FFF9D6,rx:16, ry:16;
 style PIML fill:#0b1020,stroke:#00FFFF,stroke-width:4px,color:#ffffff,stroke-dasharray:6 6,rx:16, ry:16;
 style potential fill:#11163a,stroke:#5f88ff,stroke-width:4px,color:#ffffff,rx:16, ry:16;
 style neural_ansatz fill:#0d1a30,stroke:#3b82ff,stroke-width:3px,color:#ffffff,stroke-dasharray:6 6,rx:16, ry:16;
