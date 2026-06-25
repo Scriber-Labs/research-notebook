@@ -1,10 +1,15 @@
 # Project 1: Low-Fidelity Harmonic Oscillator
 
+<div class="center-button" markdown>
+[🔗 GitHub Repo](https://github.com/Scriber-Labs/lf-pinn-harmonic-oscillator){ .md-button .md-button--primary }
+</div>
+
 <div class="grid cards" markdown>
 
 -   🪀 __Project 1 Overview__
 
-    [`lf-harmonic-oscillator`](https://github.com/Scriber-Labs/lf-pinn-harmonic-oscillator)
+    
+
 
 -   🧜🏻‍♀️ __Architecture__
     

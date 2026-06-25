@@ -186,8 +186,8 @@
             
 ---
 
-### 📚 References & Inspiration
-*   Pollack, G. H. (2013). *The Fourth Phase of Water*.
-*   Fröhlich, H. (1968). *Long-range coherence and energy storage in biological systems*.
-*   Standard Textbooks: Atkins' *Physical Chemistry*
+!!! summary "__References & Inspiration__"
+    *   Pollack, G. H. (2013). *The Fourth Phase of Water*.
+    *   Fröhlich, H. (1968). *Long-range coherence and energy storage in biological systems*.
+    *   Standard Textbooks: Atkins' *Physical Chemistry*
 
