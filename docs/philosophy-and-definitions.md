@@ -1,4 +1,4 @@
-# :favicon: Definitions
+# :eigenote: Definitions
 ---
 
 !!! warning ":ember: User discretion is advised."
@@ -6,7 +6,7 @@
     The following definitions/conventions are specific to Scriber Labs projects and are not used in standard literature. 
     Moreover, they are subject to change as I work through projects and update them for the purposes of clarity and consistency among all projects.
 
-## :favicon: Physical Structure
+## :eigenote: Physical Structure
 
 
 !!! eigenote "Overview"
