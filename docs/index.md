@@ -2,10 +2,30 @@
 title: Scriber Labs - Research Notebook
 ---
 
-# Scriber Labs - Research Notebook 📝 :bootstrap-favicon:
+# Scriber Labs - Research Notebook
 
-##### 🔗 Useful Links $e^{i\pi} + 1 = 0$
+!!! summary ":favicon: Scriber Labs Links"
+    <div class="center-button" markdown>
+    [⚗️ Github <br> Organization Page](https://github.com/Scriber-Labs){ .md-button .md-button--primary }
+    </div>
 
-- ⚗️ [Scriber Labs GitHub Organization Page](https://github.com/Scriber-Labs)
-- 📜 [There and Back Again - A Zettelkasten for Eigenscribe Inc.](https://eigenscribe.github.io/there-and-back-again/frontmatter.html)
-- 🪶 [Handwritten Cheat Sheets](https://notability.com/gallery/profile/eigenscribe)
+    <div class="center-button" markdown>
+    [🗃️ Research Notebook <br> Github Repo](https://github.com/Scriber-Labs/research-notebook){ .md-button .md-button--primary }
+    </div>
+
+!!! summary ":favicon: Useful Resources"
+    <div class="center-button" markdown>
+    [📜 There and Back Again - <br> A Zettelkasten for <br> Eigenscribe Inc.](https://eigenscribe.github.io/there-and-back-again/frontmatter.html){ .md-button .md-button--primary }
+    </div>
+    
+    <div class="center-button" markdown>
+    [🪶 Handwritten Cheat <br> Sheets](https://notability.com/gallery/profile/eigenscribe){ .md-button .md-button--primary }
+    </div>
+
+
+
+    
+
+!!! important "Always remember and never forget!"
+    
+    $$e^{\mathcal{i}\pi} + 1 = 0$$

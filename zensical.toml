@@ -44,8 +44,8 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
 #
 # Read more: https://zensical.org/docs/setup/navigation/
  nav = [
-   { "🏘️ Home" = "index.md" },
-
+   { ":favicon: Home" = "index.md" },
+   { ":eigenote: Philosophy & Definitions" = "philosophy-and-definitions.md" },
    { "🌀 Kuramoto Benchmark Data" = [
        { ":eigenote: Overview" = "kuramoto-benchmark/index.md" },
        { "Mathematical Foundations" = "kuramoto-benchmark/mathematical-foundations.md" },

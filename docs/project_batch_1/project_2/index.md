@@ -1,4 +1,4 @@
-# Project 2: Low-Fidelity Inverse Schrödinger Problem ⚛️
+# Project 2: Low-Fidelity Inverse Schrödinger Problem
 
 !!! abstract "__Overview__"
 
@@ -108,6 +108,23 @@
         !!! eigenote "Note on POD usage in Project 2"
             
             Proper orthogonal decomposition (POD) is treated as a diagnostic probe of learned basis geometry rather as a computational tool for dimension reduction.
+
+!!! eigenote ":favicon: Physical Structure"
+
+    | **State Space** $\mathcal{X}$ | **Structure** $\mathcal{S}$ | **Admissible Set** $\mathcal{M}_\mathcal{S}$|
+    | :---------- | :---------- | :---------- |
+    | Hilbert Space, $\mathcal{H}$  | $\big\{\hat{H}\psi=E\psi : \langle\psi_i, \psi_j\rangle = \delta_{ij}\big\}$ | $\psi \in \big\{ \mathcal{H} : \mathcal{S} \, \text{holds} \big\}$ |
+    
+    ??? eigenote
+
+        - 🎗️ For Scriber Labs projects, the *admissible set* $\mathcal{M}_\mathcal{S}$ is induced by the *structure* $\mathcal{S}$. 
+        - 🔮 Generalizing to other Scriber Labs projects $\implies$ replace $\mathcal{S}$ with:
+            - Hamiltonian systems
+            - Kuramoto
+            - DFT/SCF
+            - Bayesian inverse problems
+            - etc.
+
 
 ??? eigenote "♾️ Note on Ill-posedness"
             
