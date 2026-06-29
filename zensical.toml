@@ -46,13 +46,7 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
  nav = [
    { ":favicon: Home" = "index.md" },
    { ":eigenote: Philosophy & Definitions" = "philosophy-and-definitions.md" },
-   { "🌀 Kuramoto Benchmark Data" = [
-       { ":eigenote: Overview" = "kuramoto-benchmark/index.md" },
-       { "Mathematical Foundations" = "kuramoto-benchmark/mathematical-foundations.md" },
-       { "Numerical Methods" = "kuramoto-benchmark/numerical-methods.md" },
-       { "Implementation" = "kuramoto-benchmark/source-code.md" }
-   ]},
-   { "⚙️ PIML Projects" = [
+   { "⚛️ PIML Projects" = [
        { "Overview " = "project_batch_1/index.md" },
        { "Project 1" = [
           { "Overview" = "project_batch_1/project_1/index.md" },
@@ -68,10 +62,16 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
           { "Conclusions" = "project_batch_1/project_2/conclusions.md"}
        ]},
    ]},
+   { "🌀 Kuramoto Benchmark Data" = [
+       { ":eigenote: Overview" = "kuramoto-benchmark/index.md" },
+       { "Mathematical Foundations" = "kuramoto-benchmark/mathematical-foundations.md" },
+       { "Numerical Methods" = "kuramoto-benchmark/numerical-methods.md" },
+       { "Implementation" = "kuramoto-benchmark/source-code.md" }
+   ]},
    { "🐦‍🔥 PCA Partition Panel" = [
        { "Overview" = "partition-pca/index.md" }
    ]},
-   {  "💠 My Widgets" = [
+   {  ":favicon: My Widgets" = [
      { ":eigenote: Overview" = "widgets/index.md" },
      { "Periodic Table" = "widgets/periodic-table.md" },
      { "Solid Angle<br/>Visualizer" = "widgets/solid-angle-visualizer.md" }
