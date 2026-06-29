@@ -93,9 +93,3 @@
 
     !!! note "Thank you for your patience!"
         Project 3 is still under development and project 1 and 2 artifacts are still being polished. 
-
-
-
-
-
-

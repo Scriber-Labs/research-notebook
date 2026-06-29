@@ -4,14 +4,13 @@
 
     === "🥅 Goal"
 
-        - Study which structural featrues of an unknown Hamiltonian remain identifiable under low-fidelity discretization, noisy observations, and constrained Hilbert-space geometry in the inverse Schrödinger problem.
-        - It is NOT to obtain a perfect reconstruction of the ground truth potential $V(x)$.
+        - Study which physical structures of an unknown Hamiltonian remain identifiable under low-fidelity discretization, noisy observations, and constrained Hilbert-space geometry in the inverse Schrödinger problem.
+        - It is *not* exact reconstruction of the ground-truth potential $V(x)$, but rather to determine which operator structures remain stable and  recoverable under limited information.
 
     === "🗝️ Key Points"
 
-        - **Indirect supervision:** Project 2 architecture resembles a *coupled operator-eigenfunction learning system*.
-        - **Proper orthogonal decomposition (POD)** is used as a geometry-aware diagnostic framework for analyzing basis 
-           conditioning, variance concentration, mode alignment, and ⁉️potential mode mixing⁉️ withinin the learned eigenstate manifold.
+        - **Indirect supervision:** the architecture behaves as a *coupled operator-eigenfunction learning system*.
+        - **Proper orthogonal decomposition (POD)** is used as a geometry-aware probe for studying basis conditioning, variance concentration, mode alignment, and potential mode mixing within the learned eigenstate manifold.
 
     === ":eigenote: Physical Structure"
 
