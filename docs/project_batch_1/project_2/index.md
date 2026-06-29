@@ -9,14 +9,18 @@
 
     === "🗝️ Key Points"
 
-        - **Indirect supervision:** the architecture behaves as a *coupled operator-eigenfunction learning system*.
+        - **Indirect supervision:** the architecture behaves as a coupled operator-eigenfunction learning system*.
         - **Proper orthogonal decomposition (POD)** is used as a geometry-aware probe for studying basis conditioning, variance concentration, mode alignment, and potential mode mixing within the learned eigenstate manifold.
 
     === ":eigenote: Physical Structure"
 
+        The inverse Schrödinger problem is interpreted as a problem of recovering elements of the physical structure 
+        $$ \mathcal{S} = \{ \text{eigenvalue constraints, orthogonality, normalization, operator geometry} \}$$ 
+        rather than reconstructing a unique potential function $V(x)$.
+
         | **State Space** $\mathcal{X}$ | **Structure** $\mathcal{S}$ | **Admissible Set** $\mathcal{M}_\mathcal{S}$|
         | :---------- | :---------- | :---------- |
-        | Hilbert Space, $\mathcal{H}$  | $\big\{\hat{H}\psi=E\psi : \langle\psi_i, \psi_j\rangle = \delta_{ij}\big\}$ | $\psi \in \big\{ \mathcal{H} : \mathcal{S} \, \text{holds} \big\}$ |
+        | Hilbert Space, $\mathcal{H}$  | $\big\{\hat{H}\psi=E\psi : \langle\psi_i, \psi_j\rangle = \delta_{ij} \, , \, \|\psi_i\|_{L^2}=1 \big\}$ | $\psi \in \big\{ \mathcal{H} : \mathcal{S} \, \text{holds} \big\}$ |
         
         ??? eigenote
     
@@ -34,7 +38,7 @@
 
         | **Step** | **Description** | **Completed?** |
         |----------|-----------------|----------------|
-        | 1. **Problem formulation** | Can a physics-informed neural network recover the unknown potential $V(x)$ along with the corresponding eigenfunctions from only noisy spectral data and probability-density snapshots? | ✔️ |
+        | 1. **Problem formulation** | Can a physics-informed neural network infer the unknown potential $V(x)$ and its associated eigenfunctions along from noisy spectral and probability-density observations, and if not, which physical structures remain identifiable? | ✔️ |
         | 2. **Data collection & curation** | - Uniform collocation grid of spatial points $x\in [-5,5]. <br/> - Noisy energy and probability density observations. | ✔️ |
         | 3. **Neural architecture**        | Coupled operator architecture with weighted wavefunction normalization, sequential Gram-Schmidt orthogonalization, and shared-potential eigenstate constraints | ⚠️ Both neural networks are scalar-in, scalar-out, fully differentiable, and deliberately kept shallow to preserve interpretability. |
         | 4. **Loss function**              | Composite loss with physics, smoothness, ordering, and data-consistency terms defined over a weighted discrete Hilbert-space geometry. | ✔️ |
@@ -101,7 +105,7 @@
 
             $$V_\theta(x)\, , \quad \psi_n^\theta(x) \, , \quad E_n^\theta$$
         
-            for $i=0,1,2$ using lightweight differentiable neural networks.
+            for $n=0,1,2$ using lightweight differentiable neural networks.
 
             
             !!! ember "The eigenfunctions $\psi_n^\theta(x)$ are not freely learned fields."
@@ -113,24 +117,25 @@
                 - Sequential Grahm-Schmidt orthogonalization.
                 - Shared dependence on the learned potential $V_\theta(x)$.
 
-                Thus, the architecture beaves as a **constrained operator-eigenfunciton system** rather than an unconstrained function approximator.
+                Consequently, the architecture behaves as a **constrained operator-eigenfunction learning system** rather than a collection of independently learned functions.
 
     === "🔢 Numerical Methods"
 
         - A central difference stencil is used to approximate the $\partial_{xx}$ operator.
-        - In the training loop, orthonormalization (via Gram-Schmidt and l2 inner product with trapezoidal weighting) is performed before the loss function is calculated. Consequently, the physics residual is evaluated using orthonormalized eigenfunctions, giving a learned Hamiltonian system $$H_\theta \hat{\psi}_n^\theta \approx E_n^\theta \hat{\psi}_n^\theta \, , $$ whose deviation from the eigenvalue equation is minimized during training. ✨
-            - Sequential Gram-Schmidt orthogonalization ensures learned orthogonal wavefunctions are orthgonal and consistent with the requirement that Hamiltonian eigenfunction be orthgonal.
-            - Since the system is trained on a uniform grid, we implement the Trapezoidal Rule to provide a discrete approximation of the continuous Hilbert-space inner product.
-            - Consistent use of the Trapezoidal Rule throughout the l2 inner product steps and POD weighting ensures consistency in normalization between the learned wavefunctions in the training loop and the POD analysis.
+        - In the training loop, orthonormalization (via Gram-Schmidt and l2 inner product with trapezoidal weighting) is performed before the loss function is calculated. Thus, the Schrödinger residual is computed using orthonormalized eigenfunctions,
+        $$ \hat{H}_\theta \hat{\psi}_n^\theta \approx E_n^\theta \hat{\psi}_n^\theta \, ,$$ and the deviation from this eigenvalue equation is minimized during training. ✨
+            - Sequential Gram-Schmidt orthogonalization ensures that the learned eigenfunctions satisfy orthogonality requirements of Hamiltonian eigenstates.
+            - The trapezoidal rule provides a discrete approximation to the continuous Hilbert-space inner product on the uniform spatial grid.
+            - Consistent quadrature weighting throughout training and POD analysis ensures that the learned geometry and the diagnostic geometry are defined with respect to the same inner product.
 
-        !!! eigenote "Note on POD usage in Project 2"
+        !!! tip "Note on POD usage in Project 2"
             
             Proper orthogonal decomposition (POD) is treated as a diagnostic probe of learned basis geometry rather as a computational tool for dimension reduction.
 
 ??? eigenote "♾️ Note on Ill-posedness"
             
-    The inverse Schrödinger problem is a challenging task due to the ill-posed nature of the underlying differential equation and the presence of noise observations. 
+    The inverse Schrödinger problem is fundamentally ill-posed: multiple potentials may reproduce nearly identical spectral measurements and probability-density observations.
         
-    In particular, the inverse mapping is fundamentally non-unique: multiple potentials may reproduce similar spectral measurements and probability-density observations.
+    Thus, exact recovery of the ground-truth potential is generally impossible from limited and noisy data alone.
         
-    In order to gain conceptual insight under the limitations of ill-posedness, the primary objective of Project 2 is not to exact reconstruction of the ground truth potential $V(x)$, but rather the identificaiton of operator structures that remain stable under limited information and measurement noise.
+    The central question of Project 2 is therefore: Which potential structures of the underlying Hamiltonian remain stable and identifiable despite non-uniqueness, discretization error, and measurement noise?
