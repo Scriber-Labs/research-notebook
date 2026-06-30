@@ -1,3 +1,11 @@
+# :eigenote: Philosophy
+
+!!! eigenote "Philosophy"
+
+    Scriber Labs develops interpretable computational methods for discovering and understanding structure in complex
+    physical and biological systems. 
+
+
 # :eigenote: Definitions
 ---
 
