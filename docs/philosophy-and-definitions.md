@@ -5,6 +5,9 @@
     Scriber Labs develops interpretable computational methods for discovering and understanding structure in complex
     physical and biological systems. 
 
+    !!! idea "Big Idea"
+
+        Reject opaque black-box models in favor of transparent, interpretable models.
 
 # :eigenote: Definitions
 ---
