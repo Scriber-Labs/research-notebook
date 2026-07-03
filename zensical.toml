@@ -61,6 +61,10 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
           { "Figure Analysis" = "project_batch_1/project_2/figure-analysis.md" },
           { "Conclusions" = "project_batch_1/project_2/conclusions.md"}
        ]},
+       { "Project 3" = [
+           { "Overview" = "project_batch_1/project_3/index.md" },
+           { "Background" = "project_batch_1/project_3/background.md" }
+       ]},
    ]},
    { "🌀 Kuramoto Benchmark Data" = [
        { ":eigenote: Overview" = "kuramoto-benchmark/index.md" },
