@@ -51,7 +51,8 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
        { "Project 1" = [
           { "Overview" = "project_batch_1/project_1/index.md" },
           { "Architecture" = "project_batch_1/project_1/architecture.md" },
-          { "Figure Analysis" = "project_batch_1/project_1/figure-analysis.md" }
+          { "Figure Analysis" = "project_batch_1/project_1/figure-analysis.md" },
+          { "Failure Modes" = "project_batch_1/project_1/failure-modes.md" }
        ]},
        { "Project 2" = [
           { "Overview" = "project_batch_1/project_2/index.md" },
