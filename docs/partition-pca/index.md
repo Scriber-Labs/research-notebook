@@ -74,16 +74,14 @@
         | $\langle E_i \rangle$ | Average Energy | Extensive |
         | $S_i$ | Entropy (Gibbs / Shannon) | Extensive |
         | $F_i$ | Helmholtz Free Energy | Extensive |
-        | $Z_i$ | Partition Function | Extensive |
+        | $Z_i$ | Partition Function | Neither; $\ln{Z_i}$ is Extensive |
         | $P_{ij}$ | Boltzmann probability of energy level $j$ | Intensive |
-        | $\% \text{NA}$ | % Inaccessible microstates ($P < 10^{-6}$) | Extensive (by definition, as it is a ratio of extensive quantities) |
+        | $\% \text{NA}$ | % Inaccessible microstates ($P < 10^{-6}$) | Intesive (a ratio of extensive quantities) |
     
-        ??? warning "‼️ Sanity-Check Extenstivity Classification"
-            - [ ] $P_{ij}$ 
-            - [ ] $\% \text{NA}$
-                - [ ] Sanity check the following statement:
+        ??? warning "‼️ Sanity-Check"
+            - [ ] Sanity check the following statement:
                     
-                    The % Inaccessible microstates metric is calculated as the percentage of energy levels with Boltzmann probabilities below a threshold ($P < 10^{-6}$). This metric is extensive because it is a ratio of extensive quantities (total number of energy levels and number of inaccessible microstates).
+                    The % Inaccessible microstates metric is calculated as the percentage of energy levels with Boltzmann probabilities below a threshold ($P < 10^{-6}$). This metric is intensive because it is a ratio of extensive quantities (total number of energy levels and number of inaccessible microstates).
 
     === "🗺️ Concept Map: Thermodynamic PCA"
 
