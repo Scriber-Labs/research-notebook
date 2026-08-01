@@ -21,6 +21,10 @@
 
         - Interestingly, the spike amplitude remains approximately constant over training.
 
+    ??? eigenote "❌ Failure Modes"
+
+        - Constraint interference
+
 ## Figure 2 - Position Trajectory
 
 ![position_trajectory.png](figure_files/phase_trajectory.png)

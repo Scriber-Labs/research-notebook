@@ -53,7 +53,8 @@ Copyright &copy; Scriber Labs 2025-2026. All rights reserved.
           { "Architecture" = "project_batch_1/project_1/architecture.md" },
           { "Loss Function" = "project_batch_1/project_1/loss-function.md" },
           { "Figure Analysis" = "project_batch_1/project_1/figure-analysis.md" },
-          { "Failure Modes" = "project_batch_1/project_1/failure-modes.md" }
+          { "Failure Modes" = "project_batch_1/project_1/failure-modes.md" },
+          { "Conclusions" = "project_batch_1/project_1/conclusions.md" }
        ]},
        { "Project 2" = [
           { "Overview" = "project_batch_1/project_2/index.md" },

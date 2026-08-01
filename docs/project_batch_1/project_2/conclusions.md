@@ -75,13 +75,13 @@
 
 
 
-# 🔮 Future Implementations
-- Constant $\Delta x$ implementations:
-  - Dirichlet boundary conditions
-  - Simpson's rule quadrature formula in place of the trapezoidal rule.
-- Adaptive collocation.
-- Symplectic loss term and other Hamiltonian-preserving regularizers.
-- Learnable $\lambda$'s.
-- Fourier features should increase the MLP's ability to capture high-frequency components.
-  - SIREN activation layer.
-  - SAFE-NET protocol from https://arxiv.org/html/2502.07209v2.
+??? eigenote "__🔮 Future Implementations__"
+    - Constant $\Delta x$ implementations:
+        - Dirichlet boundary conditions.
+        - Simpson's rule quadrature formula in place of the trapezoidal rule.
+    - Adaptive collocation.
+    - Symplectic loss term and other Hamiltonian-preserving regularizers.
+    - Learnable $\lambda$'s.
+    - Fourier features should increase the MLP's ability to capture high-frequency components.
+        - SIREN activation layer.
+        - SAFE-NET protocol from https://arxiv.org/html/2502.07209v2.

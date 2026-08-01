@@ -87,5 +87,5 @@ $$ r(t) = \left| \frac{1}{N} \sum_{j=1}^N e^{i \theta_j(t)} \right| $$
 
 
 ## References
-1. Strogatz, S. H. (2000). From Kuramoto to Crawford: Exploring the onset of synchronization in populations of coupled oscillators. Physica D: Nonlinear Phenomena, 143(1–4), 1–20. https://doi.org/10.1016/s0167-2789(00)00094-4
-2. Pikovsky, A., Rosenblum, M., & Kurths, J. (2001). Synchronization: A universal concept in nonlinear sciences. Cambridge University Press.
+1. [Strogatz, S. H. (2000)](../references/references.md#strogatz_2000). From Kuramoto to Crawford: Exploring the onset of synchronization in populations of coupled oscillators. Physica D: Nonlinear Phenomena, 143(1–4), 1–20. https://doi.org/10.1016/s0167-2789(00)00094-4
+2. [Pikovsky, A., Rosenblum, M., & Kurths, J. (2001)](../references/references.md#pikovsky_rosenblum_kurths_2001). Synchronization: A universal concept in nonlinear sciences. Cambridge University Press.
