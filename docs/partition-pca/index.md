@@ -50,7 +50,7 @@
         
         !!! warning "Citation needed!"
             
-            - [ ] Check if function of state is being used appropriately here.
+        - [ ] Check if function of state is being used appropriately here.
 
         ??? note "$H_0$ and $H_1$ hypotheses"
            

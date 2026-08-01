@@ -1,5 +1,9 @@
 # Project 2: Low-Fidelity Inverse Schrödinger Problem
 
+<div class="center-button" markdown>
+[🔗 GitHub Repo](https://github.com/Scriber-Labs/lf-pinn-inverse-schrodinger){ .md-button .md-button--primary }
+</div>
+
 !!! abstract "__Overview__"
 
     === "🥅 Goal"
@@ -20,17 +24,7 @@
 
         | **State Space** $\mathcal{X}$ | **Structure** $\mathcal{S}$ | **Admissible Set** $\mathcal{M}_\mathcal{S}$|
         | :---------- | :---------- | :---------- |
-        | Hilbert Space, $\mathcal{H}$  | $\big\{\hat{H}\psi=E\psi : \langle\psi_i, \psi_j\rangle = \delta_{ij} \, , \, \|\psi_i\|_{L^2}=1 \big\}$ | $\psi \in \big\{ \mathcal{H} : \mathcal{S} \, \text{holds} \big\}$ |
-        
-        ??? eigenote
-    
-            - 🎗️ For Scriber Labs projects, the *admissible set* $\mathcal{M}_\mathcal{S}$ is induced by the *structure* $\mathcal{S}$. 
-            - 🔮 Generalizing to other Scriber Labs projects $\implies$ replace $\mathcal{S}$ with:
-                - Hamiltonian systems
-                - Kuramoto
-                - DFT/SCF
-                - Bayesian inverse problems
-                - etc.
+        | Hilbert Space, $\mathcal{H}$  | $\big\{\hat{H}\psi=E\psi : \langle\psi_i, \psi_j\rangle = \delta_{ij} \, , \, \|\psi_i\|_{L^2}=1 \big\}$ | $\psi \in \big\{ \mathcal{H} : \mathcal{S} \, \text{holds} \big\}$ 
 
 !!! eigenote "PIML Design"
         

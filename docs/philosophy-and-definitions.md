@@ -61,4 +61,13 @@
         :eigenote: **Probability Distributions**
 
         $$ \mathcal{X} = \big\{ \rho : \rho \geq 0 \, , \int{\rho} = 1 \big\} $$
-        
+    
+    ??? eigenote
+    
+        - 🎗️ For Scriber Labs projects, the *admissible set* $\mathcal{M}_\mathcal{S}$ is induced by the *structure* $\mathcal{S}$.
+        - 🔮 Generalizing to other Scriber Labs projects $\implies$ replace $\mathcal{S}$ with:
+            - Hamiltonian systems
+            - Kuramoto
+            - DFT/SCF
+            - Bayesian inverse problems
+            - etc.    
