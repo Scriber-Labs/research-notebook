@@ -109,4 +109,71 @@ document$.subscribe(function() {
     fixLayout();
     // Run again after a short delay to catch any late rendering
     setTimeout(fixLayout, 500);
+
+    // --- Mermaid Zoom/Pan Support ---
+    function initMermaidZoom() {
+        const diagrams = document.querySelectorAll('.mermaid svg');
+        diagrams.forEach(svg => {
+            // Avoid double initialization
+            if (svg.hasAttribute('data-zoom-initialized')) return;
+            svg.setAttribute('data-zoom-initialized', 'true');
+
+            // Style the container
+            const container = svg.parentElement;
+            container.classList.add('zoomable-mermaid');
+            
+            // Set a reasonable height for large diagrams if not already constrained
+            if (svg.viewBox && svg.viewBox.baseVal) {
+                if (svg.viewBox.baseVal.height > 600) {
+                    container.style.height = '600px';
+                } else {
+                    container.style.height = (svg.viewBox.baseVal.height + 20) + 'px';
+                }
+            } else {
+                container.style.height = '500px';
+            }
+
+            // Remove Mermaid's inline styles that might interfere
+            svg.removeAttribute('style');
+            svg.style.width = '100%';
+            svg.style.height = '100%';
+
+            // Initialize svg-pan-zoom
+            const panZoom = svgPanZoom(svg, {
+                zoomEnabled: true,
+                controlIconsEnabled: true,
+                fit: true,
+                center: true,
+                minZoom: 0.1,
+                maxZoom: 10,
+                mouseWheelZoomEnabled: false, // Disable by default to allow scrolling the page
+            });
+
+            // Enable mouse wheel zoom only when holding Ctrl/Cmd or after clicking
+            svg.addEventListener('mousedown', () => {
+                panZoom.enableMouseWheelZoom();
+            });
+            
+            // Optional: Reset zoom on double click
+            svg.addEventListener('dblclick', () => {
+                panZoom.reset();
+            });
+        });
+    }
+
+    // Mermaid might render after a delay
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.addedNodes.length) {
+                initMermaidZoom();
+            }
+        });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+    
+    // Also try immediately and after a few delays
+    initMermaidZoom();
+    setTimeout(initMermaidZoom, 1000);
+    setTimeout(initMermaidZoom, 3000);
 });

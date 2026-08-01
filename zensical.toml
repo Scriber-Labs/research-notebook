@@ -110,6 +110,7 @@ extra_css = [
 #
 # Read more: https://zensical.org/docs/customization/#additional-javascript
 extra_javascript = [
+    "https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js",
     "extra_assets/javascript/extra.js",
     "https://unpkg.com/katex@0/dist/katex.min.js",
     "https://unpkg.com/katex@0/dist/contrib/auto-render.min.js",

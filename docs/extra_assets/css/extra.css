@@ -1259,9 +1259,34 @@ body {
   -webkit-text-fill-color: whitesmoke !important;
 }
 
-/* ============================================
-   Responsive Design (Mobile & Tablet)
-   ============================================ */
+/* Zoomable Mermaid Containers */
+.zoomable-mermaid {
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--ptg-code-border);
+  border-radius: var(--ptg-radius-md);
+  background-color: var(--ptg-code-bg);
+  cursor: grab;
+  margin-bottom: 1rem;
+}
+
+.zoomable-mermaid:active {
+  cursor: grabbing;
+}
+
+/* svg-pan-zoom control icons styling */
+#svg-pan-zoom-controls {
+  fill: var(--ptg-color-blue-light);
+  fill-opacity: 0.6;
+}
+
+#svg-pan-zoom-controls:hover {
+  fill-opacity: 1;
+}
+
+#svg-pan-zoom-controls rect {
+  fill: var(--ptg-code-bg);
+}
 
 /* Tablet and Small Desktop Breakpoint */
 @media screen and (min-width: 1221px) {
