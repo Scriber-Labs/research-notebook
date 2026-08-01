@@ -1569,9 +1569,9 @@ body {
 }
 
 .md-typeset .admonition.eigenote,
-.md-typeset details.admonition.eigenote,
+.md-typeset details.eigenote,
 .md-typeset .admonition.favicon,
-.md-typeset details.admonition.favicon {
+.md-typeset details.favicon {
   border-left-color: var(--ptg-color-blue-light);
   background-image: linear-gradient(135deg, rgba(20, 181, 255, 0.2), rgba(121, 82, 245, 0.2)) !important;
   border-color: rgba(20, 181, 255, 0.4);
@@ -1580,7 +1580,7 @@ body {
 }
 
 .md-typeset .admonition.ember,
-.md-typeset details.admonition.ember {
+.md-typeset details.ember {
   border-left-color: var(--ptg-color-pink-vibrant);
   background-image: linear-gradient(135deg, rgba(255, 102, 179, 0.2), rgba(255, 157, 87, 0.2)) !important;
   border-color: rgba(255, 102, 179, 0.4);
@@ -1635,7 +1635,7 @@ body {
 }
 
 .md-typeset .admonition.eigenote > .admonition-title,
-.md-typeset details.admonition.eigenote > summary {
+.md-typeset details.eigenote > summary {
   background-image: var(--ptg-gradient-6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent !important;
@@ -1647,7 +1647,7 @@ body {
 }
 
 .md-typeset .admonition.ember > .admonition-title,
-.md-typeset details.admonition.ember > summary {
+.md-typeset details.ember > summary {
   background-image: linear-gradient(90deg, var(--ptg-color-pink-vibrant), var(--ptg-color-orange-warm));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent !important;
@@ -1660,7 +1660,7 @@ body {
 }
 
 .md-typeset .admonition.favicon > .admonition-title,
-.md-typeset details.admonition.favicon > summary {
+.md-typeset details.favicon > summary {
   background-image: var(--ptg-gradient-6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent !important;
@@ -1673,7 +1673,68 @@ body {
 }
 
 .md-typeset .admonition.eigenote > .admonition-title::before,
-.md-typeset details.admonition.eigenote > summary::before,
+.md-typeset details.eigenote > summary::before {
+  content: "";
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: var(--ptg-color-blue-light);
+  -webkit-mask-image: var(--md-admonition-icon--eigenote);
+  mask-image: var(--md-admonition-icon--eigenote);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  animation: eigenote-pulse 3s infinite ease-in-out;
+}
+
 .md-typeset .admonition.ember > .admonition-title::before,
-.md-typeset details.admonition.ember > summary::before {
+.md-typeset details.ember > summary::before {
+  content: "";
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: var(--ptg-color-pink-vibrant);
+  -webkit-mask-image: var(--md-admonition-icon--ember);
+  mask-image: var(--md-admonition-icon--ember);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  animation: ember-pulse 3s infinite ease-in-out;
+}
+
+.md-typeset .admonition.favicon > .admonition-title::before,
+.md-typeset details.favicon > summary::before {
+  content: "";
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: var(--ptg-color-blue-light);
+  -webkit-mask-image: var(--md-admonition-icon--favicon);
+  mask-image: var(--md-admonition-icon--favicon);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  animation: favicon-pulse 3s infinite ease-in-out;
+}
+
+/* Ensure emojis and images in headers remain visible despite gradient text */
+.md-typeset .admonition.eigenote > .admonition-title img.twemoji,
+.md-typeset details.eigenote > summary img.twemoji,
+.md-typeset .admonition.favicon > .admonition-title img.twemoji,
+.md-typeset details.favicon > summary img.twemoji,
+.md-typeset .admonition.ember > .admonition-title img.twemoji,
+.md-typeset details.ember > summary img.twemoji {
+  -webkit-text-fill-color: initial !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  background-image: none !important;
 }
