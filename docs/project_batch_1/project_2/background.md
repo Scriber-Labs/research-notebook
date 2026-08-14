@@ -1,11 +1,14 @@
 # 🎭 Background
 
-The inverse Schrödinger problem is a fundamental problem in quantum mechanics that uses noisy/incomplete observables to 
+The inverse Schrödinger problem is a fundamental problem in quantum mechanics that usesnoisy/incomplete observables to 
 determine the potential $V(x)$ that generates a given set of eigenfunctions and eigenvalues satisfying the Schrödinger 
 equation. Unlike the forward problem, where the potential is known and eigenstates are computed, this inverse problem 
 is generally non-unique and highly sensitive to measurement noise.
 
-Project 2 investigates this setting for the 1-D time-independent Schrödinger equation (TISE) of a harmonic oscillator using a physics-informed neural architecture. ✨ In particular, this architecture learns a potential parameterization $V_\theta(x)$ whose induced Hamiltonian $\hat{H}_\theta$ simultaneously satisfied observed, noisy spectral constraints and the TISE.
+Project 2 investigates this setting for the 1-D time-independent Schrödinger equation (TISE) of a harmonic oscillator 
+using a physics-informed neural architecture. ✨ In particular, this architecture learns a potential parameterization 
+$V_\theta(x)$ whose induced Hamiltonian $\hat{H}_\theta$ simultaneously satisfies observed, noisy spectral constraints 
+and the TISE.
 
 Learned variables include:
 
