@@ -1,6 +1,6 @@
 # 🎭 Background
 
-The inverse Schrödinger problem is a fundamental problem in quantum mechanics that uses noisy, incomplete observables to 
+The inverse Schrödinger problem is a fundamental problem in quantum mechanics that uses noisy/incomplete observables to 
 determine the potential $V(x)$ that generates a given set of eigenfunctions and eigenvalues satisfying the Schrödinger 
 equation. Unlike the forward problem, where the potential is known and eigenstates are computed, this inverse problem is generally non-unique and highly sensitive to measurement noise.
 
