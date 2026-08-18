@@ -7,9 +7,8 @@ title: Scriber Labs - Research Notebook
 
 !!! abstract ":favicon: Overview" 
 
-    **Scriber Labs** is an independent computational research organization exploring how mathematical
-    and computational structure can be discovered, represented, and interpreted across the physical and 
-    biological sciences.
+    **Scriber Labs** is an independent curiosity-driven research organization exploring how structure can be 
+    mathematically described, computationally represented, empirically measured, and physically intpreted.
 
     Rather than focusing on benchmark performance alone, Scriber Labs emphasizes interpretability, parsimony,
     and scientific intuition, using small, well-understood systems as teaching and research vehicles. Many projects
