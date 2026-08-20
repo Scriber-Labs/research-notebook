@@ -1259,33 +1259,307 @@ body {
   -webkit-text-fill-color: whitesmoke !important;
 }
 
-/* Zoomable Mermaid Containers */
+/* ============================================
+   Zoomable Mermaid Containers & Floating Toolbar
+   ============================================ */
 .zoomable-mermaid {
   overflow: hidden;
-  position: relative;
+  position: relative !important;
+  display: block;
+  width: 100%;
   border: 1px solid var(--ptg-code-border);
   border-radius: var(--ptg-radius-md);
   background-color: var(--ptg-code-bg);
-  cursor: grab;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  transition: border-color var(--ptg-transition-normal), box-shadow var(--ptg-transition-normal);
+  cursor: grab !important;
 }
 
-.zoomable-mermaid:active {
+.zoomable-mermaid,
+.zoomable-mermaid svg,
+.zoomable-mermaid svg * {
+  cursor: grab !important;
+}
+
+.zoomable-mermaid:hover {
+  border-color: var(--ptg-code-border-hover);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.zoomable-mermaid:active,
+.zoomable-mermaid:active svg,
+.zoomable-mermaid:active svg * {
+  cursor: grabbing !important;
+}
+
+/* Floating Diagram Toolbar */
+.mermaid-zoom-toolbar {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  z-index: 100 !important;
+  background: rgba(13, 17, 23, 0.94) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(20, 181, 255, 0.45) !important;
+  border-radius: var(--ptg-radius-md) !important;
+  padding: 4px 6px !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65), 0 0 10px rgba(20, 181, 255, 0.25) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  cursor: default !important;
+}
+
+.mermaid-zoom-toolbar * {
+  cursor: pointer !important;
+}
+
+.mermaid-zoom-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  height: 30px !important;
+  padding: 0 9px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: #F0F6FC !important;
+  border-radius: var(--ptg-radius-sm) !important;
+  cursor: pointer !important;
+  transition: all var(--ptg-transition-fast) !important;
+  outline: none !important;
+  pointer-events: auto !important;
+  font-size: 11.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.2px !important;
+  line-height: 1 !important;
+  user-select: none !important;
+  white-space: nowrap !important;
+}
+
+.mermaid-zoom-btn:hover {
+  background: rgba(20, 181, 255, 0.3) !important;
+  border-color: rgba(20, 181, 255, 0.85) !important;
+  color: #00FFFF !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(20, 181, 255, 0.35) !important;
+}
+
+.mermaid-zoom-btn:active {
+  background: rgba(20, 181, 255, 0.5) !important;
+  transform: translateY(0) scale(0.97) !important;
+}
+
+.mermaid-zoom-btn.mermaid-fullscreen-btn:hover {
+  background: rgba(168, 85, 247, 0.35) !important;
+  border-color: rgba(168, 85, 247, 0.85) !important;
+  color: #e4d4ff !important;
+}
+
+.mermaid-zoom-btn.mermaid-close-btn:hover {
+  background: rgba(255, 75, 75, 0.35) !important;
+  border-color: rgba(255, 75, 75, 0.85) !important;
+  color: #ff8585 !important;
+}
+
+.mermaid-btn-text {
+  display: inline-block !important;
+  font-size: 11.5px !important;
+  font-weight: 500 !important;
+  color: inherit !important;
+}
+
+/* Specific styling for vector icons inside buttons to prevent inheriting Mermaid SVG fill styles */
+.mermaid-zoom-btn svg {
+  width: 15px !important;
+  height: 15px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.2px !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  display: inline-block !important;
+  flex-shrink: 0 !important;
+}
+
+.mermaid-zoom-btn svg path,
+.mermaid-zoom-btn svg circle,
+.mermaid-zoom-btn svg line {
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.2px !important;
+}
+
+/* Subtle Helper Hint at Bottom */
+.mermaid-zoom-hint {
+  position: absolute !important;
+  bottom: 8px !important;
+  left: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  z-index: 20 !important;
+  background: rgba(13, 17, 23, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: var(--ptg-radius-sm) !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  color: rgba(240, 246, 252, 0.7) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+/* ============================================
+   Lightbox Modal for Fullscreen Diagrams
+   ============================================ */
+.mermaid-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+}
+
+.mermaid-lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mermaid-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 9, 15, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.mermaid-lightbox-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.mermaid-lightbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: rgba(13, 17, 23, 0.78);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-shrink: 0;
+}
+
+.mermaid-lightbox-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mermaid-lightbox-badge {
+  font-family: var(--ptg-font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #00FFFF;
+  background: rgba(0, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  padding: 4px 10px;
+  border-radius: var(--ptg-radius-sm);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
+}
+
+.mermaid-lightbox-hint {
+  font-size: 0.8rem;
+  color: #8B949E;
+}
+
+.mermaid-lightbox-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--ptg-radius-md);
+  padding: 4px;
+}
+
+.mermaid-lightbox-body {
+  flex: 1;
+  width: 100%;
+  height: calc(100% - 60px);
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.mermaid-lightbox-body:active {
   cursor: grabbing;
 }
 
-/* svg-pan-zoom control icons styling */
+.mermaid-lightbox-body svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .mermaid-lightbox-header {
+    padding: 10px 14px;
+  }
+
+  .mermaid-lightbox-hint {
+    display: none;
+  }
+}
+
+/* svg-pan-zoom control icons styling fallback */
 #svg-pan-zoom-controls {
-  fill: var(--ptg-color-blue-light);
-  fill-opacity: 0.6;
+  opacity: 0.9 !important;
+  transition: opacity 0.2s ease !important;
+  cursor: pointer !important;
 }
 
 #svg-pan-zoom-controls:hover {
-  fill-opacity: 1;
+  opacity: 1 !important;
+}
+
+#svg-pan-zoom-controls .svg-pan-zoom-control-element {
+  fill: #161b22 !important;
+  fill-opacity: 0.9 !important;
+  stroke: #14B5FF !important;
+  stroke-width: 1.5px !important;
+}
+
+#svg-pan-zoom-controls .svg-pan-zoom-control-element:hover {
+  fill: #14B5FF !important;
+  fill-opacity: 0.35 !important;
+}
+
+#svg-pan-zoom-controls path {
+  fill: #00FFFF !important;
+  stroke: #00FFFF !important;
 }
 
 #svg-pan-zoom-controls rect {
-  fill: var(--ptg-code-bg);
+  fill: #0d1117 !important;
+  stroke: #14B5FF !important;
+  stroke-width: 1px !important;
 }
 
 /* Tablet and Small Desktop Breakpoint */

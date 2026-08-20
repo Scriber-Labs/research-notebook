@@ -35,7 +35,7 @@ This results in a model that behaves as a constrained operator-learning system w
 
         "flowchart": {
             "curve": "basis",
-            "useMaxWidth": true,
+            "useMaxWidth": false,
             "htmlLabels": true,
             "rankSpacing": 131,
             "nodeSpacing": 81
@@ -268,7 +268,7 @@ linkStyle default stroke:#4CC9F0,stroke-width:1.618px,opacity:0.6
         "themeCSS": ".node rect, .node circle, .node ellipse, .node polygon, .node path { stroke-width: 2.618px !important; filter: drop-shadow(0px 4px 6px rgba(0,0,0, 0.5)); } .node { filter: saturate(1.2) contrast(1.1); } .cluster rect { rx: 25.8; ry: 25.8; stroke-width: 1px; stroke-dasharray: 10,5; } .nodeLabel, .edgeLabel, .cluster-label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: #F0F6FC !important; fill: #F0F6FC !important; font-weight: 300; } #pod .cluster-label { fill: #00D4FF !important; font-size: 20px; } #pod rect { stroke: #00D4FF; fill: rgba(0, 212, 255, 0.04); }",
         "flowchart": {
             "curve": "basis",
-            "useMaxWidth": true,
+            "useMaxWidth": false,
             "htmlLabels": true,
             "rankSpacing": 131,
             "nodeSpacing": 81
