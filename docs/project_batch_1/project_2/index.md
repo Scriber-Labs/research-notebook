@@ -120,11 +120,18 @@
         - A central difference stencil is used to approximate the $\partial_{xx}$ operator.
         - In the training loop, orthonormalization (via Gram-Schmidt and l2 inner product with trapezoidal weighting) is performed before the loss function is calculated. Thus, the Schrödinger residual is computed using orthonormalized eigenfunctions,
         $$ \hat{H}_\theta \hat{\psi}_n^\theta \approx E_n^\theta \hat{\psi}_n^\theta \, ,$$ and the deviation from this eigenvalue equation is minimized during training. ✨
-            - Sequential Gram-Schmidt orthogonalization ensures that the learned eigenfunctions satisfy orthogonality requirements of Hamiltonian eigenstates.
+            
+            - $L^2$ **normalization** guarantees a unit norm but does *not* enforce orthogonality between distinct
+              eigenfunctions. 
+            - Sequential Gram-Schmidt orthogonalization ensures that the learned eigenfunctions satisfy the 
+              orthogonality requirements of Hamiltonian eigenstates:
+
+                $$\langle \hat{\psi}_n^\theta | \hat{\psi}_m^\theta \rangle = \delta_{nm} \, .$$
+
             - The trapezoidal rule provides a discrete approximation to the continuous Hilbert-space inner product on the uniform spatial grid.
             - Consistent quadrature weighting throughout training and POD analysis ensures that the learned geometry and the diagnostic geometry are defined with respect to the same inner product.
 
-        !!! tip "Normalization By Construction"
+        ??? "Normalization By Construction"
 
             Rather than enforcing normalization as a soft penalty in the loss function -- which would compete with other
             loss terms and never guarantee exact satisfaction -- we **enforce normalization by construction** inside the
@@ -136,12 +143,12 @@
             where $\epsilon=10^{-8}$ is a small constant added for numerical stability during training, when the network
             output may be near zero. 
 
-+           This approach is sometimes called **hard normalization** or **normalization by construction**. It is used 
-+           in Project 2 to ensure that every wavefunction emitted by the model is a valid quantum state at every
-+           training step. It also eliminates the need for a dedicated normalization loss term, thus eliminating the
-+           need for the optimizer to trade physical validity against other objectives such as the Schrödinger residual
-+           or data mismatch.
-+ 
+            This approach is sometimes called **hard normalization** or **normalization by construction**. It is used 
+            in Project 2 to ensure that every wavefunction emitted by the model is a valid quantum state at every
+            training step. It also eliminates the need for a dedicated normalization loss term, thus eliminating the
+            need for the optimizer to trade physical validity against other objectives such as the Schrödinger residual
+            or data mismatch.
+  
         !!! tip "Note on POD usage in Project 2"
             
             Proper orthogonal decomposition (POD) is treated as a diagnostic probe of learned basis geometry rather as a computational tool for dimension reduction.
