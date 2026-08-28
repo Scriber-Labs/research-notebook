@@ -14,7 +14,8 @@
     === "🗝️ Key Points"
 
         - **Indirect supervision:** the architecture behaves as a coupled operator-eigenfunction learning system*.
-        - **Proper orthogonal decomposition (POD)** is used as a geometry-aware probe for studying basis conditioning, variance concentration, mode alignment, and potential mode mixing within the learned eigenstate manifold.
+        - **Proper orthogonal decomposition (POD)** is used as a geometry-aware probe for studying basis conditioning, 
+        variance concentration, mode alignment, and potential mode mixing within the learned eigenstate manifold.
 
     === ":eigenote: Physical Structure"
 
@@ -102,16 +103,17 @@
             for $n=0,1,2$ using lightweight differentiable neural networks.
 
             
-            !!! ember "The eigenfunctions $\psi_n^\theta(x)$ are not freely learned fields."
-
-                The learned eigenstates are constrained by multiple coupled structures:
+            !!! eigenote "Note" 
+                The learned eigenfunctions $\psi_n^\theta(x)$ are *not* freely learned fields. They are constrained by 
+                multiple coupled structures:
                     
                 - The time-independent Schrödinger equation (TISE).
                 - Weighted $L^2$ normalization.
                 - Sequential Grahm-Schmidt orthogonalization.
                 - Shared dependence on the learned potential $V_\theta(x)$.
 
-                Consequently, the architecture behaves as a **constrained operator-eigenfunction learning system** rather than a collection of independently learned functions.
+                Consequently, the architecture behaves as a **constrained operator-eigenfunction learning system** 
+                rather than a collection of independently learned functions.
 
     === "🔢 Numerical Methods"
 
