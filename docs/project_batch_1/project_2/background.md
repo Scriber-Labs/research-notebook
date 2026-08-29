@@ -24,6 +24,8 @@ and the TISE.
 
         is used to define the physics residual for the inverse problem.
     
+    - **Born Rule**: The probability of finding a quantum particle somewhere in the domain is 100%.
+    
     - **Identifiability**: The extent to which information contained in the observed densities and energies constrains 
       the underlying learned potential.
         - *Perfect identifiability* corresponds to unique recovery. 
