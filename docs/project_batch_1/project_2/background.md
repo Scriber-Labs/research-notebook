@@ -10,19 +10,30 @@ using a physics-informed neural architecture. ✨ In particular, this architectu
 $V_\theta(x)$ whose induced Hamiltonian $\hat{H}_\theta$ simultaneously satisfies observed, noisy spectral constraints 
 and the TISE.
 
-Learned variables include:
+!!! eigenote "Learned variables"
 
-- $N=3$ orthonormalized eigenfunctions $\hat{\psi}_n^\theta$ where $n=\{0, 1, ..., N-1\}$. 
-- Eigenvalues $E_n^\theta$ are predicted for the energy eigenvalues. These are constrained to be ordered $E_0 < E_1 < E_2$.
-- The neural network architecture $V_\theta : \mathbb{R} \rightarrow \mathbb{R}$ approximates the unknown potential $V_\theta(x)$.
+    - $N=3$ orthonormalized eigenfunctions $\hat{\psi}_n^\theta$ where $n=\{0, 1, ..., N-1\}$. 
+    - Eigenvalues $E_n^\theta$ are predicted for the energy eigenvalues. These are constrained to be ordered $E_0 < E_1 < E_2$.
+    - The neural network architecture $V_\theta : \mathbb{R} \rightarrow \mathbb{R}$ approximates the unknown potential $V_\theta(x)$.
 
-## 📒 Core Terminology
-- **Identifiability**: The extent to which information contained in the observed densities and energies constrains the underlying learned potential.
-  - Perfect identifiabillity corresponds to unique recovery, while poor identifiability permits multiple distinct potentials to explain the same observations.
-- **Physics Residual**: Used in the loss function to ensure the learned wavefunctions and learned potential are physically consistent.
-- **1-D TISE (Time-Independent Schrödinger Equation)**: The physical constraint $ \hat{H}\psi_n = E_n\psi_n $ where $$ \hat{H}=-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+V(x)$$ is used to define the physics residual for the inverse problem.
-- **POD (Proper Orthogonal Decomposition)**: A data-driven method (equivalent to PCA) used to find the spatial features (modes) in the learned wavefunctions along which the variance in the data varies the most.
-- **Mode Mixing**: A failure mode in which a learned basis state contains contributions from multiple physical eigenstates, reducing interpretability and obscuring state-to-state correspondence.
+!!! tip "📒 Core Terminology"
+
+    - **1D TISE (Time-Independent Schrödinger Equation)**: The physical constraint $\hat{H}\psi_n = E_n\psi_n$ where 
+        
+        $$ \hat{H}=-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+V(x)$$ 
+
+        is used to define the physics residual for the inverse problem.
+    
+    - **Identifiability**: The extent to which information contained in the observed densities and energies constrains 
+      the underlying learned potential.
+        - *Perfect identifiability* corresponds to unique recovery. 
+        - *Poor identifiability* permits multiple distinct potentials to explain the same observations.
+    - **Mode Mixing**: A failure mode in which a learned basis state contains contributions from multiple physical eigenstates, reducing interpretability and obscuring state-to-state correspondence.
+    - **Normalization by Construction**: A technique used to ensure that the wavefunctions emitted by the model are valid quantum states at every training step, eliminating the need for a dedicated normalization loss term.
+    - **Physics Residual**: Used in the loss function to ensure the learned wavefunctions and learned potential are physically consistent.
+    - **POD (Proper Orthogonal Decomposition)**: A data-driven method (equivalent to PCA) used to find the spatial 
+      features (modes) in the learned wavefunctions along which the variance in the data varies the most.
+
 
 ## Summary Tables:
 ---
