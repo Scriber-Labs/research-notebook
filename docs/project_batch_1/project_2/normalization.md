@@ -1,16 +1,49 @@
 # Normalization
 
+!!! tip "Born Rule and Physical Interpretability"
+
+    In quantum mechanics, the **Born rule** requires that the total probability of finding a particle anywhere in space
+    is equal to unity. For the 1D-TISE, this requires
+
+    $$\int_{-\infty}^{\infty}{\| \psi (x) \|^2 \, dx} = 1 \, .$$
+
+    On a uniform spatial grid with spacing $\Delta x$, the inttegral is replaced by a discretized sum, gving the
+    constraint
+
+    $$\sum_i{ \| \psi(x_i) \|^2 \Delta x } = 1 \, .$$
+
+    Any neural network parameterizing a wavefunction must respect this constraint in order for its output to be a 
+    physically interpretable quantum state.
+
+
 !!! tip "Normalization By Construction"
 
-    Rather than enforcing normalization as a soft penalty in the loss function -- which would compete with other
-    loss terms and never guarantee exact satisfaction – we enforce **normalization by construction** inside the
-    forward pass of the PIML network. In particular, given the raw output $\psi_\text{raw}(x)$ of the multilayer
-    perceptron, we rescale it to the unit norm:
+    Normalization as a soft penalty in the loss function cannot guarantee exact satisfaction of the Born rule and also 
+    entails competition with other loss terms. In order to avoid these complications all together, we enforce 
+    **normalization by construction** inside the forward pass of the PIML network:
 
-    $$\hat{\psi}(x) = \frac{\psi_\text{raw}(x)}{\sum_i{\psi_\text{raw}(x_i)^2} \Delta x + \epsilon} \, ,$$
+    ```py
+    class NormalizedWaveFunctionNet(nn.Module):
+        """Wraps an MLP to enforce L2 normalization by construction."""
+
+    def __init__(self, base_net: nn.Module, dx: float) -> None:
+        super().__init__()
+        self.base_net = base_net
+        self.dx = dx
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        psi_raw = self.base_net(x)
+        nor_sq = torch.sum(psi_raw ** 2) * self.dx
+        norm = torch.sqrt(norm_sq + 1e-8)
+        return psi_raw / norm
+    ```
+
+    Given the output $\psi^\theta_\text{raw}(x)$ of the multilayer perceptron, we rescale it to the unit norm:
+
+    $$\hat{\psi}^\theta(x) = \frac{\psi^\theta_\text{raw}(x)}{\sum_i{\psi^\theta_\text{raw}(x_i)^2} \Delta x + \epsilon} \, ,$$
     
     where $\epsilon=10^{-8}$ is a small constant added for numerical stability during training, when the network
-    output may be near zero. 
+        output may be near zero. 
 
     This approach is sometimes called **hard normalization** or **normalization by construction**. It is used 
     in Project 2 to ensure that every wavefunction emitted by the model is a valid quantum state at every
