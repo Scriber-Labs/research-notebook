@@ -2,12 +2,14 @@
 
 !!! eigenote "Philosophy"
 
-    Scriber Labs develops interpretable computational methods for discovering and understanding structure in complex
-    physical and biological systems. 
+    Scriber Labs develops computational methods for constructing mathematical formalizations that represent underlying 
+    structure in natural systems and support the development of interpretable models. The goal is to develop models 
+    whose representations of structure can be simulated, evaluated, and empirically tested.
 
-    !!! idea "Big Idea"
+    !!! eigenote "Core Commitment"
 
-        Reject opaque black-box models in favor of transparent, interpretable models.
+        1. Reject opaque black-box models in favor of transparent, interpretable models.
+        2. Devolop strategies for model validation 
 
 # :eigenote: Definitions
 ---

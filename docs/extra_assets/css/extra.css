@@ -667,6 +667,7 @@ body {
   -webkit-text-fill-color: transparent;
   display: inline-block;
   margin-bottom: 0.5rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 232, 255, 0.14));
 }
 
 .md-typeset h1 {
@@ -1829,12 +1830,12 @@ body {
 
 /* Node glow effect */
 .node-glow {
-  filter: drop-shadow(0 0 6px rgba(20, 181, 255, 0.6)) drop-shadow(0 0 12px rgba(121, 82, 245, 0.4));
+  filter: drop-shadow(0 0 3px rgba(20, 181, 255, 0.35)) drop-shadow(0 0 7px rgba(121, 82, 245, 0.2));
 }
 
 /* Navigation arrow glow */
 .nav-arrow-glow {
-  box-shadow: 0 0 10px rgba(20, 181, 255, 0.5), 0 0 20px rgba(121, 82, 245, 0.3);
+  box-shadow: 0 0 6px rgba(20, 181, 255, 0.3), 0 0 12px rgba(121, 82, 245, 0.15);
 }
 
 /* White smoke text */
@@ -1865,45 +1866,45 @@ body {
 
 @keyframes eigenote-pulse {
   0% {
-    box-shadow: 0 0 8px rgba(20, 181, 255, 0.4);
+    box-shadow: 0 0 4px rgba(20, 181, 255, 0.25);
     transform: translateY(-50%) scale(1);
   }
   50% {
-    box-shadow: 0 0 15px rgba(20, 181, 255, 0.7);
+    box-shadow: 0 0 8px rgba(20, 181, 255, 0.4);
     transform: translateY(-50%) scale(1.1);
   }
   100% {
-    box-shadow: 0 0 8px rgba(20, 181, 255, 0.4);
+    box-shadow: 0 0 4px rgba(20, 181, 255, 0.25);
     transform: translateY(-50%) scale(1);
   }
 }
 
 @keyframes favicon-pulse {
   0% {
-    box-shadow: 0 0 6px rgba(20, 181, 255, 0.3);
+    box-shadow: 0 0 3px rgba(20, 181, 255, 0.2);
     transform: translateY(-50%) scale(1);
   }
   50% {
-    box-shadow: 0 0 12px rgba(20, 181, 255, 0.6);
+    box-shadow: 0 0 6px rgba(20, 181, 255, 0.35);
     transform: translateY(-50%) scale(1.1);
   }
   100% {
-    box-shadow: 0 0 6px rgba(20, 181, 255, 0.3);
+    box-shadow: 0 0 3px rgba(20, 181, 255, 0.2);
     transform: translateY(-50%) scale(1);
   }
 }
 
 @keyframes ember-pulse {
   0% {
-    box-shadow: 0 0 8px rgba(255, 102, 179, 0.4);
+    box-shadow: 0 0 4px rgba(255, 102, 179, 0.25);
     transform: translateY(-50%) scale(1);
   }
   50% {
-    box-shadow: 0 0 15px rgba(255, 157, 87, 0.7);
+    box-shadow: 0 0 8px rgba(255, 157, 87, 0.4);
     transform: translateY(-50%) scale(1.1);
   }
   100% {
-    box-shadow: 0 0 8px rgba(255, 102, 179, 0.4);
+    box-shadow: 0 0 4px rgba(255, 102, 179, 0.25);
     transform: translateY(-50%) scale(1);
   }
 }
@@ -1918,6 +1919,7 @@ body {
   position: relative;
   padding-left: 2.5rem;
   font-weight: 600;
+  filter: drop-shadow(0 1px 2px rgba(0, 232, 255, 0.12));
 }
 
 .md-typeset .admonition.ember > .admonition-title,
@@ -1931,6 +1933,7 @@ body {
   padding-left: 2.5rem;
   padding-top: 2px;
   font-weight: 600;
+  filter: drop-shadow(0 1px 2px rgba(255, 102, 179, 0.1));
 }
 
 .md-typeset .admonition.favicon > .admonition-title,
@@ -1944,6 +1947,7 @@ body {
   padding-left: 2.5rem; /* Shifted right from 2.2rem */
   padding-top: 2px;     /* Lowered text slightly */
   font-weight: 600;
+  filter: drop-shadow(0 1px 2px rgba(0, 232, 255, 0.12));
 }
 
 .md-typeset .admonition.eigenote > .admonition-title::before,
