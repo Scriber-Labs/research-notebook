@@ -118,33 +118,29 @@
 
 ---
 
+### :eigenote: Examples 
+  
 
-!!! example "Examples"
+!!! example "Example Table - Structure $\mathcal{S}$ ddepends on context"
 
-    !!! example "$\mathcal{X}$: State Space"  
- 
-        :eigenote: **Simple Harmonic Oscillator**
-        $$ \mathcal{X} = \mathbb{R}^2 \, , \quad \mathcal{x} = (q,p) \quad \text{(phase space)} $$
+    | **Context** | **Ambient Space** $\mathcal{X}$ | **Example Structure** $\mathcal{S}$ | **Possible** $\mathcal{M}_\mathcal{S}$ |
+    |:---|:---|:---|:---|
+    | Ordinary Cartesian mechanics | phase space <br> $\mathcal{P} = \{ (q,p) : q\in Q \, , p\in\mathbb{R}^n \}$ | fixed energy ($E$) <br> constraint | $\{(q,p) \in \mathcal{P} : H(q,p)=E\}$ | 
+    | Differential geometry | manifold | geometric constraint | submanifold |
+    | Dynamical systems | space of candidate trajectories | system of differential equations | solution trajectories |
+    | Probability | space of candidate distributions <br> $\mathcal{X} = \{ \rho : \rho \geq 0 \, , \int{\rho} = 1 \}$ | normalization/positivity | admissible distributions |
+    | Quantum mechanics | Hilber space $\mathcal{H}$ | eigenvalue equation | eigenspace |
+    | Optimization | parameter space | inequality/equality constraints | feasible set |
+    | Graph theory | space of graphs | connectivity condition | connected graphs |
+    | PIMLs | parameter/function space | governing physical laws | physicall admissible sets |
+
+
+??? eigenote "🎗️Reminder"
     
-        :eigenote: **Quantum Mechanics**
-
-        - Generally,
-        $$ \mathcal{X} = \mathcal{H} \quad \text{(Hilbert space)} $$
-    
-        - For the time-independent Schrödinger equation,
-
-            $$ \mathcal{x} \in \Bigg\{ \psi : \bigg[ -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial q^2} + V(q) \bigg] \psi = E \psi \Bigg\} $$
-
-        :eigenote: **Probability Distributions**
-
-        $$ \mathcal{X} = \big\{ \rho : \rho \geq 0 \, , \int{\rho} = 1 \big\} $$
-    
-    ??? eigenote
-    
-        - 🎗️ For Scriber Labs projects, the *admissible set* $\mathcal{M}_\mathcal{S}$ is induced by the *structure* $\mathcal{S}$.
-        - 🔮 Generalizing to other Scriber Labs projects $\implies$ replace $\mathcal{S}$ with:
-            - Hamiltonian systems
-            - Kuramoto
-            - DFT/SCF
-            - Bayesian inverse problems
-            - etc.    
+    - For Scriber Labs projects, the *admissible set* $\mathcal{M}_\mathcal{S}$ is induced by the *structure* $\mathcal{S}$.
+    - 🔮 Generalizing to other Scriber Labs projects $\implies$ replace $\mathcal{S}$ with:
+        - Hamiltonian systems
+        - Kuramoto
+        - DFT/SCF
+        - Bayesian inverse problems
+        - etc.  
