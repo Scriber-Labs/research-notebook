@@ -35,57 +35,91 @@
 
     !!! defiinition "Ambient State Space"
 
-        The **ambient state space** $X$ is defined as the space containing all the possible states (or trajectories)
-        $x\in X$ a physical system of interest may obtain.
+        The **ambient state space** $\mathcal{X}$ is defined as the space containing all the possible states (or trajectories)
+        $\mathcal{x}\in \mathcal{X}$ a physical system of interest may obtain.
 
-        We use the term *ambient* is here for emphasis on the significance of the ambient state space $X$ as a 
+        We use the term *ambient* is here for emphasis on the significance of the ambient state space $\mathcal{X}$ as a 
         fundamental concept in the study of physical systems. It serves as a container for all possible states or 
         trajectories that a physical system can attain, regardless of the specific mathematical representation used 
         to describe it. 
 
-        The choice of mathematical representation for $X$ depends on the system being studied, and 
+        The choice of mathematical representation for $\mathcal{X}$ depends on the system being studied, and 
         different systems may require different representations to accurately capture their behavior and properties. 
         Examples of ambient state spaces include finite-dimensional vector spaces, function spaces, manifolds, and 
         spaces of probability distributions, among others.
 
     !!! definition "Structure and Admissibility"
 
-        Let $S$ denote the physical structure imposed on the system. Rather than requiring $S$ be represented using a 
-        particular mathematical framework, we use $S$ as an abstract placeholder for whatever collection of mathematical 
-        objects, relationships, symmetries, invariants, or constraints determine admissiblity for the problem at hand.
+        Let $\mathcal{S}$ denote the **physical structure** imposed on the system. Rather than requiring $\mathcal{S}$ 
+        be represented using a particular mathematical framework, we use it as an abstract placeholder for whatever 
+        collection of mathematical objects, relationships, symmetries, invariants, or constraints determine admissiblity 
+        for the problem at hand.
 
         Conceptually, we write
         
-        $$\boxed{(X,S) \rightsquigarrow \mathcal{M}_{S}}$$
+        $$\boxed{(\mathcal{X},\mathcal{S}) \rightsquigarrow \mathcal{M}_\mathcal{S}}$$
 
-        where $\rightsquigarrow$ informally denotes "induces", "gives rise to", or "determines".
+        where $\rightsquigarrow$ informally reads as "induces", "gives rise to", or "determines".
+ 
+        Note that the $\rightsquigarrow$ notation is intentionally less specific than a function arrow 
+        (e.g., $f: X \rightarrow Y$). It is meant to indicate a structural relation similar to that of a 
+        function arrow, without asserting that $\mathcal{S}$ necessarily acts as an ordinary function.
 
-        ??? eigenote "__$\rightsquigarrow$  vs. Function Arrows__"
+        !!! eigenote "Admissible state set"
+
+            The resulting **admisible state set** is
+
+            $$ \mathcal{M}_\mathcal{S} = \{ \mathcal{x}\in \mathcal{X} | \mathcal{x} \, \text{satisfies the structure} \, \mathcal{S} \} \, .$$
+
+            Again, we leave our definition intentionally general. Depending on the problem, admissibility may be expressed
+            via equations, inequalities, symmetries, conservation laws, systems of differential equations, geometric 
+            constraints, etc.
+
+        Thus, 
+
+        $$\mathcal{M}_\mathcal{S} \subseteq \mathcal{X}$$ 
+
+        represents the remaining set of states that are admissible after the $\mathcal{S}$ has been imposed.
         
-            The $\rightsquigarrow$ notation used here is intentionally less specific than a function arrow 
-            (e.g., $f: X \rightarrow Y$). It is meant to indicate a structural relation similar to that of a function 
-            arrow, without asserting that $S$ necessarily acts as an ordinary function.
+    !!! eigenote "States and Evolutions"
 
-        The resulting
+        The admissible state set $\mathcal{M}_\mathcal{S}$ is not the same thing as the admissible trajectory. This
+        nuance arises from distinguishing a **trajectory** as a map
+
+        $$\gamma : \mathcal{I} \rightarrow \mathcal{X}$$
+
+        where $\mathcal{I}$ denotes the relevant parameter interval (e.g., a period of time $t$).
+
+        Importantly a given physical structure $\mathcal{S}$ may impose both
+
+        $$\mathcal{M}_\mathcal{S} \subseteq \mathcal{X}$$
+
+        and
+
+        $$\gamma(t) \in \mathcal{M}_\mathcal{S} \, ,$$
+
+        or more generally restrictions on the evolution law itself. Thus, Scriber Labs convention distinguishes
+
+        $$\text{admissible states} \neq \text{admissible evolutions} \, ,$$
+
+        the later of which may be determined by additional dynamical structure.
+
         
+!!! eigenote "Summary of variables"
+
+    | **Symbol** | **Meaning** |
+    | :--- | :--- |
+    | $\mathcal{X}$ | Ambient state space containing the mathematically possible states under consideration |
+    | $\mathcal{x}$ | A state satisfying $\mathcal{x} \in \mathcal{X}$ |
+    | $\mathcal{S}$ | Physical structure: mathematical objects, relationships, symmetries, invariants, or constraints that determine admissibility |
+    | $\mathcal{M}_\mathcal{S}$ | Admissible subset of states induced by $\mathcal{S}$ |
+    | $\gamma$ | A trajectory through the state space |
+    | $\rightsquigarrow$ | Informal structural relation meaning “induces,” “gives rise to,” or “determines” |
+
+        
+
 ---
 
-!!! eigenote "Formal Definition"
-
-    Suppose  $\mathcal{X}$ denotes the *state space* of all mathematically possible states $\mathcal{x}\in\mathcal{X}$ of a system. Then the 
-    **physical structure** $\mathcal{S}$ determines an admissible subset of states and trajectories that satisfy governing laws,
-    symmetries, invariants, or geometric contraints of the system.
-
-    In particular, $\mathcal{S}$ is a collection of constraints, symmetries, or invariants that induces
-
-    $$ \mathcal{M}_{\mathcal{S}} \subseteq \mathcal{X} \, .$$
-
-    !!! eigenote "Summary of variables"
-
-        - $\mathcal{X}$: state space of all mathematically possible states $\mathcal{x}\in\mathcal{X}$ of a system
-        - $\mathcal{S}$: **physical structure** that restricts the admissible states or evolutions of a system
-        - $\mathcal{M}_{\mathcal{S}}$: admissible subset of states and trajectories that satisfy governing laws, 
-          symmetries, invariants, or geometric contraints of the system
 
 !!! example "Examples"
 
