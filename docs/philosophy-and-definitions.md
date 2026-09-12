@@ -1,4 +1,4 @@
-# :eigenote: Philosophy
+## :eigenote: Philosophy
 
 !!! eigenote "Philosophy"
 
@@ -11,15 +11,13 @@
         1. Reject opaque black-box models in favor of transparent, interpretable models.
         2. Devolop strategies for model validation 
 
-# :eigenote: Definitions
+## :eigenote: Definitions
 ---
 
 !!! warning ":ember: User discretion is advised."
 
     The following definitions/conventions are specific to Scriber Labs projects and are not used in standard literature. 
     Moreover, they are subject to change as I work through projects and update them for the purposes of clarity and consistency among all projects.
-
-## :eigenote: Physical Structure
 
 
 !!! eigenote "Overview"
