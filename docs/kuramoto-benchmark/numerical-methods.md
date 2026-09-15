@@ -75,14 +75,14 @@
             In the context of numerical integration of ordinary differential equations (such as Kuramoto phase 
             oscillators $\dot{\theta}_i=\omega_i + \frac{K}{N} \sum_j{A_{ij}\sin(\theta_j-\theta_i})$ ):
 
-                - The fastest effective timescale is governed not only by the maximum frequency 
-                $\omega_\text{max} = \max_i \| \omega_i \|$, but also the maximum *coupling torque* 
+            - The fastest effective timescale is governed not only by the maximum frequency 
+                $\omega_\text{max} = \max_i \| \omega_i \|$, but also the maximum *coupling torque*
                 $\propto K \cdot \deg_\text{max}$.
 
-                - Setting a step size limmit based on this fastest scale ensures that the numerical trajectory does not 
+            - Setting a step size limmit based on this fastest scale ensures that the numerical trajectory does not 
                 skip cycles ($2\pi$ phase wraps) beteween solver evaluations.
 
-                - In order to to maintain numerical stability and high integration accuracy in Runge-Kutta schemes 
+            - In order to to maintain numerical stability and high integration accuracy in Runge-Kutta schemes 
                 (e.g., RK45), the step size should be limited to a conservative fraction of the minimum intrinsic 
                 frequency (e.g., 20 steps per period), comfortably exceeding the theoretical minimum Nyquist threshold 
                 of 2 steps per period.
@@ -145,7 +145,6 @@
                         max_step=max_step if max_step is not None else np.inf,
                     )
                     ```
-
 
                 - This forces SciPy's adaptive RK45 engine to constrain every internal step $h_n \leq \max_\text{step}$, 
                   preventing excessive step sizes and ensuring a robust trajectory resolution across arbitrary network 
