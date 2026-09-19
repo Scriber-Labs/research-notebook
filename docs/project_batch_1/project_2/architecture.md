@@ -364,6 +364,11 @@ trap --> trap_pod
 linkStyle default stroke:#4CC9F0,stroke-width:1.618px,opacity:0.6
 ```
 
+
+!!! note "✅ To Do"
+    
+    - [ ] Make sure $\sqrt{w_i\Delta x}$ weighting is properly applied at all relevant steps.
+
 !!! eigenote "Proper Orthogonal Decomposition (POD) Diagnostics"
   
     This figure details the weighted POD pipeline used for diagnostic verification.

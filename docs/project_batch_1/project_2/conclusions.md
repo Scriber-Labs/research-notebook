@@ -1,8 +1,23 @@
 # Conclusions
 
+
+!!! note "✅ To Do"
+    
+    - [ ] Update Take Home Messages (questions that need answering).
+
 !!! eigenote "__Figure Analysis Overview__"
 
-    1. Figures 2, 3, 4, and 5 all together suggest accurate recovery of low-energy spectral information does not necessarily require accurate recovery of the underlying potential.
+    1. **Spectral Recovery & Subspace Fidelity:** Figures 4 and 7 demonstrate that the model accurately captures the 
+    energy eigenvalues ($E_1 = 1.50$, $E_2 = 2.40$), preserves strict spatial orthonormality ($\langle \hat{\psi}_m^\theta | \hat{\psi}_n^\theta \rangle = \delta_{mn}$),
+    and accurately spans the low-energy Hilbert subspace ($\ge 0.96$ alignment with true analytical eigenstates).
+    2. **Potential Identifiability & Asymptotics**: Figure 2 highlights that the inverse problem is under-determined; the 
+    optimizer minimizes data loss using an asymmetric sigmoidal potential step rather than the true parabolic well, 
+    inducing spurious high-frequency ripples in low-density tails (Figure 3).
+    3. **Optimization Trajectory:** Multi-scale training diagnostics (Figure 1) confirm two distinct transitions (Spike 1
+    at epoch 5 and spike 2 at epoch 782) followed by an invariant plateau across epochs 800-6000.
+    4. **POD Basis DecouplingL** POD diagnostics (Figures 6 and 8-13) demonstrate that unweighted snapshot SVD produces
+    degenerate singular values ($\sigma_k = 1.0$) rotated spatial modes, which can be resolved via physical 
+    meausre-weighted decomposition.
 
 !!! favicon "__Take-Home Messages__"
 

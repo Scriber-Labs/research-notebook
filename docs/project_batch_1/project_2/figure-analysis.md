@@ -1,11 +1,14 @@
-# Figure Analysis (Windows)
+# Figure Analysis (macOS)
 ---
 
-## Figure 1 - Training Curves
+!!! note "✅ To Do"
     
-![training_curves.png](figure_files/training_curves/training_curves.png)
+    - [ ] Update all the figure analyses for new figures.
 
-!!! eigenote "**Figure 1 Analysis**"
+
+!!! eigenote "Figure 1 - Training Curves"
+    
+    ![training_curves.png](figure_files/training_curves/training_curves.png)
 
     !!! favicon "**Take-Home Message**"
     
@@ -30,11 +33,9 @@
 ## Sanity Checks
 ---
 
-### Figure 2 - $V_\theta$ vs. $V(x)$
+!!! eigenote "Figure 2 - $V_\theta$ vs. $V(x)$"
 
-![learned_potential.png](figure_files/learned_potential.png)
-
-!!! eigenote "**Figure 2 Analysis**"
+    ![learned_potential.png](figure_files/learned_potential.png)
 
     !!! favicon "**Take-Home Message**"
 
@@ -53,11 +54,9 @@
         | ❌           | Boundary under-constraint | Sparse data at $x \in (-\infty, -4.5] \cup [4.5, \infty)$ allows the potential to drift. | Grey dashed domain limits show no training points beyond. |
 
 
-### Figure 3 – $\{\psi_n^\theta\}$ vs. $\{\psi_n\}$
+!!! eigenote "Figure 3 – $\{\psi_n^\theta\}$ vs. $\{\psi_n\}$"
 
-![learned_wavefunctions.png](figure_files/learned_wavefunctions.png)
-
-!!! eigenote "**Figure 3 Analysis**"
+    ![learned_wavefunctions.png](figure_files/learned_wavefunctions.png)
 
     !!! favicon "**Take-Home Message**"
 
@@ -78,11 +77,9 @@
         | ❌ | Spurious oscillations | High-frequency ripples in tails from weak $V_\theta$ smoothness. | Visible beyond $x\approx \pm 4$.           |
 
 
-### Figure 4 – $\{E_n^\theta\}$ vs. $\{E_n\}$
+!!! eigenote "Figure 4 – $\{E_n^\theta\}$ vs. $\{E_n\}$"
 
-![learned_energies.png](figure_files/learned_energies.png)
-
-!!! eigenote "**Figure 4 Analysis**"
+    ![learned_energies.png](figure_files/learned_energies.png)
 
     !!! favicon "**Take-Home Message**"
 
@@ -99,11 +96,9 @@
         | :---------- | :--------------- | :-------------- | :-------------- |
         | ❌ | Spectral fit, wrong operator | Energies match, but $V_\theta$ deviates (see Fig. 2) |
 
-### Figure 5 - $\{|\psi_n^\theta|^2\}$ vs.$\{\rho_n^\text{observed}\}$
+!!! eigenote "Figure 5 - $\{|\psi_n^\theta|^2\}$ vs.$\{\rho_n^\text{observed}\}$"
 
-![density.png](figure_files/density.png)
-
-!!! eigenote "Figure 5 Analysis"
+    ![density.png](figure_files/density.png)
 
     !!! favicon "**Take-Home Message**"
     
@@ -123,11 +118,9 @@
 
 ## POD Analysis
 
+!!! eigenote "Figure 6 - POD Singular Values"
 
-### Figure 6 - POD Singular Values
-![pod_singular_values.png](figure_files/pod_singular_values.png)
-
-!!! eigenote "Figure 6 Analysis"
+    ![pod_singular_values.png](figure_files/pod_singular_values.png)
 
     !!! favicon "**Take-Home Message**"
 
@@ -145,11 +138,9 @@
         | ❌ | Flat spectrum | All $\sigma_i$ nearly equal $\Rightarrow$ modes are independent, but unphysical. | Would signal noise-dominated snapshots (❓).                |
         | ❌ | Slow decay | $\tfrac{\sigma_{2}}{\sigma_{0}} \geq 0.3 \Rightarrow$ redundant or correlated modes. | Implies over-fitting or aliasing in $\hat{\psi}_n^\theta$. |
     
-### Figure 7 - Overlap matrix $\langle \hat{\psi}_m^\theta | \hat{\psi}_n^\theta \rangle $
+!!! eigenote "Figure 7 - Overlap matrix $\langle \hat{\psi}_m^\theta | \hat{\psi}_n^\theta \rangle $"
 
-![overlap_heatmap.png](figure_files/overlap_heatmap.png){: .image-medium}
-
-!!! eigenote "Figure 7 Analysis"
+    ![overlap_heatmap.png](figure_files/overlap_heatmap.png){: .image-medium}
 
     !!! favicon "**Take-Home Message**"
         
@@ -166,11 +157,9 @@
         | :---------- | :--------------- | :-------------- | :-------------- |
         | ✔️ | Non-orthogonality | Off-diagonal $> 0.1$ indicates incomplete convergence | Here, max off-diagonal is $\ge 0.02$ $\Rightarrow$ passes. | 
 
-### Figure 8 - $\{u_n\}$ vs. $\{\hat{\psi}_n^\theta\}$ vs. $\{\hat{\psi}_n\}$
+!!! eigenote "Figure 8 - $\{u_n\}$ vs. $\{\hat{\psi}_n^\theta\}$ vs. $\{\hat{\psi}_n\}$"
 
-![pod_modes.png](figure_files/pod_modes.png)
-
-!!! eigenote "Figure 8 Analysis"
+    ![pod_modes.png](figure_files/pod_modes.png)
 
     !!! favicon "**Take-Home Message**"
 
@@ -187,11 +176,9 @@
         | :---------- | :--------------- | :-------------- | :-------------- |
         | ❌ | Mode mixing | Pod modes do not resemble any physical eigenfunction. | Blue curves visibly shifted (see Sec. A.6); fix requires re-weighting. |
 
-### Figure 9 - Overlap matrix $\langle u_k | \hat{\psi}_n^\theta \rangle$
+!!! eigenote "Figure 9 - Overlap matrix $\langle u_k | \hat{\psi}_n^\theta \rangle$"
 
-![cross_overlap_heatmap.png](figure_files/cross_overlap_heatmap.png){: .image-medium}
-
-!!! eigenote "Figure 9 Analysis"
+    ![cross_overlap_heatmap.png](figure_files/cross_overlap_heatmap.png){: .image-medium}
 
     !!! favicon "**Take-Home Message**"
     
@@ -208,11 +195,9 @@
         | :---------- | :--------------- |:----------------------------------------------------------| :-------------- |
         | ❌ | Distributed overlap | Single $u_k$ projects onto several $\hat{\psi}_n^\theta$. | 🔮 Further investigation required to understand the root cause and impact on POD basis stability and interpretability. |
 
-### Figure 10 - Overlap matrix $\langle u_k | \hat{\psi}_n \rangle$ 
+!!! eigenote "Figure 10 - Overlap matrix $\langle u_k | \hat{\psi}_n \rangle$"
 
-![pod_eigen_alignment.png](figure_files/pod_eigen_alignment.png){: .image-medium}
-
-!!! eigenote "Figure 10 Analysis"
+    ![pod_eigen_alignment.png](figure_files/pod_eigen_alignment.png){: .image-medium}
 
     !!! favicon "**Take-Home Message**"
     
@@ -230,11 +215,9 @@
         | ❌ | Mis-alignment | Off-diagonal $> 0.2$ indicates POD not yet physical | Here $\rangle u_0, \hat{\psi}_1 \rangle \approx 0.3 \Rightarrow $ Fix via rescaling (see text). 
 
 
-### Figure 11 - Temporal Modes
+!!! eigenote "Figure 11 - Temporal Modes"
 
-![pod_temporal_modes.png](figure_files/pod_temporal_modes.png){ .image-medium }
-
-!!! eigenote "Figure 11 Analysis"
+    ![pod_temporal_modes.png](figure_files/pod_temporal_modes.png){ .image-medium }
 
     !!! favicon "**Take-Home Message**"
     
@@ -250,11 +233,9 @@
         | :---------- | :--------------- | :-------------- | :-------------- |
         | ❌ | Incoherent coefficients | Random sign / magnitude pattern across rows of $V$. | Magnitudes scatter (cf. Fig. 13) $\Rightarrow$ indicates prior mis-alignment. |
 
-### Figure 12 - Overlap Matrix $\langle v_m | v_n \rangle$
+!!! eigenote "Figure 12 - Overlap Matrix $\langle v_m | v_n \rangle$"
 
-![pod_temporal_overlap.png](figure_files/pod_temporal_overlap.png){: .image-medium}
-
-!!! eigenote "Figure 12 Analysis"
+    ![pod_temporal_overlap.png](figure_files/pod_temporal_overlap.png){: .image-medium}
 
     !!! favicon "Take-Home Message"
     
@@ -270,11 +251,9 @@
         | :---------- | :--------------- |:-------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------|
         | ✔️ | Identity deviation | Large off-diagonals | Largest off-diagonal $\approx 3\times 10^{-3} \Rightarrow$ within tolerance $\therefore$ pass. |
 
-### Figure 13 - Overlap Matrix $|\langle \mathbf{e}_n | v_n \rangle|$
+!!! eigenote "Figure 13 - Overlap Matrix $|\langle \mathbf{e}_n | v_n \rangle|$"
 
-![pod_temporal_cross_overlap.png](figure_files/pod_temporal_cross_overlap.png){: .image-medium}
-
-!!! eigenote "Figure 13 Analysis"
+    ![pod_temporal_cross_overlap.png](figure_files/pod_temporal_cross_overlap.png){: .image-medium}
 
     !!! favicon "Take-Home Message"
 
