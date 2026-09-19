@@ -3,7 +3,7 @@
 
 ## Figure 1 - Training Curves
     
-![training_curves.png](figure_files/training_curves.png)
+![training_curves.png](figure_files/training_curves/training_curves.png)
 
 !!! eigenote "**Figure 1 Analysis**"
 
