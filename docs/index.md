@@ -34,7 +34,7 @@ title: Scriber Labs - Research Notebook
 
     Although these projects span multiple scientific disciplines, they share a common objective: to understand how meaningful
     structure emerges from data, mathematics, and physical laws, and to develop computational tools that make those 
-    structures easier to discover, interpret, and communicate.
+    structures easier to understand, implement, interpret, and validate.
 
 
 !!! summary ":favicon: Scriber Labs Links"
