@@ -5,7 +5,7 @@
     
     - [ ] Update all the figure analyses for new figures.
         - [x] Figure 1
-        - [ ] Figure 2
+        - [x] Figure 2
         - [ ] Figure 3
         - [ ] Figure 4
         - [ ] Figure 5
@@ -63,7 +63,7 @@
     ??? eigenote "🔑 Key Insights"
 
         1. Central regions of the learned eigenfunctions (Fig. 3) and densities (Fig. 5) match the ground truth far better than the tails.
-        2. The model learns only the portion of $H_\theta$ required to reproduce high-probability regions, exposing the inverse problem's under-determinism.
+        2. The model learns only the portion of $H_\theta$ required to reproduce high-probability regions, :ember: **exposing the inverse problem's under-determinism**.
 
     ??? fail "❌ **Failure Modes**"
 
