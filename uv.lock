@@ -279,8 +279,22 @@ dependencies = [
     { name = "zensical" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "black" },
+    { name = "ruff" },
+    { name = "zensical" },
+]
+
 [package.metadata]
 requires-dist = [
+    { name = "black", specifier = ">=26.5.1" },
+    { name = "ruff", specifier = ">=0.16.8" },
+    { name = "zensical", specifier = ">=0.0.64" },
+]
+
+[package.metadata.requires-dev]
+dev = [
     { name = "black", specifier = ">=26.5.1" },
     { name = "ruff", specifier = ">=0.16.8" },
     { name = "zensical", specifier = ">=0.0.64" },

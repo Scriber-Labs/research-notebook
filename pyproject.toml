@@ -7,3 +7,10 @@ dependencies = [
     "ruff>=0.16.8",
     "zensical>=0.0.64",
 ]
+
+[dependency-groups]
+dev = [
+    "black>=26.5.1",
+    "ruff>=0.16.8",
+    "zensical>=0.0.64",
+]
