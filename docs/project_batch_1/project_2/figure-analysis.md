@@ -1,24 +1,6 @@
 # Figure Analysis (macOS)
 ---
 
-??? note "✅ To Do"
-    
-    - [ ] Update all the figure analyses for new figures.
-        - [x] Figure 1
-        - [x] Figure 2
-        - [x] Figure 3
-        - [x] Figure 4
-        - [x] Figure 5
-        - [x] Figure 6
-        - [x] Figure 7
-        - [x] Figure 8
-        - [x] Figure 9
-        - [x] Figure 10
-        - [ ] Figure 11
-        - [ ] Figure 12
-        - [ ] Figure 13
-
-
 !!! eigenote "Figures 1 a-c - Training Curves"
 
     === "**Figure 1a - Full Simulation**"
@@ -261,39 +243,51 @@
 
 !!! eigenote "Figure 11 - Temporal Modes"
 
+    - [ ] Choose different color scale for more intuitive visualization.
+    - [ ] Rewrite Take-Home Message to reflect your own understanding of the figure. Current description is not clear and is a placeholder.
+
     ![pod_temporal_modes.png](figure_files/pod_temporal_modes.png){ .image-medium }
 
     !!! favicon "**Take-Home Message**"
     
-        Columns of $V$ from $\Psi=U\Sigma V^T$: modal composition per state.
+        Right singular matrix components $V_{nk}$ reflect modal participation of POD basis vectors across learned states.
     
     ??? eigenote "🔑 **Key Insights**"
     
-        1. **Coefficient distribution** - Shows how each POD mode contributes to each learned state.
+        1. **Modal composition:** State $0$ draws from $\sigma_0$ ($-0.88$), and $\sigma_1$ ($-0.47$). State $1$ draws from $\sigma_0$ ($-0.46$) and $\sigma_1$ ($+0.87$).
+
+        2. **State doubling:** State $2$ is pre-dominantly aligned with $\sigma_2$ ($0.98$). 
     
     ??? fail "❌ **Failure Modes**"
     
         | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
         | :---------- | :--------------- | :-------------- | :-------------- |
-        | ❌ | Incoherent coefficients | Random sign / magnitude pattern across rows of $V$. | Magnitudes scatter (cf. Fig. 13) $\Rightarrow$ indicates prior mis-alignment. |
+        | ❌ | Incoherent coefficients | Scatter if non-zero coefficients across temporal mode entries. | States $0$ and $1$ exhisbit multi-mode particiption rather than diagonal isolation. |
 
-!!! eigenote "Figure 12 - Overlap Matrix $\langle v_m | v_n \rangle$"
+!!! eigenote "Figure 12 - Temporal overlap heatmap"
+
+    - [ ] Choose different color scale for more intuitive visualization.
+    - [ ] Consider using a diverging color scale to highlight the diagonal structure.
+    - [ ] Adjust colorbar limits to better represent the range of values.
+    - [ ] Normalize color scale to emphasize diagonal structure.
 
     ![pod_temporal_overlap.png](figure_files/pod_temporal_overlap.png){: .image-medium}
 
     !!! favicon "Take-Home Message"
     
-        Overlap $\langle v_m | v_n \rangle  \approx I$, as expected.
+        Orthogonality of right singular vectors $\langle v_m | v_n \rangle$, conforms to exact unitary requirements.
     
     ??? eigenote "🔑 **Key Insights**"
     
-        1. **Unitary property** - Diagonals $\approx 1$, off-diagonals $\approx 0$ verifies numerical stability of SVD.
+        1. **Unitary property** - Diagonals equal $1.00$ and off-diagonals equal to $\pm 0.00$.
+
+        2. **SVD Consistency:** - Confirms numerical precision of the underlying SVD algorithm
     
     ??? fail "❌ **Failure Modes**"
     
         | **Verdict** | **Failure Mode** | **Description**                                                                                  | **Explanation**                                                                                |
         | :---------- | :--------------- |:-------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------|
-        | ✔️ | Identity deviation | Large off-diagonals | Largest off-diagonal $\approx 3\times 10^{-3} \Rightarrow$ within tolerance $\therefore$ pass. |
+        | ✔️ | Identity deviation | Off-diagonal deviation from standard identity. | Off-diagonals are identically $0.00$, fully passing unitary criteria.  |
 
 !!! eigenote "Figure 13 - Overlap Matrix $|\langle \mathbf{e}_n | v_n \rangle|$"
 
@@ -301,14 +295,16 @@
 
     !!! favicon "Take-Home Message"
 
-        Absolute coefficients $|V_{nk}| = |\langle \mathbf{e}_n | v_k \rangle|$ (basis vector vs. temporal mode).
+        Absolute coefficients $|V_{nk}| = |\langle \mathbf{e}_n | v_k \rangle|$ reveal modal mixing across snapshot states.
 
     ??? eigenote "🔑 **Key Insights**"
 
-        1. **Modal dominance** - Ideally sparse with a bright diagonal; here large off-diagonals repeat the spatial misalignment story.
+        1. **Cross-state sarticipation:** Off-diagonal magnitudes reach $0.47$ ($n=0, \, k=1)$ and $0.46$ ($n=1, \, k=0)$.
+
+        2. **Partial state isolation:** State $2$ maintains strong modal dominance with $k=2$ ($0.96$).
 
     ??? fail "❌ **Failure Modes**"
     
         | **Verdict** | **Failure Mode** | **Description** | **Explanation** |
         | :---------- | :--------------- | :-------------- | :-------------- |
-        | ❌ | Spread dominance | No clear diagonal; each state draws from several $v_k$. | Reflects same weighting bug; correcting $\psi_n^\theta$-scaling collapses to identity. | 
+        | ❌ | Spread dominance | Multiple temporal modes project onto single state. | States $0$ and $1$ exhibit shared weight distribution across modes $0$ and $1$. | 
