@@ -6,9 +6,18 @@
     - [ ] Update all the figure analyses for new figures.
 
 
-!!! eigenote "Figure 1 - Training Curves"
-    
-    ![training_curves.png](figure_files/training_curves/training_curves.png)
+!!! eigenote "Figures 1 a-c - Training Curves"
+
+    === "**Figure 1a - Full Simulation**"
+
+        ![training_curves.png](figure_files/training_curves/training_curves.png)
+
+    === "**Figures 1b-c - Zoomed-In Simulation Windows**"
+
+        |**Figure 1b - Spike 1**|**Figure 1c - Spike 2**| 
+        |:---------------------:|:---------------------:|
+        |![training_curves_spike_1.png](figure_files/training_curves/training_curves_spike_1_epoch_5.png)|![training_curves_spike_2.png](figure_files/training_curves/training_curves_spike_2_epoch_782.png)|
+
 
     !!! favicon "**Take-Home Message**"
     

@@ -3,7 +3,7 @@
 !!! eigenote "__1. Spectral bias and collocation resolution__"
 
     Increasing $\omega$ or $T_\text{max}$ too much causes **aliasing** (conceptually analagous to *Nyquist sampling*).
-    This behavior is consistent with reported PINN failure modes due to undersampling ([Basir & Senocak, 2022](../references/references.md#basir2022pinnfailures)).
+    This behavior is consistent with reported PINN failure modes due to undersampling ([Basir & Senocak, 2022](../../../references/references.md#basir2022pinnfailures)).
 
     - Insufficient point density will be unable to resulve the curvature 'resolution' that is required by the governing
       differential equations.
