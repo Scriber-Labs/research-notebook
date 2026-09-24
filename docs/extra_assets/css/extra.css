@@ -1260,20 +1260,232 @@ body {
   -webkit-text-fill-color: whitesmoke !important;
 }
 
+/* High contrast Mermaid edge and marker rules */
+.md-typeset .mermaid svg .marker,
+.md-typeset .mermaid svg .arrowMarkerPath,
+.md-typeset .mermaid svg .arrowheadPath,
+.md-typeset svg[id^="mermaid-"] .marker,
+.md-typeset svg[id^="mermaid-"] .arrowMarkerPath,
+.md-typeset svg[id^="mermaid-"] .arrowheadPath,
+.zoomable-mermaid svg .marker,
+.zoomable-mermaid svg .arrowMarkerPath,
+.zoomable-mermaid svg .arrowheadPath {
+  fill: #4CC9F0 !important;
+  stroke: #4CC9F0 !important;
+}
+
+/* Default flowchart link high-contrast color */
+.md-typeset .mermaid svg .flowchart-link,
+.md-typeset .mermaid svg .edgePaths .path,
+.md-typeset svg[id^="mermaid-"] .flowchart-link,
+.md-typeset svg[id^="mermaid-"] .edgePaths .path,
+.zoomable-mermaid svg .flowchart-link,
+.zoomable-mermaid svg .edgePaths .path {
+  stroke: #4CC9F0;
+}
+
+/* Glow effects for main training loop edges */
+.md-typeset .mermaid svg .edge-thickness-thick:not([class*="LS-sanity"]),
+.md-typeset .mermaid svg [class*="LS-opt"],
+.md-typeset svg[id^="mermaid-"] .edge-thickness-thick:not([class*="LS-sanity"]),
+.md-typeset svg[id^="mermaid-"] [class*="LS-opt"],
+.zoomable-mermaid svg .edge-thickness-thick:not([class*="LS-sanity"]),
+.zoomable-mermaid svg [class*="LS-opt"] {
+  stroke: #FE28A2 !important;
+  stroke-width: 3.8px !important;
+  filter: drop-shadow(0 0 6px #FE28A2) drop-shadow(0 0 12px rgba(254, 40, 162, 0.85)) !important;
+  opacity: 1 !important;
+}
+
+/* Invisible structural spacing links */
+.md-typeset .mermaid svg [class*="LS-sanity"][class*="LE-pod"],
+.md-typeset svg[id^="mermaid-"] [class*="LS-sanity"][class*="LE-pod"],
+.zoomable-mermaid svg [class*="LS-sanity"][class*="LE-pod"],
+.md-typeset .mermaid svg .edge-thickness-invisible,
+.md-typeset svg[id^="mermaid-"] .edge-thickness-invisible,
+.zoomable-mermaid svg .edge-thickness-invisible {
+  stroke: transparent !important;
+  stroke-width: 0 !important;
+  filter: none !important;
+  opacity: 0 !important;
+  fill: none !important;
+}
+
+.md-typeset .mermaid svg [class*="LE-opt"],
+.md-typeset svg[id^="mermaid-"] [class*="LE-opt"],
+.zoomable-mermaid svg [class*="LE-opt"] {
+  stroke: #00FFFF !important;
+  stroke-width: 2.8px !important;
+  filter: drop-shadow(0 0 5px #00FFFF) drop-shadow(0 0 10px rgba(0, 255, 255, 0.8)) !important;
+  opacity: 1 !important;
+}
+
+.md-typeset .mermaid svg [class*="LS-R"][class*="LE-Lp"],
+.md-typeset svg[id^="mermaid-"] [class*="LS-R"][class*="LE-Lp"],
+.zoomable-mermaid svg [class*="LS-R"][class*="LE-Lp"] {
+  stroke: #03E8BD !important;
+  stroke-width: 2.8px !important;
+  filter: drop-shadow(0 0 5px #03E8BD) drop-shadow(0 0 10px rgba(3, 232, 189, 0.8)) !important;
+  opacity: 1 !important;
+}
+
 /* ============================================
-   Zoomable Mermaid Containers & Floating Toolbar
+   Glow Effects for Training Loop Nodes
    ============================================ */
+
+/* 6️⃣ Optimizer (Adam) Node - Vivid Neon Magenta Glow */
+.md-typeset .mermaid svg .node.opt rect,
+.md-typeset .mermaid svg .node.opt polygon,
+.md-typeset .mermaid svg .node.opt path,
+.md-typeset .mermaid svg [id*="flowchart-opt-"] rect,
+.md-typeset .mermaid svg [id*="flowchart-opt-"] polygon,
+.md-typeset svg[id^="mermaid-"] .node.opt rect,
+.md-typeset svg[id^="mermaid-"] [id*="flowchart-opt-"] rect,
+.zoomable-mermaid svg .node.opt rect,
+.zoomable-mermaid svg [id*="flowchart-opt-"] rect,
+.mermaid-lightbox-body svg .node.opt rect,
+.mermaid-lightbox-body svg [id*="flowchart-opt-"] rect {
+  stroke: #FE28A2 !important;
+  stroke-width: 3.5px !important;
+  filter: drop-shadow(0 0 8px #FE28A2) drop-shadow(0 0 16px rgba(254, 40, 162, 0.75)) !important;
+}
+
+/* 5️⃣ Total Loss & Loss Terms (Lp, Ln, Ls, Ld) - Neon Cyan Glow */
+.md-typeset .mermaid svg .node.loss_terms rect,
+.md-typeset .mermaid svg .node.loss_terms polygon,
+.md-typeset .mermaid svg [id*="flowchart-Lp-"] rect,
+.md-typeset .mermaid svg [id*="flowchart-Ln-"] rect,
+.md-typeset .mermaid svg [id*="flowchart-Ls-"] rect,
+.md-typeset .mermaid svg [id*="flowchart-Ld-"] rect,
+.md-typeset svg[id^="mermaid-"] .node.loss_terms rect,
+.zoomable-mermaid svg .node.loss_terms rect,
+.zoomable-mermaid svg [id*="flowchart-Lp-"] rect,
+.zoomable-mermaid svg [id*="flowchart-Ln-"] rect,
+.zoomable-mermaid svg [id*="flowchart-Ls-"] rect,
+.zoomable-mermaid svg [id*="flowchart-Ld-"] rect,
+.mermaid-lightbox-body svg .node.loss_terms rect,
+.mermaid-lightbox-body svg [id*="flowchart-Lp-"] rect,
+.mermaid-lightbox-body svg [id*="flowchart-Ln-"] rect,
+.mermaid-lightbox-body svg [id*="flowchart-Ls-"] rect,
+.mermaid-lightbox-body svg [id*="flowchart-Ld-"] rect {
+  stroke: #00FFFF !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 6px #00FFFF) drop-shadow(0 0 12px rgba(0, 255, 255, 0.7)) !important;
+}
+
+/* 4️⃣ Physics Residual (R) - Neon Jade Glow */
+.md-typeset .mermaid svg .node.physics rect,
+.md-typeset .mermaid svg .node.physics polygon,
+.md-typeset .mermaid svg [id*="flowchart-R-"] rect,
+.md-typeset svg[id^="mermaid-"] .node.physics rect,
+.zoomable-mermaid svg .node.physics rect,
+.zoomable-mermaid svg [id*="flowchart-R-"] rect,
+.mermaid-lightbox-body svg .node.physics rect,
+.mermaid-lightbox-body svg [id*="flowchart-R-"] rect {
+  stroke: #03E8BD !important;
+  stroke-width: 3.5px !important;
+  filter: drop-shadow(0 0 8px #03E8BD) drop-shadow(0 0 16px rgba(3, 232, 189, 0.75)) !important;
+}
+
+/* 2️⃣ Neural Ansatz MLPs (MLP1-4) - Electric Violet Purple Glow */
+.md-typeset .mermaid svg .node.MLP rect,
+.md-typeset .mermaid svg .node.MLP polygon,
+.md-typeset .mermaid svg [id*="flowchart-MLP"] rect,
+.md-typeset svg[id^="mermaid-"] .node.MLP rect,
+.zoomable-mermaid svg .node.MLP rect,
+.zoomable-mermaid svg [id*="flowchart-MLP"] rect,
+.mermaid-lightbox-body svg .node.MLP rect,
+.mermaid-lightbox-body svg [id*="flowchart-MLP"] rect {
+  stroke: #9A66FF !important;
+  stroke-width: 3.2px !important;
+  filter: drop-shadow(0 0 7px #9A66FF) drop-shadow(0 0 14px rgba(154, 102, 255, 0.7)) !important;
+}
+
+/* Energy Eigenvalues (E0, E1, E2) - Luminous Cyan-Blue Glow */
+.md-typeset .mermaid svg .node.energy rect,
+.md-typeset .mermaid svg [id*="flowchart-E0-"] rect,
+.md-typeset .mermaid svg [id*="flowchart-E1-"] rect,
+.md-typeset .mermaid svg [id*="flowchart-E2-"] rect,
+.md-typeset svg[id^="mermaid-"] .node.energy rect,
+.zoomable-mermaid svg .node.energy rect,
+.zoomable-mermaid svg [id*="flowchart-E0-"] rect,
+.zoomable-mermaid svg [id*="flowchart-E1-"] rect,
+.zoomable-mermaid svg [id*="flowchart-E2-"] rect,
+.mermaid-lightbox-body svg .node.energy rect,
+.mermaid-lightbox-body svg [id*="flowchart-E0-"] rect,
+.mermaid-lightbox-body svg [id*="flowchart-E1-"] rect,
+.mermaid-lightbox-body svg [id*="flowchart-E2-"] rect {
+  stroke: #3B9EFF !important;
+  stroke-width: 3.2px !important;
+  filter: drop-shadow(0 0 7px #3B9EFF) drop-shadow(0 0 14px rgba(59, 158, 255, 0.7)) !important;
+}
+
+/* Wavefunctions & Potential Nodes (psi0, psi1, psi2, potential) */
+.md-typeset .mermaid svg .node.psinorm rect,
+.md-typeset .mermaid svg .node.psiraw rect,
+.md-typeset .mermaid svg [id*="flowchart-potential-"] rect,
+.zoomable-mermaid svg .node.psinorm rect,
+.zoomable-mermaid svg .node.psiraw rect,
+.zoomable-mermaid svg [id*="flowchart-potential-"] rect,
+.mermaid-lightbox-body svg .node.psinorm rect,
+.mermaid-lightbox-body svg .node.psiraw rect,
+.mermaid-lightbox-body svg [id*="flowchart-potential-"] rect {
+  stroke: #14B5FF !important;
+  stroke-width: 2.8px !important;
+  filter: drop-shadow(0 0 6px #14B5FF) drop-shadow(0 0 12px rgba(20, 181, 255, 0.65)) !important;
+}
+
+/* Node label sizing and clipping prevention */
+.md-typeset .mermaid svg .node foreignObject,
+.md-typeset svg[id^="mermaid-"] .node foreignObject,
+.zoomable-mermaid svg .node foreignObject,
+.mermaid-lightbox-body svg .node foreignObject {
+  overflow: visible !important;
+}
+
+.md-typeset .mermaid svg .node foreignObject div,
+.md-typeset svg[id^="mermaid-"] .node foreignObject div,
+.zoomable-mermaid svg .node foreignObject div,
+.mermaid-lightbox-body svg .node foreignObject div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 2px 6px !important;
+  line-height: 1.25 !important;
+}
+
+.md-typeset .mermaid svg .node .katex,
+.zoomable-mermaid svg .node .katex,
+.mermaid-lightbox-body svg .node .katex {
+  font-size: 1.05em !important;
+  line-height: 1.2 !important;
+}
+
+.md-typeset .mermaid svg .node .katex-display,
+.zoomable-mermaid svg .node .katex-display,
+.mermaid-lightbox-body svg .node .katex-display {
+  margin: 0 !important;
+}
+
 .zoomable-mermaid {
   overflow: hidden;
   position: relative !important;
   display: block;
   width: 100%;
+  min-height: 420px;
   border: 1px solid var(--ptg-code-border);
   border-radius: var(--ptg-radius-md);
   background-color: var(--ptg-code-bg);
   margin-bottom: 1.5rem;
   transition: border-color var(--ptg-transition-normal), box-shadow var(--ptg-transition-normal);
   cursor: grab !important;
+  touch-action: none;
+}
+
+.zoomable-mermaid-large {
+  min-height: 620px;
+  max-height: 82vh;
 }
 
 .zoomable-mermaid,

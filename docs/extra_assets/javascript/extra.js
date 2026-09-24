@@ -179,6 +179,12 @@ function initExtraFeatures() {
             }
         });
 
+        window.addEventListener('resize', () => {
+            if (lightboxModal && lightboxModal.classList.contains('active') && activeModalPanZoom) {
+                activeModalPanZoom.resize();
+            }
+        });
+
         lightboxModal = modal;
         return modal;
     }
@@ -193,18 +199,24 @@ function initExtraFeatures() {
         const body = modal.querySelector('#mermaid-lightbox-body');
         body.innerHTML = '';
 
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(originalSvgHtml || svgElement.outerHTML, 'image/svg+xml');
-        const modalSvg = doc.querySelector('svg');
+        // Clone the SVG element from DOM directly to preserve all styled/math-rendered DOM nodes
+        let modalSvg = null;
+        if (svgElement) {
+            modalSvg = svgElement.cloneNode(true);
+        } else if (originalSvgHtml) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(originalSvgHtml, 'image/svg+xml');
+            modalSvg = doc.querySelector('svg');
+        }
 
         if (!modalSvg) {
             console.error("Failed to parse SVG for lightbox");
             return;
         }
 
-        modalSvg.removeAttribute('id');
-        modalSvg.id = 'modal-mermaid-svg-' + Date.now();
+        // Clean up pan-zoom artifacts on the cloned SVG
         modalSvg.removeAttribute('style');
+        modalSvg.removeAttribute('data-zoom-initialized');
         modalSvg.style.width = '100%';
         modalSvg.style.height = '100%';
         modalSvg.style.display = 'block';
@@ -213,14 +225,29 @@ function initExtraFeatures() {
         if (existingViewport) {
             existingViewport.removeAttribute('transform');
             existingViewport.removeAttribute('style');
+            existingViewport.classList.remove('svg-pan-zoom_viewport');
         }
 
         body.appendChild(modalSvg);
 
+        if (typeof renderMathInElement !== 'undefined') {
+            try {
+                renderMathInElement(body, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    throwOnError: false
+                });
+            } catch (e) {}
+        }
+
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        setTimeout(() => {
+        const initModalPanZoom = () => {
             if (activeModalPanZoom) {
                 try { activeModalPanZoom.destroy(); } catch (e) {}
                 activeModalPanZoom = null;
@@ -232,23 +259,36 @@ function initExtraFeatures() {
                 fit: true,
                 center: true,
                 minZoom: 0.05,
-                maxZoom: 30,
+                maxZoom: 40,
+                zoomScaleSensitivity: 0.22,
                 mouseWheelZoomEnabled: true,
+                preventMouseEventsDefault: true,
                 dblClickZoomEnabled: false
             });
 
             activeModalPanZoom.resize();
             activeModalPanZoom.fit();
             activeModalPanZoom.center();
+        };
 
-            modalSvg.addEventListener('dblclick', () => {
-                if (activeModalPanZoom) {
-                    activeModalPanZoom.reset();
+        requestAnimationFrame(() => {
+            initModalPanZoom();
+            setTimeout(() => {
+                if (activeModalPanZoom && modal.classList.contains('active')) {
+                    activeModalPanZoom.resize();
                     activeModalPanZoom.fit();
                     activeModalPanZoom.center();
                 }
-            });
-        }, 50);
+            }, 260);
+        });
+
+        modalSvg.addEventListener('dblclick', () => {
+            if (activeModalPanZoom) {
+                activeModalPanZoom.reset();
+                activeModalPanZoom.fit();
+                activeModalPanZoom.center();
+            }
+        });
     }
 
     function closeMermaidLightbox() {
@@ -263,91 +303,80 @@ function initExtraFeatures() {
         if (body) body.innerHTML = '';
     }
 
-    function initMermaidZoom() {
-        if (typeof svgPanZoom === 'undefined') {
-            return;
+    function setupZoomableContainer(container) {
+        if (!container) return;
+        const svg = container.querySelector('svg');
+        if (!svg || svg.hasAttribute('data-zoom-initialized')) return;
+        svg.setAttribute('data-zoom-initialized', 'true');
+
+        if (!container._originalSvgXml) {
+            container._originalSvgXml = svg.outerHTML;
         }
 
-        const diagrams = Array.from(document.querySelectorAll('.mermaid svg, svg[id^="mermaid-"], .zoomable-mermaid svg'));
-        diagrams.forEach(svg => {
-            if (svg.hasAttribute('data-zoom-initialized') || svg.closest('#mermaid-lightbox-modal')) return;
-            svg.setAttribute('data-zoom-initialized', 'true');
-
-            // Find or create a dedicated zoomable container
-            let container = svg.closest('.zoomable-mermaid');
-            if (!container) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'zoomable-mermaid';
-                const parentPre = svg.closest('pre.mermaid') || (svg.parentElement && svg.parentElement.tagName === 'PRE' ? svg.parentElement : null);
-                if (parentPre && parentPre.parentNode) {
-                    parentPre.parentNode.insertBefore(wrapper, parentPre);
-                    wrapper.appendChild(svg);
-                    parentPre.remove();
-                } else if (svg.parentNode) {
-                    svg.parentNode.insertBefore(wrapper, svg);
-                    wrapper.appendChild(svg);
-                }
-                container = wrapper;
+        // Set responsive height
+        let vbHeight = 0;
+        if (svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.height > 0) {
+            vbHeight = svg.viewBox.baseVal.height;
+        } else if (svg.getAttribute('viewBox')) {
+            const parts = svg.getAttribute('viewBox').split(/\s+|,/);
+            if (parts.length === 4) {
+                vbHeight = parseFloat(parts[3]) || 0;
             }
+        }
 
-            // Save clean original SVG before svgPanZoom alters it
-            const originalSvgHtml = svg.outerHTML;
-            container._originalSvgXml = originalSvgHtml;
+        if (vbHeight > 900) {
+            container.style.height = '72vh';
+            container.classList.add('zoomable-mermaid-large');
+        } else if (vbHeight > 550) {
+            container.style.height = '68vh';
+            container.classList.add('zoomable-mermaid-large');
+        } else if (vbHeight > 350) {
+            container.style.height = `${Math.min(vbHeight + 40, 620)}px`;
+        } else {
+            container.style.height = '460px';
+        }
 
-            // Set a generous height based on diagram viewBox height
-            if (svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.height > 0) {
-                const vbHeight = svg.viewBox.baseVal.height;
-                if (vbHeight > 550) {
-                    container.style.height = '620px';
-                } else if (vbHeight > 350) {
-                    container.style.height = (vbHeight + 40) + 'px';
-                } else {
-                    container.style.height = '420px';
-                }
-            } else {
-                container.style.height = '540px';
-            }
+        // Clean up svg style
+        svg.removeAttribute('style');
+        svg.style.width = '100%';
+        svg.style.height = '100%';
+        svg.style.display = 'block';
 
-            // Remove Mermaid inline styling constraints
-            svg.removeAttribute('style');
-            svg.style.width = '100%';
-            svg.style.height = '100%';
-            svg.style.display = 'block';
+        // Floating custom toolbar
+        if (!container.querySelector('.mermaid-zoom-toolbar')) {
+            const toolbar = document.createElement('div');
+            toolbar.className = 'mermaid-zoom-toolbar';
+            toolbar.innerHTML = `
+                <button type="button" class="mermaid-zoom-btn" data-action="zoom-in" title="Zoom In (+)" aria-label="Zoom In">
+                    <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2.5" fill="none"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    <span class="mermaid-btn-text">Zoom In</span>
+                </button>
+                <button type="button" class="mermaid-zoom-btn" data-action="zoom-out" title="Zoom Out (-)" aria-label="Zoom Out">
+                    <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2.5" fill="none"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    <span class="mermaid-btn-text">Zoom Out</span>
+                </button>
+                <button type="button" class="mermaid-zoom-btn" data-action="reset" title="Reset View" aria-label="Reset View">
+                    <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    <span class="mermaid-btn-text">Reset</span>
+                </button>
+                <button type="button" class="mermaid-zoom-btn mermaid-fullscreen-btn" data-action="fullscreen" title="Expand diagram viewer" aria-label="Expand diagram viewer">
+                    <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    <span class="mermaid-btn-text">Expand</span>
+                </button>
+            `;
+            container.appendChild(toolbar);
+        }
 
-            // Create floating custom toolbar with clear buttons
-            if (!container.querySelector('.mermaid-zoom-toolbar')) {
-                const toolbar = document.createElement('div');
-                toolbar.className = 'mermaid-zoom-toolbar';
-                toolbar.innerHTML = `
-                    <button type="button" class="mermaid-zoom-btn" data-action="zoom-in" title="Zoom In (+)" aria-label="Zoom In">
-                        <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2.5" fill="none"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-                        <span class="mermaid-btn-text">Zoom In</span>
-                    </button>
-                    <button type="button" class="mermaid-zoom-btn" data-action="zoom-out" title="Zoom Out (-)" aria-label="Zoom Out">
-                        <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2.5" fill="none"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-                        <span class="mermaid-btn-text">Zoom Out</span>
-                    </button>
-                    <button type="button" class="mermaid-zoom-btn" data-action="reset" title="Reset View" aria-label="Reset View">
-                        <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-                        <span class="mermaid-btn-text">Reset</span>
-                    </button>
-                    <button type="button" class="mermaid-zoom-btn mermaid-fullscreen-btn" data-action="fullscreen" title="Fullscreen Lightbox" aria-label="Fullscreen">
-                        <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        <span class="mermaid-btn-text">Fullscreen</span>
-                    </button>
-                `;
-                container.appendChild(toolbar);
-            }
+        // Hint bar
+        if (!container.querySelector('.mermaid-zoom-hint')) {
+            const hint = document.createElement('div');
+            hint.className = 'mermaid-zoom-hint';
+            hint.innerHTML = `<span>🖱️ Drag to pan &bull; Scroll to zoom &bull; Expand for readable labels</span>`;
+            container.appendChild(hint);
+        }
 
-            // Create subtle hint bar
-            if (!container.querySelector('.mermaid-zoom-hint')) {
-                const hint = document.createElement('div');
-                hint.className = 'mermaid-zoom-hint';
-                hint.innerHTML = `<span>🖱️ Drag to pan &bull; Scroll to zoom</span>`;
-                container.appendChild(hint);
-            }
-
-            // Initialize svg-pan-zoom for inline diagram
+        // Initialize svg-pan-zoom
+        if (typeof svgPanZoom !== 'undefined') {
             let panZoomInstance = null;
             try {
                 panZoomInstance = svgPanZoom(svg, {
@@ -356,9 +385,10 @@ function initExtraFeatures() {
                     fit: true,
                     center: true,
                     minZoom: 0.05,
-                    maxZoom: 30,
-                    zoomScaleSensitivity: 0.25,
+                    maxZoom: 35,
+                    zoomScaleSensitivity: 0.22,
                     mouseWheelZoomEnabled: true,
+                    preventMouseEventsDefault: true,
                     dblClickZoomEnabled: false
                 });
             } catch (err) {
@@ -366,14 +396,12 @@ function initExtraFeatures() {
             }
 
             if (panZoomInstance) {
-                // Double click resets zoom
                 svg.addEventListener('dblclick', () => {
                     panZoomInstance.reset();
                     panZoomInstance.fit();
                     panZoomInstance.center();
                 });
 
-                // Attach button actions
                 const toolbar = container.querySelector('.mermaid-zoom-toolbar');
                 if (toolbar) {
                     toolbar.querySelector('[data-action="zoom-in"]')?.addEventListener('click', (e) => {
@@ -400,56 +428,99 @@ function initExtraFeatures() {
                     });
                 }
 
-                // Window resize handler
                 window.addEventListener('resize', () => {
                     panZoomInstance.resize();
                     panZoomInstance.fit();
                     panZoomInstance.center();
                 });
             }
-        });
+        }
     }
 
-    function renderAndInitMermaid() {
+    async function renderAndInitMermaid() {
         if (isProcessingMermaid) return;
+        if (typeof mermaid === 'undefined') return;
         isProcessingMermaid = true;
 
-        const finalize = () => {
-            try {
-                initMermaidZoom();
-            } finally {
-                setTimeout(() => {
-                    isProcessingMermaid = false;
-                }, 100);
-            }
-        };
+        try {
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: 'base',
+                securityLevel: 'loose'
+            });
 
-        if (typeof mermaid !== 'undefined') {
-            try {
-                mermaid.initialize({
-                    startOnLoad: false,
-                    theme: 'base',
-                    securityLevel: 'loose'
-                });
-                const unrendered = document.querySelectorAll('pre.mermaid:not([data-processed="true"]), .mermaid:not([data-processed="true"])');
-                if (unrendered.length > 0) {
-                    mermaid.run({
-                        nodes: Array.from(unrendered)
-                    }).then(() => {
-                        finalize();
-                    }).catch(err => {
-                        console.warn("Mermaid run warning:", err);
-                        finalize();
-                    });
-                } else {
-                    finalize();
+            // Find all unrendered mermaid blocks
+            const blocks = Array.from(document.querySelectorAll('pre.mermaid:not([data-processed="true"]), .mermaid:not([data-processed="true"])'));
+
+            for (let i = 0; i < blocks.length; i++) {
+                const block = blocks[i];
+                if (block.hasAttribute('data-processed') || block.closest('.zoomable-mermaid')) continue;
+                block.setAttribute('data-processed', 'true');
+                if (block.querySelector('code')) {
+                    block.querySelector('code').setAttribute('data-processed', 'true');
                 }
-            } catch (e) {
-                console.warn("Mermaid init error:", e);
-                finalize();
+
+                const rawCode = (block.querySelector('code')?.textContent || block.textContent || '').trim();
+                if (!rawCode) continue;
+
+                const renderId = 'mermaid-svg-' + Math.random().toString(36).substring(2, 9) + '-' + Date.now();
+
+                try {
+                    const { svg, bindFunctions } = await mermaid.render(renderId, rawCode);
+
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'zoomable-mermaid';
+                    wrapper._originalSvgXml = svg;
+                    wrapper.innerHTML = svg;
+
+                    if (block.parentNode) {
+                        block.parentNode.insertBefore(wrapper, block);
+                        block.remove();
+                    }
+
+                    if (typeof bindFunctions === 'function') {
+                        try { bindFunctions(wrapper); } catch (e) {}
+                    }
+
+                    if (typeof renderMathInElement !== 'undefined') {
+                        try {
+                            renderMathInElement(wrapper, {
+                                delimiters: [
+                                    { left: "$$", right: "$$", display: true },
+                                    { left: "$", right: "$", display: false },
+                                    { left: "\\(", right: "\\)", display: false },
+                                    { left: "\\[", right: "\\]", display: true }
+                                ],
+                                throwOnError: false
+                            });
+                        } catch (e) {}
+                    }
+
+                    setupZoomableContainer(wrapper);
+                } catch (err) {
+                    console.warn("Mermaid render error for block:", err);
+                }
             }
-        } else {
-            finalize();
+
+            // Also check for standalone SVGs if any
+            const standaloneSvgs = Array.from(document.querySelectorAll('.mermaid svg, svg[id^="mermaid-"]'));
+            standaloneSvgs.forEach(svg => {
+                if (svg.hasAttribute('data-zoom-initialized') || svg.closest('#mermaid-lightbox-modal') || svg.closest('.zoomable-mermaid')) return;
+                let wrapper = document.createElement('div');
+                wrapper.className = 'zoomable-mermaid';
+                wrapper._originalSvgXml = svg.outerHTML;
+                if (svg.parentNode) {
+                    svg.parentNode.insertBefore(wrapper, svg);
+                    wrapper.appendChild(svg);
+                }
+                setupZoomableContainer(wrapper);
+            });
+        } catch (e) {
+            console.warn("Mermaid general error:", e);
+        } finally {
+            setTimeout(() => {
+                isProcessingMermaid = false;
+            }, 100);
         }
     }
 
@@ -460,8 +531,8 @@ function initExtraFeatures() {
         for (const mutation of mutations) {
             for (const node of mutation.addedNodes) {
                 if (node.nodeType === Node.ELEMENT_NODE) {
-                    if (node.matches?.('pre.mermaid:not([data-processed="true"]), .mermaid:not([data-processed="true"])') ||
-                        node.querySelector?.('pre.mermaid:not([data-processed="true"]), .mermaid:not([data-processed="true"])')) {
+                    if (node.matches?.('pre.mermaid:not([data-processed="true"]), pre.mermaid > code:not([data-processed="true"]), .mermaid:not([data-processed="true"])') ||
+                        node.querySelector?.('pre.mermaid:not([data-processed="true"]), pre.mermaid > code:not([data-processed="true"]), .mermaid:not([data-processed="true"])')) {
                         shouldRun = true;
                         break;
                     }

@@ -70,7 +70,7 @@
                     "rankSpacing": 131,
                     "nodeSpacing": 81
                 }
-            }[]()
+            }
             }%%
                 
             flowchart LR

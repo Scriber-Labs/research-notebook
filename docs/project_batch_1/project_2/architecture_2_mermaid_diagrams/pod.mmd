@@ -17,7 +17,7 @@
             "rankSpacing": 131,
             "borderRadius": "16"
         },
-        "themeCSS": ".node rect, .node circle, .node ellipse, .node polygon, .node path { stroke-width: 2.618px !important; filter: drop-shadow(0px 4px 6px rgba(0,0,0, 0.5)); } .node { filter: saturate(1.2) contrast(1.1); } .cluster rect { rx: 25.8; ry: 25.8; stroke-width: 1px; stroke-dasharray: 10,5; } .nodeLabel, .edgeLabel, .cluster-label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: #F0F6FC !important; fill: #F0F6FC !important; font-weight: 300; } #pod .cluster-label { fill: #00D4FF !important; font-size: 20px; } #pod rect { stroke: #00D4FF; fill: rgba(0, 212, 255, 0.04); }",
+        "themeCSS": ".node rect, .node circle, .node ellipse, .node polygon, .node path { stroke-width: 2.618px !important; filter: drop-shadow(0px 4px 6px rgba(0,0,0, 0.5)); } .node { filter: saturate(1.2) contrast(1.1); } .cluster rect { rx: 25.8; ry: 25.8; stroke-width: 1px; stroke-dasharray: 10,5; } .nodeLabel, .edgeLabel, .cluster-label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: #F0F6FC !important; fill: #F0F6FC !important; font-weight: 300; } #pod .cluster-label { fill: #00D4FF !important; font-size: 20px; } #pod rect { stroke: #00D4FF; fill: rgba(0, 212, 255, 0.04); } .marker, .arrowMarkerPath, .marker path, .marker polygon { fill: #4CC9F0 !important; stroke: #4CC9F0 !important; } .flowchart-link, .edgePaths .path { stroke: #4CC9F0; stroke-width: 1.618px; }",
         "flowchart": {
             "curve": "basis",
             "useMaxWidth": true,
@@ -59,9 +59,9 @@ classDef diag fill:#1a2b3c,stroke:#00e8ff,stroke-width:2.5px,rx:16,ry:16;
 
 subgraph normalized_wavefunctions["Normalized Wavefunctions"]
     direction TB
-    psi0(("$$\hat{\psi}_0^\theta$$")):::psinorm
-    psi1(("$$\hat{\psi}_1^\theta$$")):::psinorm
-    psi2(("$$\hat{\psi}_2^\theta$$")):::psinorm
+    psi0(["$$\hat{\psi}_0^\theta$$"]):::psinorm
+    psi1(["$$\hat{\psi}_1^\theta$$"]):::psinorm
+    psi2(["$$\hat{\psi}_2^\theta$$"]):::psinorm
 end
 
 
